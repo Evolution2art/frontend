@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
-import ProductsList from "../../components/ProductsList"
+import FossilsList from "../../components/FossilsList"
 import { getCategories, getCategory } from "../../utils/api"
 
 const CategoryPage = ({ category }) => {
@@ -12,9 +12,9 @@ const CategoryPage = ({ category }) => {
   return (
     <div>
       <Head>
-        <title>{category.name} products</title>
+        <title>{category.name} fossils</title>
       </Head>
-      <ProductsList products={category.products} />
+      <FossilsList fossils={category.fossils} />
     </div>
   )
 }

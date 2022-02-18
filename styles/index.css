@@ -2,11 +2,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-.product-card img {
+.fossil-card img {
     position: absolute;
 }
 
-.product-infooos {
+.fossil-infooos {
     position: relative;
     top: -50px;
 }

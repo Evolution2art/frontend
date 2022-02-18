@@ -1,11 +1,12 @@
 const { colors } = require(`tailwindcss/defaultTheme`);
 
 module.exports = {
+  darkMode: "class",
   purge: ["./components/**/*.js", "./pages/**/*.js"],
   theme: {
     extend: {
       colors: {
-        primary: colors.indigo,
+        primary: colors.slate,
       },
       container: {
         center: true,
