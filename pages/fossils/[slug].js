@@ -14,7 +14,7 @@ const FossilPage = ({ fossil }) => {
   return (
     <div className="m-6 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-8">
       <Head>
-        <title>{fossil.title} fossil</title>
+        <title>{fossil.title}</title>
       </Head>
       <div className="rounded-t-lg pt-2 pb-2 m-auto h-full w-full col-span-2">
         <NextImage media={fossil.image} />

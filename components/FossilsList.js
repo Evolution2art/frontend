@@ -7,21 +7,28 @@ const FossilsList = ({ fossils }) => {
       {fossils?.map((_fossil) => (
         <div
           key={_fossil.id}
-          className="border rounded-lg hover:shadow-lg shadow-md fossil-card"
+          className="border hover:shadow-lg shadow-md fossil-card"
         >
           <Link href={`/fossils/${_fossil.slug}`}>
-            <a className="flex flex-col justify-between h-full">
-              <div className="w-full">
-                <div className="rounded-t-lg pt-2 pb-2 mx-auto">
-                  <NextImage media={_fossil.image} />
+            <a className="h-full">
+              <div className="fossil-image w-full h-full relative z-0">
+                <div className="mx-auto h-full">
+                  <NextImage
+                    media={_fossil.image}
+                    layout="fill"
+                    objectFit="cover"
+                    objectPosition="center"
+                  />
                 </div>
               </div>
-              <div className="pl-4 pr-4 pb-4 pt-4 rounded-lg fossil-info">
-                <h4 className="mt-1 font-semibold text-base leading-tight truncate text-gray-700">
-                  {_fossil.title}
-                </h4>
-                <div className="mt-1 text-sm text-gray-700">
-                  {_fossil.description}
+              <div className="z-0 fossil-info">
+                <div className="relative z-1">
+                  <h4 className="p-4 mt-1 font-semibold text-base leading-tight truncate text-gray-700 fossil-title">
+                    {_fossil.title}
+                  </h4>
+                  <div className="p-4 text-sm text-gray-700 fossil-description">
+                    {_fossil.description}
+                  </div>
                 </div>
               </div>
             </a>
