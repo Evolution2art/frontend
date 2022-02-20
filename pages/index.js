@@ -8,7 +8,6 @@ import { getFossils, getCMSContent, getCategories } from "../utils/api"
 const HomePage = ({ categories, fossils, intro, about, contact }) => {
   const router = useRouter()
 
-  console.log("Homepage path", path)
   return (
     <div>
       <Head>

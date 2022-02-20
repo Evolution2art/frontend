@@ -2,11 +2,8 @@ import NextImage from "./Image"
 import Link from "next/link"
 
 const CategoryButtons = ({ categories = [], path = "/" }) => {
-  // console.log("CategoryButtons path", path, path !== "/")
   const asBreadCrumbs = path !== "/"
   const paths = path.split("/")
-  console.log("paths", paths)
-  // console.log("asBreadCrumbs", asBreadCrumbs)
   return (
     <div className="container flex flex-wrap justify-center mx-auto gap-2 mt-8">
       {asBreadCrumbs
