@@ -1,4 +1,4 @@
-const { colors } = require(`tailwindcss/defaultTheme`);
+const { colors } = require(`tailwindcss/defaultTheme`)
 
 module.exports = {
   darkMode: "class",
@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.slate,
+        primary: colors.stone,
       },
       container: {
         center: true,
@@ -17,4 +17,4 @@ module.exports = {
       },
     },
   },
-};
+}

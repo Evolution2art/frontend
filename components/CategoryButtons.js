@@ -17,7 +17,7 @@ const CategoryButtons = ({ categories = [], path = "/" }) => {
           ))
         : categories.map((_category) => (
             <Link href={`/categories/${_category.slug}`} key={_category.id}>
-              <a className="opacity-75 hover:opacity-100 text-gray-800 text-center font-semibold py-2 px-4">
+              <a className="opacity-75 hover:opacity-100 text-stone-800 text-center font-semibold py-2 px-4">
                 {_category.icon?.url && (
                   <div className="rounded-t-lg pt-2 pb-2 mx-auto w-16 h-16">
                     <NextImage media={_category.icon} />

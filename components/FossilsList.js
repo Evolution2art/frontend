@@ -23,10 +23,17 @@ const FossilsList = ({ fossils }) => {
               </div>
               <div className="z-0 fossil-info">
                 <div className="relative z-1">
-                  <h4 className="p-4 mt-1 font-semibold text-base leading-tight truncate text-gray-700 fossil-title">
-                    {_fossil.title}
-                  </h4>
-                  <div className="p-4 text-sm text-gray-700 fossil-description">
+                  <div className="flex flex-row justify-between gap-2">
+                    <h4 className="pl-4 py-3 font-semibold text-base truncate text-stone-700 fossil-title">
+                      {_fossil.title}
+                    </h4>
+                    {!_fossil.priceOnRequest && (
+                      <div className="pr-4 py-3 fossil-price">
+                        {_fossil.price + " €"}
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4 text-sm text-stone-700 fossil-description">
                     {_fossil.description}
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import NextImage from "./Image"
 const Footer = () => {
   return (
     <div className="flex justify-between m-6">
-      <p className="text-xs font-semibold text-gray-600">
+      <p className="text-xs font-semibold text-stone-600">
         Evolution2Art &copy; 2022
       </p>
       <div className="flex gap-3 ml-4">
