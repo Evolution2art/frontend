@@ -5,6 +5,7 @@
 .fossil-card {
   height: 48vh;
   overflow: hidden;
+  text-align: left;
 }
 
 .fossil-info {
