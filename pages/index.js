@@ -31,7 +31,7 @@ const HomePage = ({ categories, fossils, intro, about, contact }) => {
       )}
       <CMSContent title={intro.title} text={intro.text} />
       <CategoryButtons categories={categories} path={router.asPath} />
-      {!_fossils.length ? (
+      {_fossils.length ? (
         <div className="text-center mt-12">
           <h2 className="text-xl text-gray-600 p-4 pb-0">New additions</h2>
           <FossilsList fossils={_fossils} />
