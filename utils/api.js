@@ -32,6 +32,14 @@ export async function getFossil(slug) {
   return fossils?.[0]
 }
 
+export async function getNewFossils() {
+  const now = new Date()
+  const fossils = await fetchAPI(
+    "/fossils?_where[new_gte]=" + now.toISOString().substr(0, 10)
+  )
+  return fossils
+}
+
 export async function getCMSContent() {
   const intro = await fetchAPI("/introduction")
   const about = await fetchAPI("/about")

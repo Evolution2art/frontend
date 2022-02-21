@@ -21,3 +21,19 @@
 .fossil-price {
   white-space: nowrap;
 }
+
+.ribbon {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  right: 0;
+  transform: rotateZ(45deg) translate(1.5rem, -0.5rem);
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.4;
+  opacity: 0.4;
+}
+
+article > p {
+  padding-top: 0.5rem;
+}

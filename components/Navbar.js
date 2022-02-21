@@ -5,10 +5,10 @@ const Navbar = () => {
   return (
     <div className="flex justify-between ml-6 mr-6 mt-4">
       <nav className="w-1/3 flex flex-col">
-        <a href="/">HOME</a>
-        <a href="/#about">ABOUT US</a>
-        <a href="/#collection">COLLECTION</a>
-        <a href="/#contact">CONTACT</a>
+        <Link href="/">HOME</Link>
+        <Link href="/#about">ABOUT US</Link>
+        <Link href="/#collection">COLLECTION</Link>
+        <Link href="/#contact">CONTACT</Link>
       </nav>
       <Link href="/">
         <a>
