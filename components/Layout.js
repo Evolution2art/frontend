@@ -3,12 +3,12 @@ import CategoryButtons from "./CategoryButtons"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, theme }) => {
   // const router = useRouter()
 
   return (
-    <div className="flex justify-center">
-      <div className="max-w-screen-xl flex flex-col min-h-screen w-full">
+    <div className={`flex justify-center ${theme}`}>
+      <div className="flex min-h-screen w-full max-w-screen-xl flex-col bg-stone-100 text-stone-800 dark:bg-stone-900 dark:text-stone-200">
         <Navbar />
         <div className="flex-grow">{children}</div>
         <Footer />

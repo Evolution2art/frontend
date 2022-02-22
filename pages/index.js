@@ -32,12 +32,14 @@ const HomePage = ({ categories, fossils, intro, about, contact }) => {
       <CMSContent title={intro.title} text={intro.text} />
       <CategoryButtons categories={categories} path={router.asPath} />
       {_fossils.length ? (
-        <div className="text-center mt-12">
-          <h2 className="text-xl text-gray-600 p-4 pb-0">New additions</h2>
+        <div className="mt-12 text-center">
+          <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
+            New acquisitions
+          </h2>
           <FossilsList fossils={_fossils} />
         </div>
       ) : (
-        <div className="text-sm text-center">
+        <div className="text-center text-sm">
           browse our collection via the categories above
         </div>
       )}

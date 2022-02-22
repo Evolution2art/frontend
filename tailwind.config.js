@@ -1,20 +1,11 @@
-const { colors } = require(`tailwindcss/defaultTheme`)
-
 module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   darkMode: "class",
-  purge: ["./components/**/*.js", "./pages/**/*.js"],
+  plugins: [require("@tailwindcss/typography")],
   theme: {
-    extend: {
-      colors: {
-        primary: colors.stone,
-      },
-      container: {
-        center: true,
-        padding: {
-          default: "1rem",
-          md: "2rem",
-        },
-      },
-    },
+    extend: {},
   },
 }

@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .fossil-card {
   height: 48vh;
@@ -35,6 +35,58 @@
   opacity: 0.4;
 }
 
-article > p {
-  padding-top: 0.5rem;
+.toggle-theme {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: black;
+  cursor: pointer;
+  border: solid 1px #ccc;
+}
+
+.toggle-theme.dark {
+  border-color: #666;
+}
+
+.toggle-theme > a,
+.toggle-theme > a > div {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.toggle-theme > a,
+.toggle-theme.dark:hover > a {
+  background-color: black;
+}
+.toggle-theme:hover > a {
+  background-color: white;
+}
+
+.toggle-theme > a > div,
+.toggle-theme.dark:hover > a > div {
+  background-color: white;
+}
+.toggle-theme:hover > a > div {
+  background-color: black;
+}
+
+.toggle-theme > a > div,
+.toggle-theme.dark:hover > a > div {
+  border-bottom-left-radius: 100%;
+  border-top-right-radius: 0;
+}
+
+.toggle-theme.dark > a {
+  background-color: white;
+}
+
+.toggle-theme.dark > a > div {
+  background-color: black;
+}
+
+.toggle-theme.dark > a > div,
+.toggle-theme:hover > a > div {
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 100%;
 }

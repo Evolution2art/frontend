@@ -16,8 +16,10 @@ const CategoryPage = ({ category, categories }) => {
         <title>{category.name} fossils</title>
       </Head>
       <CategoryButtons categories={categories} path={router.asPath} />
-      <div className="text-center mt-12">
-        <h2 className="text-xl text-gray-600 p-4 pb-0">{category.name}</h2>
+      <div className="mt-12 text-center">
+        <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
+          {category.name}
+        </h2>
         <FossilsList fossils={category.fossils} />
       </div>
     </div>

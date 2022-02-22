@@ -1,10 +1,11 @@
 import Link from "next/link"
 import NextImage from "./Image"
+import Cart from "./Svg/Cart"
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between ml-6 mr-6 mt-4">
-      <nav className="w-1/3 flex flex-col">
+    <div className="ml-6 mr-6 mt-4 flex justify-between text-stone-700 dark:text-stone-300">
+      <nav className="flex w-1/3 flex-col">
         <Link href="/">HOME</Link>
         <Link href="/#about">ABOUT US</Link>
         <Link href="/#collection">COLLECTION</Link>
@@ -21,9 +22,9 @@ const Navbar = () => {
           />
         </a>
       </Link>
-      <button className="w-1/3 snipcart-checkout flex justify-end items-center">
-        <NextImage height="150" width="150" src="/cart.svg" alt="Cart" />
-        <span className="snipcart-total-price ml-3 font-semibold text-sm text-stone-500"></span>
+      <button className="snipcart-checkout flex w-1/3 items-center justify-end">
+        <Cart />
+        <span className="snipcart-total-price ml-3 text-sm font-semibold text-stone-700 dark:text-stone-300"></span>
       </button>
     </div>
   )

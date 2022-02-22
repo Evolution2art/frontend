@@ -1,28 +1,43 @@
 import NextImage from "./Image"
+import Twitter from "./Svg/Twitter"
+import Facebook from "./Svg/Facebook"
+import Instagram from "./Svg/Instagram"
+import Github from "./Svg/Github"
 
 const Footer = () => {
   return (
-    <div className="flex justify-between m-6">
-      <p className="text-xs font-semibold text-stone-600">
+    <div className="m-6 flex justify-between">
+      <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
         Evolution2Art &copy; 2022
       </p>
-      <div className="flex gap-3 ml-4">
-        <a href="https://twitter.com/strapijs" className="max-w-xs ml-4">
-          <NextImage src="/twitter.svg" width={20} height={20} alt="Twitter" />
-        </a>
-        <a href="https://facebook.com/strapijs" className="ml-3">
-          <NextImage
-            src="/facebook.svg"
-            width={20}
-            height={20}
-            alt="Facebook"
-          />
+      <div className="ml-4 flex gap-3">
+        <a
+          href="https://twitter.com/evolution2art"
+          target="_blank"
+          className="ml-4 max-w-xs"
+        >
+          <Twitter width={20} height={20} />
         </a>
         <a
-          href="https://github.com/strapi/strapi-starter-next-ecommerce"
+          href="https://facebook.com/evolution2art/"
+          target="_blank"
           className="ml-3"
         >
-          <NextImage src="/github.svg" width={20} height={20} alt="GitHub" />
+          <Facebook width={20} height={20} />
+        </a>
+        {/* <a
+          href="https://facebook.com/evolution2art/"
+          target="_blank"
+          className="ml-3"
+        >
+          <Instagram width={20} height={20} />
+        </a> */}
+        <a
+          href="https://github.com/Evolution2art/"
+          target="_blank"
+          className="ml-3"
+        >
+          <Github width={20} height={20} />
         </a>
       </div>
     </div>

@@ -3,10 +3,24 @@ import Head from "next/head"
 import Layout from "../components/Layout"
 import { getCategories } from "../utils/api"
 import "../styles/index.css"
+import { useEffect, useState } from "react"
 
 const MyApp = ({ Component, pageProps }) => {
+  const [theme, setTheme] = useState("dark")
+  useEffect(() => {
+    const _theme = localStorage.getItem("theme") || "dark"
+    localStorage.setItem("theme", _theme)
+    setTheme(_theme)
+  }, [])
+
+  const toggleTheme = () => {
+    const _theme = theme === "dark" ? "light" : "dark"
+    setTheme(_theme)
+    localStorage.setItem("theme", _theme)
+  }
+
   return (
-    <Layout categories={pageProps.categories}>
+    <Layout categories={pageProps.categories} theme={theme}>
       <Head>
         <link rel="preconnect" href="https://app.snipcart.com" />
         <link rel="preconnect" href="https://cdn.snipcart.com" />
@@ -19,6 +33,11 @@ const MyApp = ({ Component, pageProps }) => {
           src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
         />
       </Head>
+      <div className={`toggle-theme ${theme}`}>
+        <a href="#" title="Toggle dark mode" onClick={toggleTheme}>
+          <div></div>
+        </a>
+      </div>
       <Component {...pageProps} />
     </Layout>
   )
