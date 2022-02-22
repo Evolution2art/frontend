@@ -2,7 +2,7 @@ import Link from "next/link"
 import NextImage from "./Image"
 import Cart from "./Svg/Cart"
 
-const Navbar = () => {
+const Navbar = ({ theme }) => {
   return (
     <div className="ml-6 mr-6 mt-4 flex justify-between text-stone-700 dark:text-stone-300">
       <nav className="flex w-1/3 flex-col">
@@ -23,7 +23,7 @@ const Navbar = () => {
         </a>
       </Link>
       <button className="snipcart-checkout flex w-1/3 items-center justify-end">
-        <Cart />
+        <Cart theme={theme} />
         <span className="snipcart-total-price ml-3 text-sm font-semibold text-stone-700 dark:text-stone-300"></span>
       </button>
     </div>
