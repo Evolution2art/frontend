@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react"
 import App from "next/app"
 import Head from "next/head"
+import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md"
 import Layout from "../components/Layout"
 import { getCategories } from "../utils/api"
 import "../styles/index.css"
-import { useEffect, useState } from "react"
 
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("dark")
@@ -33,10 +34,13 @@ const MyApp = ({ Component, pageProps }) => {
           src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
         />
       </Head>
-      <div className={`toggle-theme ${theme}`}>
-        <a href="#" title="Toggle dark mode" onClick={toggleTheme}>
-          <div></div>
-        </a>
+      <div className={`toggle-theme p-5 ${theme} w-full max-w-screen-lg`}>
+        <MdDarkMode
+          size="1.5em"
+          onClick={toggleTheme}
+          title="Toggle dark mode"
+          className="float-right inline-block cursor-pointer text-stone-700 dark:text-stone-300"
+        />
       </div>
       <Component {...pageProps} />
     </Layout>

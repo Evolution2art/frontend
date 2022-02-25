@@ -15,11 +15,18 @@ const CategoryPage = ({ category, categories }) => {
       <Head>
         <title>{category.name} fossils</title>
       </Head>
-      <CategoryButtons categories={categories} path={router.asPath} />
-      <div className="mt-12 text-center">
-        <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
+      <CategoryButtons
+        categories={categories}
+        path={router.asPath}
+        className="text-xs"
+        size="8"
+        curSize="8"
+        category={category}
+      />
+      <div className="text-center">
+        {/* <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
           {category.name}
-        </h2>
+        </h2> */}
         <FossilsList fossils={category.fossils} />
       </div>
     </div>

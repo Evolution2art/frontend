@@ -9,6 +9,7 @@ import { getFossils, getCMSContent, getCategories } from "../utils/api"
 const HomePage = ({ categories, fossils, intro, about, contact }) => {
   const router = useRouter()
   const background = intro.background[0]
+  const { email } = contact
   const now = new Date()
   const _fossils = fossils.filter((_fossil) => {
     const _date = (_fossil.new && new Date(_fossil.new)) || new Date()
@@ -30,13 +31,18 @@ const HomePage = ({ categories, fossils, intro, about, contact }) => {
         </div>
       )}
       <CMSContent title={intro.title} text={intro.text} />
-      <CategoryButtons categories={categories} path={router.asPath} />
+      <CategoryButtons
+        categories={categories}
+        path={router.asPath}
+        size={12}
+        curSize={12}
+      />
       {_fossils.length ? (
         <div className="mt-12 text-center">
           <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
             New acquisitions
           </h2>
-          <FossilsList fossils={_fossils} />
+          <FossilsList fossils={_fossils} email={email} />
         </div>
       ) : (
         <div className="text-center text-sm">

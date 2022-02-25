@@ -1,8 +1,4 @@
-import NextImage from "./Image"
-import Twitter from "./Svg/Twitter"
-import Facebook from "./Svg/Facebook"
-import Instagram from "./Svg/Instagram"
-import Github from "./Svg/Github"
+import { FaGithub, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const Footer = () => {
   return (
@@ -11,33 +7,37 @@ const Footer = () => {
         Evolution2Art &copy; 2022
       </p>
       <div className="ml-4 flex gap-3">
-        <a
+        {/* <a
           href="https://twitter.com/evolution2art"
           target="_blank"
-          className="ml-4 max-w-xs"
+          rel="noreferrer"
+          className="ml-4"
         >
           <Twitter width={20} height={20} />
-        </a>
+        </a> */}
         <a
           href="https://facebook.com/evolution2art/"
           target="_blank"
-          className="ml-3"
+          rel="noreferrer"
+          className="ml-3 max-w-xs"
         >
-          <Facebook width={20} height={20} />
+          <FaFacebook width={20} height={20} />
         </a>
-        {/* <a
-          href="https://facebook.com/evolution2art/"
+        <a
+          href="https://www.instagram.com/evolution.2.art/"
           target="_blank"
+          rel="noreferrer"
           className="ml-3"
         >
-          <Instagram width={20} height={20} />
-        </a> */}
+          <FaInstagram width={20} height={20} />
+        </a>
         <a
           href="https://github.com/Evolution2art/"
           target="_blank"
+          rel="noreferrer"
           className="ml-3"
         >
-          <Github width={20} height={20} />
+          <FaGithub width={20} height={20} />
         </a>
       </div>
     </div>

@@ -1,26 +1,55 @@
 import NextImage from "./Image"
 import Link from "next/link"
 
-const CategoryButtons = ({ categories = [], path = "/" }) => {
+const CategoryButtons = ({
+  categories = [],
+  category = {},
+  path = "/",
+  className = "",
+  size = 8,
+  curSize = 12,
+}) => {
+  // manually add tailwindcss classnames so it generates the required defs
+  // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
+  const twClasses = [
+    "w-2 w-3 w-4 w-5 w-6 w-8 w-12 w-16",
+    "h-2 h-3 h-4 h-5 h-6 h-8 h-12 h-16",
+  ]
+  const classNames =
+    "text-stone-700 dark:text-stone-300" + (className && ` ${className}`)
+  const hidden = "" //!category.slug ? "block " : "hidden "
   return (
     <div
-      className="container mx-auto mt-8 flex flex-wrap justify-center gap-2"
+      className="container mx-auto mt-8 flex flex-wrap justify-center gap-4"
       id="collection"
     >
-      {categories.map((_category) => (
-        <Link href={`/categories/${_category.slug}`} key={_category.id}>
-          <a className="py-2 px-4 text-center font-semibold text-stone-800 opacity-75 hover:opacity-100">
-            {_category.icon?.url && (
-              <div className="mx-auto h-16 w-16 rounded-t-lg pt-2 pb-2">
-                <NextImage media={_category.icon} />
-              </div>
-            )}
-            <h4 className="mt-8 text-stone-700 dark:text-stone-300">
-              {_category.name}
-            </h4>
-          </a>
-        </Link>
-      ))}
+      {categories.map((_category) => {
+        const isCurrent = category?.slug === _category.slug
+        const twSize = isCurrent ? curSize : size
+        const current = isCurrent ? "current " : ""
+        const sizes = `${
+          (!isCurrent && "") || ""
+        }${hidden}mx-auto h-${twSize} w-${twSize}`
+        return (
+          <Link href={`/categories/${_category.slug}`} key={_category.id}>
+            <a
+              className={
+                current +
+                "nav-item py-2 text-center font-semibold text-stone-800 dark:text-stone-200"
+              }
+            >
+              {_category.icon?.url && (
+                <div className={`${sizes}`}>
+                  <NextImage media={_category.icon} />
+                </div>
+              )}
+              <h5 className="mx-auto pt-2 text-sm leading-4 tracking-tight">
+                {_category.name}
+              </h5>
+            </a>
+          </Link>
+        )
+      })}
     </div>
   )
 }

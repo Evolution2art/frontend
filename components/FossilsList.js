@@ -5,10 +5,10 @@ const FossilsList = ({ fossils }) => {
   return (
     <div className="m-4 mt-8 flex flex-wrap justify-center">
       {fossils?.map((_fossil) => (
-        <div key={_fossil.id} className="w-full p-2 sm:w-1/2 md:w-1/3 xl:w-1/4">
-          <div className="fossil-card border shadow-md hover:shadow-lg">
+        <div key={_fossil.id} className="w-full p-2 sm:w-1/2 md:w-1/3">
+          <div className="fossil-card shadow-md hover-hover:shadow-lg">
             <Link href={`/fossils/${_fossil.slug}`}>
-              <a className="h-full">
+              <a className="h-full" title={_fossil.title}>
                 <div className="fossil-image relative z-0 h-full w-full">
                   <div className="mx-auto h-full">
                     <NextImage
@@ -29,10 +29,10 @@ const FossilsList = ({ fossils }) => {
                     )}
                   </div>
                 </div>
-                <div className="fossil-info z-0">
+                <div className="fossil-info z-0 text-stone-700">
                   <div className="z-1 relative">
                     <div className="flex flex-row justify-between gap-2">
-                      <h4 className="fossil-title truncate py-3 pl-4 text-base font-semibold text-stone-700">
+                      <h4 className="fossil-title truncate py-3 pl-4 text-base font-semibold">
                         {_fossil.title}
                       </h4>
                       {_fossil.price && !_fossil.priceOnRequest && (
@@ -41,7 +41,7 @@ const FossilsList = ({ fossils }) => {
                         </div>
                       )}
                     </div>
-                    <div className="fossil-description p-4 text-sm text-stone-700">
+                    <div className="fossil-description p-4 text-sm">
                       {_fossil.description}
                     </div>
                   </div>

@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+.nav-item {
+  opacity: 0.5;
+  transition: opacity ease-in-out 0.2s;
+}
+
+.nav-item:hover,
+.nav-item.current {
+  opacity: 1;
+}
+
+.nav-item img {
+  opacity: 0.8;
+}
+.nav-item.current img {
+  opacity: 1;
+}
+
+.nav-item:hover img {
+  opacity: 1;
+}
+
 .fossil-card {
   height: 48vh;
   overflow: hidden;
@@ -14,7 +35,8 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.fossil-card:hover .fossil-info {
+.fossil-card:hover .fossil-info,
+.fossil-card:focus .fossil-info {
   transform: translateY(-100%);
   background-color: rgba(255, 255, 255, 0.9);
 }
@@ -36,57 +58,44 @@
 }
 
 .toggle-theme {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background-color: black;
-  cursor: pointer;
-  border: solid 1px #ccc;
+  position: absolute;
+  pointer-events: none;
+}
+
+.toggle-theme > * {
+  pointer-events: auto;
 }
 
 .toggle-theme.dark {
-  border-color: #666;
+  /* box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); */
 }
 
-.toggle-theme > a,
-.toggle-theme > a > div {
+.toggle-theme > button,
+.toggle-theme > button > div {
+  border-color: rgba(0, 0, 0, 0);
   display: block;
-  width: 1rem;
-  height: 1rem;
+  width: 14px;
+  height: 14px;
 }
 
-.toggle-theme > a,
-.toggle-theme.dark:hover > a {
+.toggle-theme > button,
+.toggle-theme.dark:hover > button {
   background-color: black;
 }
-.toggle-theme:hover > a {
+.toggle-theme:hover > button {
   background-color: white;
 }
 
-.toggle-theme > a > div,
-.toggle-theme.dark:hover > a > div {
+.toggle-theme > button > div,
+.toggle-theme.dark:hover > button > div {
   background-color: white;
 }
-.toggle-theme:hover > a > div {
+.toggle-theme:hover > button > div {
   background-color: black;
 }
 
-.toggle-theme > a > div,
-.toggle-theme.dark:hover > a > div {
+.toggle-theme > button > div,
+.toggle-theme.dark:hover > button > div {
   border-bottom-left-radius: 100%;
   border-top-right-radius: 0;
-}
-
-.toggle-theme.dark > a {
-  background-color: white;
-}
-
-.toggle-theme.dark > a > div {
-  background-color: black;
-}
-
-.toggle-theme.dark > a > div,
-.toggle-theme:hover > a > div {
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 100%;
 }

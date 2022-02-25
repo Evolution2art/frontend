@@ -3,12 +3,10 @@ import * as React from "react"
 const Cart = (props) => (
   <svg
     viewBox="0 0 64 64"
-    fill="none"
     width={20}
     height={20}
     xmlns="http://www.w3.org/2000/svg"
-    className="snipcart-cart-header__icon snipcart__icon"
-    fill={props?.theme === "dark" ? "#cccccc" : "#333333"}
+    fill={props?.theme === "dark" ? "rgb(214, 211, 209)" : "rgb(68, 64, 60)"}
     {...props}
   >
     <path
