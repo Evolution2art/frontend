@@ -1,4 +1,4 @@
-import { getCMSContent } from "../../utils/api"
+import { getCMSContent } from "../utils/api"
 
 const HistoryPage = () => null
 
