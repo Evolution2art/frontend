@@ -11,7 +11,9 @@ const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {
     const _theme = localStorage.getItem("theme") || "light"
     localStorage.setItem("theme", _theme)
-    window && document.querySelector("body").classList.toggle("dark")
+    window &&
+      _theme === "dark" &&
+      document.querySelector("body").classList.toggle("dark")
   }, [])
 
   const toggleTheme = () => {
