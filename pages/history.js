@@ -1,11 +1,11 @@
+import { getCMSContent } from "../../utils/api"
+
 const HistoryPage = () => null
 
 export async function getStaticProps() {
-  const categories = await getCategories()
-  const fossils = await getFossils()
   const [intro, about, contact] = await getCMSContent()
   return {
-    props: { categories, fossils, intro, about, contact },
+    props: { intro, about, contact },
     revalidate: 300,
   }
 }
