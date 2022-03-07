@@ -6,6 +6,10 @@ module.exports = {
   darkMode: "class",
   plugins: [require("@tailwindcss/typography")],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "hover-hover": { raw: "(hover: hover)" },
+      },
+    },
   },
 }

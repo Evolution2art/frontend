@@ -6,6 +6,7 @@ import Cart from "./Svg/Cart"
 const Navbar = ({ theme, path }) => {
   // const totalRef = useRef()
   const [total, setTotal] = useState(0)
+  const logo = theme === "dark" ? "logo-white" : "logo-dark"
   useEffect(() => {
     if (window.Snipcart) {
       setTotal(Snipcart.store.getState().cart.total)
@@ -15,15 +16,15 @@ const Navbar = ({ theme, path }) => {
   return (
     <div className="ml-6 mr-6 mt-4 flex justify-between pt-1 text-stone-700 dark:text-stone-300">
       <nav className="flex h-2 w-1/3 flex-col text-sm">
-        <Link href="/">HOME</Link>
+        {/* <Link href="/">HOME</Link>
         <Link href="/#about">ABOUT US</Link>
         <Link href="/#collection">COLLECTION</Link>
-        <Link href="/#contact">CONTACT</Link>
+        <Link href="/#contact">CONTACT</Link> */}
       </nav>
       <Link href="/">
         <a className="w-1/3 text-center">
           <NextImage
-            src="/logo-white.png"
+            src={`/${logo}.png`}
             alt="home"
             className="logo mx-auto"
             height={!path || path === "/" ? 148 : 96}

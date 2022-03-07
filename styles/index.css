@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #fff;
+}
+body.dark {
+  background-color: #000;
+}
+
 .nav-item {
+  position: relative;
   opacity: 0.5;
+  overflow: hidden;
   transition: opacity ease-in-out 0.2s;
 }
 
@@ -50,6 +59,7 @@
   color: white;
   font-weight: bold;
   right: 0;
+  top: 0;
   transform: rotateZ(45deg) translate(1.5rem, -0.5rem);
   text-align: center;
   text-transform: uppercase;
@@ -57,6 +67,9 @@
   opacity: 0.4;
 }
 
+.nav-item .ribbon {
+  transform: rotateZ(45deg) translate(0.5rem, -0.5rem);
+}
 .toggle-theme {
   position: absolute;
   pointer-events: none;

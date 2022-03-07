@@ -8,6 +8,7 @@ const CategoryButtons = ({
   className = "",
   size = 8,
   curSize = 12,
+  theme = "light",
 }) => {
   // manually add tailwindcss classnames so it generates the required defs
   // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
@@ -27,6 +28,7 @@ const CategoryButtons = ({
         const isCurrent = category?.slug === _category.slug
         const twSize = isCurrent ? curSize : size
         const current = isCurrent ? "current " : ""
+        const hasNew = _category.fossils.filter((_fossil) => _fossil.new).length
         const sizes = `${
           (!isCurrent && "") || ""
         }${hidden}mx-auto h-${twSize} w-${twSize}`
@@ -35,17 +37,21 @@ const CategoryButtons = ({
             <a
               className={
                 current +
-                "nav-item py-2 text-center font-semibold text-stone-800 dark:text-stone-200"
+                "nav-item mx-4 py-2 text-center font-semibold text-stone-800 dark:text-stone-200"
               }
             >
               {_category.icon?.url && (
-                <div className={`${sizes}`}>
-                  <NextImage media={_category.icon} />
+                <div className={`relative ${sizes}`}>
+                  <NextImage
+                    src={`/${_category.slug}-${theme}.png`}
+                    layout="fill"
+                  />
                 </div>
               )}
               <h5 className="mx-auto pt-2 text-sm leading-4 tracking-tight">
                 {_category.name}
               </h5>
+              {hasNew > 0 && <div className="ribbon h-2 w-10 bg-red-500"></div>}
             </a>
           </Link>
         )

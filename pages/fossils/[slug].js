@@ -122,7 +122,7 @@ export default FossilPage
 
 export async function getStaticProps({ params }) {
   const fossil = await getFossil(params.slug)
-  return { props: { fossil } }
+  return { props: { fossil }, revalidate: 300 }
 }
 
 export async function getStaticPaths() {

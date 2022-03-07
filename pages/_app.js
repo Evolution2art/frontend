@@ -7,17 +7,18 @@ import { getCategories } from "../utils/api"
 import "../styles/index.css"
 
 const MyApp = ({ Component, pageProps }) => {
-  const [theme, setTheme] = useState("dark")
+  const [theme, setTheme] = useState("light")
   useEffect(() => {
-    const _theme = localStorage.getItem("theme") || "dark"
+    const _theme = localStorage.getItem("theme") || "light"
     localStorage.setItem("theme", _theme)
-    setTheme(_theme)
+    window && document.querySelector("body").classList.toggle("dark")
   }, [])
 
   const toggleTheme = () => {
     const _theme = theme === "dark" ? "light" : "dark"
     setTheme(_theme)
     localStorage.setItem("theme", _theme)
+    window && document.querySelector("body").classList.toggle("dark")
   }
 
   return (
@@ -42,7 +43,7 @@ const MyApp = ({ Component, pageProps }) => {
           className="float-right inline-block cursor-pointer text-stone-700 dark:text-stone-300"
         />
       </div>
-      <Component {...pageProps} />
+      <Component {...pageProps} theme={theme} />
     </Layout>
   )
 }
