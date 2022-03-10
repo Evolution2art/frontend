@@ -5,10 +5,10 @@ import { getNewFossils, getCMSContent, getCategories } from "../../utils/api"
 import { MdOutlineArrowBack, MdClose } from "react-icons/md"
 import { useState } from "react"
 
-const FossilsPage = ({ categories, fossils, contact, theme }) => {
+const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
   const router = useRouter()
   const { email } = contact
-  const [showCategories, setShowCategories] = useState(!fossils?.length)
+  // const [showCategories, setShowCategories] = useState(!fossils?.length)
 
   return (
     <div>

@@ -1,12 +1,11 @@
 import React from "react"
 import ReactMarkdown from "react-markdown"
 
-const CMSContent = ({ title, text, id }) => {
+const CMSContent = ({ title, text, id, className }) => {
+  const classNames =
+    "prose prose-stone dark:prose-invert" + (className ? ` ${className}` : "")
   return (
-    <article
-      id={id}
-      className="prose prose-stone mx-auto mt-12 max-w-none p-8 text-center dark:prose-invert"
-    >
+    <article id={id} className={`max-w-none p-8 ${classNames}`}>
       {title && <h2>{title}</h2>}
       {text && <ReactMarkdown>{text}</ReactMarkdown>}
     </article>

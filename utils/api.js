@@ -32,6 +32,21 @@ export async function getFossil(slug) {
   return fossils?.[0]
 }
 
+export async function getAchievements() {
+  const achievements = await fetchAPI("/achievements")
+  return achievements
+}
+
+export async function getMedia() {
+  const medias = await fetchAPI("/medias")
+  return medias
+}
+
+export async function getPress() {
+  const press = await fetchAPI("/press")
+  return press
+}
+
 export async function getNewFossils() {
   const now = new Date()
   const fossils = await fetchAPI(
@@ -40,9 +55,25 @@ export async function getNewFossils() {
   return fossils
 }
 
-export async function getCMSContent() {
-  const intro = await fetchAPI("/introduction")
-  const about = await fetchAPI("/about")
-  const contact = await fetchAPI("/contact")
-  return [intro, about, contact]
+export async function getCMSContent(types) {
+  if (!types) {
+    types = ["introduction", "about", "contact", "history"]
+  }
+  if (!Array.isArray(types)) {
+    types = [types]
+  }
+  const content = []
+  for (let i = 0; i < types.length; i++) {
+    // console.log("fetching type", types[i])
+    const cms = await fetchAPI(`/${types[i]}`)
+
+    // return plain object if single type
+    if (types.length === 1) {
+      return cms
+    }
+
+    content.push(cms)
+  }
+  // console.log("content for types", types, content)
+  return content
 }

@@ -5,7 +5,7 @@ const FossilsList = ({ fossils }) => {
   return (
     <div className="m-4 mt-8 flex flex-wrap justify-center">
       {fossils?.map((_fossil) => (
-        <div key={_fossil.id} className="w-full p-2 sm:w-1/2 md:w-1/3">
+        <div key={_fossil.id} className="w-full p-2 sm:w-1/2">
           <div className="fossil-card shadow-md hover-hover:shadow-lg">
             <Link href={`/fossils/${_fossil.slug}`}>
               <a className="h-full" title={_fossil.title}>

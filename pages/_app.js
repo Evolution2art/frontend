@@ -10,17 +10,24 @@ const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("light")
   useEffect(() => {
     const _theme = localStorage.getItem("theme") || "light"
+    setTheme(_theme)
     localStorage.setItem("theme", _theme)
     window &&
       _theme === "dark" &&
-      document.querySelector("body").classList.toggle("dark")
+      document.querySelector("body").classList.add("dark")
   }, [])
 
   const toggleTheme = () => {
     const _theme = theme === "dark" ? "light" : "dark"
     setTheme(_theme)
     localStorage.setItem("theme", _theme)
-    window && document.querySelector("body").classList.toggle("dark")
+    if (window) {
+      if (_theme === "light") {
+        document.querySelector("body").classList.add("dark")
+      } else {
+        document.querySelector("body").classList.remove("dark")
+      }
+    }
   }
 
   return (
@@ -37,7 +44,7 @@ const MyApp = ({ Component, pageProps }) => {
           src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
         />
       </Head>
-      <div className={`toggle-theme p-5 ${theme} w-full max-w-screen-lg`}>
+      <div className={`toggle-theme p-5 ${theme} w-full max-w-screen-md`}>
         <MdDarkMode
           size="1.5em"
           onClick={toggleTheme}

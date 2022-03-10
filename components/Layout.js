@@ -4,10 +4,10 @@ import Navbar from "./Navbar"
 
 const Layout = ({ children, theme }) => {
   const router = useRouter()
-  // const colors = theme === "dark" ? "bg-stone-900" : "bg-stone-100"
+  const colors = "" //theme === "dark" ? "bg-stone-900" : "bg-stone-100"
   return (
-    <div className={`flex justify-center ${theme}`}>
-      <div className="flex min-h-screen w-full max-w-screen-lg flex-col text-stone-800 dark:text-stone-200">
+    <div className={`flex justify-center ${theme} ${colors}`}>
+      <div className="frame flex min-h-screen w-full max-w-screen-md flex-col text-stone-800 dark:text-stone-200">
         <Navbar theme={theme} path={router.asPath} />
         {children}
         <Footer />

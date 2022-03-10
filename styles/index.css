@@ -3,19 +3,61 @@
 @tailwind utilities;
 
 body {
-  background-color: #fff;
+  background-color: rgb(245 245 244);
 }
 body.dark {
-  background-color: #000;
+  background-color: rgb(28 25 23);
+}
+
+.background {
+  z-index: -1;
+}
+
+.frame {
+  background-color: rgb(245 245 244 / 0.9);
+}
+nav > a {
+}
+
+nav > a {
+  padding: 0.2rem 1rem 0.2rem 3rem;
+  line-height: 1;
+}
+
+nav > a:hover {
+  font-weight: 700;
+}
+
+nav.menu > a {
+  text-transform: uppercase;
+}
+
+nav > a.menu {
+  position: absolute;
+  top: 4px;
+  padding: 0;
 }
 
 .nav-item {
   position: relative;
-  opacity: 0.5;
   overflow: hidden;
   transition: opacity ease-in-out 0.2s;
 }
+.selected .nav-item {
+  opacity: 0.3;
+}
 
+body.dark .selected .nav-item {
+  opacity: 0.5;
+}
+
+.sopaque .nav-item {
+  opacity: 1;
+}
+
+.half-screen {
+  min-height: 50vh;
+}
 .nav-item:hover,
 .nav-item.current {
   opacity: 1;

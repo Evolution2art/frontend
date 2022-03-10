@@ -9,6 +9,7 @@ const CategoryButtons = ({
   size = 8,
   curSize = 12,
   theme = "light",
+  selected,
 }) => {
   // manually add tailwindcss classnames so it generates the required defs
   // https://tailwindcss.com/docs/content-configuration#class-detection-in-depth
@@ -16,12 +17,17 @@ const CategoryButtons = ({
     "w-2 w-3 w-4 w-5 w-6 w-8 w-12 w-16",
     "h-2 h-3 h-4 h-5 h-6 h-8 h-12 h-16",
   ]
+
+  const hasSelection = selected || path.indexOf("/", 1) !== -1
+
   const classNames =
-    "text-stone-700 dark:text-stone-300" + (className && ` ${className}`)
+    "text-stone-700 dark:text-stone-300" +
+    (className && ` ${className}`) +
+    (hasSelection && ` selected`)
   const hidden = "" //!category.slug ? "block " : "hidden "
   return (
     <div
-      className="container mx-auto mt-8 flex flex-wrap justify-center gap-4"
+      className={`container mx-auto mt-8 flex flex-wrap justify-center gap-4 ${classNames}`}
       id="collection"
     >
       {categories.map((_category) => {
@@ -51,7 +57,7 @@ const CategoryButtons = ({
               <h5 className="mx-auto pt-2 text-sm leading-4 tracking-tight">
                 {_category.name}
               </h5>
-              {hasNew > 0 && <div className="ribbon h-2 w-10 bg-red-500"></div>}
+              {hasNew > 0 && <div className="ribbon h-1 w-10 bg-red-500"></div>}
             </a>
           </Link>
         )
