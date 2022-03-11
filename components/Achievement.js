@@ -8,7 +8,7 @@ const Achievement = ({
   theme = "light",
 }) => {
   const classNames =
-    "flex justify-start " +
+    "flex " +
     (odd ? "justify-start" : "justify-end") +
     (className ? ` ${className}` : "")
   return (

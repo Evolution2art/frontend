@@ -5,8 +5,11 @@ import { MdClose, MdMenu } from "react-icons/md"
 import NextImage from "./Image"
 import Cart from "./Svg/Cart"
 
-const Navbar = ({ theme, path }) => {
+const Navbar = ({ theme, path, className }) => {
   // const totalRef = useRef()
+  const classNames =
+    "flex justify-between pt-1 text-stone-700 dark:text-stone-300" +
+    (className ? ` ${className}` : "")
   const [total, setTotal] = useState(0)
   const logo = theme === "dark" ? "logo-white" : "logo-dark"
   const [isOpen, setIsOpen] = useState(true)
@@ -21,7 +24,7 @@ const Navbar = ({ theme, path }) => {
   const showMenu = () => setIsOpen(true)
 
   return (
-    <div className="ml-6 mr-6 mt-4 flex justify-between pt-1 text-stone-700 dark:text-stone-300">
+    <div className={classNames}>
       <nav className="menu flex w-1/3 flex-col text-sm">
         <a className="menu h-6 w-6" onClick={toggleMenu}>
           <Hamburger toggled={isOpen} size={20} />
@@ -55,8 +58,8 @@ const Navbar = ({ theme, path }) => {
             src={`/${logo}.png`}
             alt="home"
             className="logo mx-auto"
-            height={!path || path === "/" ? 148 : 96}
-            width={!path || path === "/" ? 148 : 96}
+            height={148}
+            width={148}
           />
         </a>
       </Link>

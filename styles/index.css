@@ -12,9 +12,16 @@ body.dark {
 .background {
   z-index: -1;
 }
+.bg-contact {
+  z-index: -1;
+}
 
 .frame {
   background-color: rgb(245 245 244 / 0.9);
+}
+
+body.dark .frame {
+  background-color: rgb(28 25 23 / 0.9);
 }
 nav > a {
 }

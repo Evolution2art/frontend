@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import App from "next/app"
 import Head from "next/head"
-import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md"
+import { MdDarkMode } from "react-icons/md"
 import Layout from "../components/Layout"
 import { getCategories } from "../utils/api"
 import "../styles/index.css"
@@ -12,9 +12,9 @@ const MyApp = ({ Component, pageProps }) => {
     const _theme = localStorage.getItem("theme") || "light"
     setTheme(_theme)
     localStorage.setItem("theme", _theme)
-    window &&
-      _theme === "dark" &&
+    if (window && _theme === "dark") {
       document.querySelector("body").classList.add("dark")
+    }
   }, [])
 
   const toggleTheme = () => {
@@ -23,9 +23,9 @@ const MyApp = ({ Component, pageProps }) => {
     localStorage.setItem("theme", _theme)
     if (window) {
       if (_theme === "light") {
-        document.querySelector("body").classList.add("dark")
-      } else {
         document.querySelector("body").classList.remove("dark")
+      } else {
+        document.querySelector("body").classList.add("dark")
       }
     }
   }
@@ -44,7 +44,9 @@ const MyApp = ({ Component, pageProps }) => {
           src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
         />
       </Head>
-      <div className={`toggle-theme p-5 ${theme} w-full max-w-screen-md`}>
+      <div
+        className={`toggle-theme pt-1 ${theme} mx-auto w-full max-w-screen-md`}
+      >
         <MdDarkMode
           size="1.5em"
           onClick={toggleTheme}

@@ -2,7 +2,7 @@ import { FaGithub, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const Footer = () => {
   return (
-    <div className="m-6 flex justify-between">
+    <div className="mx-auto my-6 flex w-full max-w-screen-md justify-between">
       <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
         Evolution2Art &copy; 2022
       </p>

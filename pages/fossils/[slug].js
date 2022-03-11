@@ -16,7 +16,7 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
     (fossil.category?.slug && "/categories/" + fossil.category.slug) || "/"
 
   return (
-    <div className="m-6 mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3">
+    <div className="mx-auto my-8 grid w-full max-w-screen-md grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3">
       <Head>
         <title>{fossil.title}</title>
       </Head>

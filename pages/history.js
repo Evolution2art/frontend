@@ -10,7 +10,7 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
     return null
   }
   return (
-    <div>
+    <div className="mx-auto w-full max-w-screen-md">
       <CMSContent title={history.title} text={history.description} />
       {achievements.map((achievement, idx) => (
         <Achievement

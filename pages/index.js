@@ -2,6 +2,7 @@ import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import CategoryButtons from "../components/CategoryButtons"
+import Contact from "../components/Contact"
 import NextImage from "../components/Image"
 import CMSContent from "../components/CMSContent"
 // import FossilsList from "../components/FossilsList"
@@ -42,13 +43,14 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
       <Head>
         <title>Evolution2Art</title>
       </Head>
-      <div className="content">
-        <CMSContent
-          title={intro.title}
-          text={intro.text}
-          className="half-screen"
-        />
-        {/* <nav className="m-10 mt-36 mb-12 flex items-center justify-center">
+      <div className="frame mx-auto min-h-screen w-full max-w-screen-md">
+        <div className="content">
+          <CMSContent
+            title={intro.title}
+            text={intro.text}
+            className="half-screen dark:prose-invert"
+          />
+          {/* <nav className="m-10 mt-36 mb-12 flex items-center justify-center">
         <Link href="/#about">
           <a className={classNames}>Our Story</a>
         </Link>
@@ -59,26 +61,26 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
           <a className={classNames}>New Acquisitions</a>
         </Link>
       </nav> */}
-        <CategoryButtons
-          categories={categories}
-          path={router.asPath}
-          size={12}
-          curSize={12}
-          theme={theme}
-          className="mb-10 mt-16"
-        />
-        <CMSContent title={about.title} text={about.text} id="about" />
-        <nav className="flex items-center justify-center">
-          <Link href="/history">
-            <a className={classNames}>Learn more about our work</a>
-          </Link>
-          <Link href="/history#press">
-            <a className={classNames}>See what others have to say</a>
-          </Link>
-        </nav>
-
-        <CMSContent title={contact.title} text={contact.text} id="contact" />
+          <CategoryButtons
+            categories={categories}
+            path={router.asPath}
+            size={12}
+            curSize={12}
+            theme={theme}
+            className="mb-10 mt-16"
+          />
+          <CMSContent title={about.title} text={about.text} id="about" />
+          <nav className="mb-12 flex items-center justify-center">
+            <Link href="/history">
+              <a className={classNames}>Learn more about our work</a>
+            </Link>
+            <Link href="/history#press">
+              <a className={classNames}>See what others have to say</a>
+            </Link>
+          </nav>
+        </div>
       </div>
+      <Contact cms={contact} />
     </>
   )
 }
