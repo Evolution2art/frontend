@@ -16,6 +16,7 @@ import {
 
 const HomePage = ({ categories, intro, about, contact, theme }) => {
   const router = useRouter()
+  const logo = theme === "dark" ? "logo-white" : "logo-dark"
   const background =
     theme === "dark" ? intro.backgroundDark[0] : intro.background[0]
   // const { email } = contact
@@ -30,6 +31,9 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
 
   return (
     <>
+      <Head>
+        <title>Evolution2Art</title>
+      </Head>
       {background && (
         <div className="background absolute top-0 left-0 right-0 -z-10 h-full w-full">
           <NextImage
@@ -40,15 +44,23 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
           />
         </div>
       )}
-      <Head>
-        <title>Evolution2Art</title>
-      </Head>
+      <Link href="/">
+        <a className="w-1/3 pb-8 text-center">
+          <NextImage
+            src={`/${logo}.png`}
+            alt="home"
+            className="logo mx-auto"
+            height={148}
+            width={148}
+          />
+        </a>
+      </Link>
       <div className="frame mx-auto min-h-screen w-full max-w-screen-md">
-        <div className="content">
+        <main className="content">
           <CMSContent
             title={intro.title}
             text={intro.text}
-            className="half-screen dark:prose-invert"
+            className="fill-screen-v dark:prose-invert"
           />
           {/* <nav className="m-10 mt-36 mb-12 flex items-center justify-center">
         <Link href="/#about">
@@ -67,7 +79,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
             size={12}
             curSize={12}
             theme={theme}
-            className="mb-10 mt-16"
+            className="mt-16 mb-10"
           />
           <CMSContent title={about.title} text={about.text} id="about" />
           <nav className="mb-12 flex items-center justify-center">
@@ -78,7 +90,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
               <a className={classNames}>See what others have to say</a>
             </Link>
           </nav>
-        </div>
+        </main>
       </div>
       <Contact cms={contact} />
     </>

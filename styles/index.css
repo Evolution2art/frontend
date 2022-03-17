@@ -23,33 +23,34 @@ body.dark {
 body.dark .frame {
   background-color: rgb(28 25 23 / 0.9);
 }
-nav > a {
+nav.top > a {
 }
 
-nav > a {
-  padding: 0.2rem 1rem 0.2rem 3rem;
+nav.top > a {
+  padding: 0.2rem 1rem;
   line-height: 1;
 }
 
-nav > a:hover {
-  font-weight: 700;
+nav.top > a:hover {
+  border-bottom-width: 1px;
 }
 
-nav.menu > a {
+nav.top > a {
   text-transform: uppercase;
 }
 
-nav > a.menu {
+/* nav > a.menu {
   position: absolute;
   top: 4px;
   padding: 0;
-}
+} */
 
 .nav-item {
   position: relative;
   overflow: hidden;
   transition: opacity ease-in-out 0.2s;
 }
+
 .selected .nav-item {
   opacity: 0.3;
 }
@@ -62,8 +63,8 @@ body.dark .selected .nav-item {
   opacity: 1;
 }
 
-.half-screen {
-  min-height: 50vh;
+.fill-screen-v {
+  min-height: calc(100vh - 20rem);
 }
 .nav-item:hover,
 .nav-item.current {

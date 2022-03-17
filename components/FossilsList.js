@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const FossilsList = ({ fossils }) => {
   return (
-    <div className="m-4 mt-8 flex flex-wrap justify-center">
+    <div className="mx-4 flex flex-wrap justify-center">
       {fossils?.map((_fossil) => (
         <div key={_fossil.id} className="w-full p-2 sm:w-1/2">
           <div className="fossil-card shadow-md hover-hover:shadow-lg">

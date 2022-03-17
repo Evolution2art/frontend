@@ -13,7 +13,7 @@ const CategoryPage = ({ category, categories, theme }) => {
   return (
     <div className="mx-auto w-full max-w-screen-md">
       <Head>
-        <title>{category.name}</title>
+        <title>{category.title || category.name}</title>
       </Head>
       <CategoryButtons
         categories={categories}
@@ -25,9 +25,9 @@ const CategoryPage = ({ category, categories, theme }) => {
         theme={theme}
       />
       <div className="text-center">
-        {/* <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
-          {category.name}
-        </h2> */}
+        <h2 className="pt-8 text-2xl font-light italic">
+          {category.title || category.name}
+        </h2>
         <FossilsList fossils={category.fossils} />
       </div>
     </div>

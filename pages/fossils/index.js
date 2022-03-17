@@ -22,7 +22,12 @@ const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
       />
 
       {fossils.length ? (
-        <div className="mt-12 text-center">
+        <div className="text-center">
+          {!selected && (
+            <h2 className="pt-8 text-2xl font-light italic">
+              New Acquisitions
+            </h2>
+          )}
           {/* <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
             {showCategories ? (
               <MdClose

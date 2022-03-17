@@ -8,62 +8,23 @@ import Cart from "./Svg/Cart"
 const Navbar = ({ theme, path, className }) => {
   // const totalRef = useRef()
   const classNames =
-    "flex justify-between pt-1 text-stone-700 dark:text-stone-300" +
+    "relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
     (className ? ` ${className}` : "")
   const [total, setTotal] = useState(0)
-  const logo = theme === "dark" ? "logo-white" : "logo-dark"
-  const [isOpen, setIsOpen] = useState(true)
+  // const [isOpen, setIsOpen] = useState(true)
   useEffect(() => {
     if (window.Snipcart) {
       setTotal(Snipcart.store.getState().cart.total)
     }
   }, [path])
 
-  const toggleMenu = () => setIsOpen(!isOpen)
-  const hideMenu = () => setIsOpen(false)
-  const showMenu = () => setIsOpen(true)
+  // const toggleMenu = () => setIsOpen(!isOpen)
+  // const hideMenu = () => setIsOpen(false)
+  // const showMenu = () => setIsOpen(true)
 
   return (
     <div className={classNames}>
-      <nav className="menu flex w-1/3 flex-col text-sm">
-        <a className="menu h-6 w-6" onClick={toggleMenu}>
-          <Hamburger toggled={isOpen} size={20} />
-        </a>
-        {isOpen && (
-          <>
-            <Link href="/">
-              <a onClick={showMenu}>Home</a>
-            </Link>
-            <Link href="/fossils">
-              <a onClick={hideMenu}>Collection</a>
-            </Link>
-            <Link href="/#about">
-              <a onClick={hideMenu}>Our Story</a>
-            </Link>
-            <Link href="/history">
-              <a onClick={hideMenu}>Our Work</a>
-            </Link>
-            <Link href="/history#press">
-              <a onClick={hideMenu}>Press</a>
-            </Link>
-            <Link href="/#contact">
-              <a onClick={hideMenu}>Contact</a>
-            </Link>
-          </>
-        )}
-      </nav>
-      <Link href="/">
-        <a className="w-1/3 text-center">
-          <NextImage
-            src={`/${logo}.png`}
-            alt="home"
-            className="logo mx-auto"
-            height={148}
-            width={148}
-          />
-        </a>
-      </Link>
-      <div className="w-1/3 pr-6">
+      <div className="absolute right-0 pr-6">
         <button
           className={
             (total === 0 ? "w-5" : "w-auto") +
@@ -85,6 +46,29 @@ const Navbar = ({ theme, path, className }) => {
           </span>
         </button>
       </div>
+      <nav className="top flex w-full justify-between whitespace-nowrap pt-8 pb-4 text-sm">
+        {/* <a className="menu h-6 w-6" onClick={toggleMenu}>
+          <Hamburger toggled={isOpen} size={20} />
+        </a> */}
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+        <Link href="/fossils">
+          <a>Collection</a>
+        </Link>
+        <Link href="/#about">
+          <a>Our Story</a>
+        </Link>
+        <Link href="/history">
+          <a>Our Work</a>
+        </Link>
+        <Link href="/history#press">
+          <a>Press</a>
+        </Link>
+        <Link href="/#contact">
+          <a>Contact</a>
+        </Link>
+      </nav>
     </div>
   )
 }

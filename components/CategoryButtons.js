@@ -22,12 +22,12 @@ const CategoryButtons = ({
 
   const classNames =
     "text-stone-700 dark:text-stone-300" +
-    (className && ` ${className}`) +
-    (hasSelection && ` selected`)
+    ((className && ` ${className}`) || "") +
+    ((hasSelection && " selected") || "")
   const hidden = "" //!category.slug ? "block " : "hidden "
   return (
-    <div
-      className={`container mx-auto mt-8 flex flex-wrap justify-center gap-4 ${classNames}`}
+    <nav
+      className={`container flex flex-wrap justify-center gap-4 ${classNames}`}
       id="collection"
     >
       {categories.map((_category) => {
@@ -62,7 +62,7 @@ const CategoryButtons = ({
           </Link>
         )
       })}
-    </div>
+    </nav>
   )
 }
 
