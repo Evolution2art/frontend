@@ -1,5 +1,6 @@
 import Achievement from "../components/Achievement"
 import CMSContent from "../components/CMSContent"
+import Slideshow from "../components/Slideshow"
 import Media from "../components/Media"
 import { getCMSContent, getAchievements, getMedia } from "../utils/api"
 
@@ -12,19 +13,13 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
   return (
     <div className="mx-auto w-full max-w-screen-md">
       <CMSContent title={history.title} text={history.description} />
-      {achievements.map((achievement, idx) => (
-        <Achievement
-          key={`achievement_${idx}`}
-          achievement={achievement}
-          odd={idx % 2}
-        />
-      ))}
+      <Slideshow items={achievements} />
       {achievements.length < 1 && <em>Add some achievements in the backend</em>}
-      <CMSContent title={press.title} text={press.description} id="press" />
+      {/* <CMSContent title={press.title} text={press.description} id="press" />
       {medias.map((media, idx) => (
         <Media key={`media_${idx}`} media={media} odd={idx % 2} />
       ))}
-      {medias.length < 1 && <em>Add some media items in the backend</em>}
+      {medias.length < 1 && <em>Add some media items in the backend</em>} */}
     </div>
   )
 }

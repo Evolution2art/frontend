@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(245 245 244);
+  --bg-light: rgb(245 245 244);
+  --bg-light-opaque: rgb(245 245 244 / 0.9);
+  --bg-dark: rgb(28 25 23);
+  --bg-dark-opaque: rgb(28 25 23 / 0.9);
+  background-color: var(--bg-light);
 }
 body.dark {
-  background-color: rgb(28 25 23);
+  background-color: var(--bg-dark);
 }
 
 .background {
@@ -17,11 +21,11 @@ body.dark {
 }
 
 .frame {
-  background-color: rgb(245 245 244 / 0.9);
+  background-color: var(--bg-light-opaque);
 }
 
 body.dark .frame {
-  background-color: rgb(28 25 23 / 0.9);
+  background-color: var(--bg-dark-opaque);
 }
 nav.top > a {
 }
@@ -59,8 +63,36 @@ body.dark .selected .nav-item {
   opacity: 0.5;
 }
 
-.sopaque .nav-item {
+.slideshow {
+  min-height: 100vh;
+}
+.slideshow .slides {
+  min-height: 100vh;
+  position: relative;
+}
+.slideshow .slide {
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+.slideshow .slide.active {
   opacity: 1;
+}
+
+.slideshow > nav {
+  position: fixed;
+  bottom: 4rem;
+}
+
+.slideshow > nav .slide-nav {
+  width: 1rem;
+  height: 1rem;
+  border: solid 2px var(--bg-dark);
+  background-color: var(--bg-light);
+}
+.slideshow > nav .slide-nav.active {
+  background: var(--bg-dark);
 }
 
 .fill-screen-v {

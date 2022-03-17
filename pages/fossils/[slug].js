@@ -41,13 +41,33 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
             </div>
           )}
           {fossil.promotion && <div className="mt-1">{fossil.promotion}</div>}
-          <div className="mt-1">{fossil.description}</div>
-          {fossil.origin && (
-            <div className="mt-1">
-              <label className="italic">Origin</label>
-              <div>{fossil.origin}</div>
-            </div>
-          )}
+          {!fossil.sold && fossil.status === "published" ? (
+            fossil.priceOnRequest ? (
+              <a
+                href={`mailto:${email}`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-block rounded border border-stone-200 bg-white py-2 px-4 font-semibold text-stone-700 shadow hover:shadow-lg"
+              >
+                Contact us for a quote
+              </a>
+            ) : (
+              <button
+                className="snipcart-add-item mt-4 rounded border border-stone-200 bg-white py-2 px-4 font-semibold text-stone-700 shadow hover:shadow-lg"
+                data-item-id={fossil.id}
+                data-item-price={fossil.price}
+                data-item-url={router.asPath}
+                data-item-max-quantity={1}
+                data-item-description={fossil.description}
+                data-item-image={getStrapiMedia(
+                  fossil.image.formats.thumbnail.url
+                )}
+                data-item-name={fossil.title}
+              >
+                Add to cart
+              </button>
+            )
+          ) : null}
           {fossil.species && (
             <div className="mt-1">
               <label className="italic">Species</label>
@@ -60,49 +80,25 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
               <div>{fossil.age}</div>
             </div>
           )}
-
-          {!fossil.sold &&
-            (fossil.status === "published" ? (
-              fossil.priceOnRequest ? (
-                <a
-                  href={`mailto:${email}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-block rounded border border-stone-200 bg-white py-2 px-4 font-semibold text-stone-700 shadow hover:shadow-lg"
-                >
-                  Contact us for a quote
-                </a>
-              ) : (
-                <button
-                  className="snipcart-add-item mt-4 rounded border border-stone-200 bg-white py-2 px-4 font-semibold text-stone-700 shadow hover:shadow-lg"
-                  data-item-id={fossil.id}
-                  data-item-price={fossil.price}
-                  data-item-url={router.asPath}
-                  data-item-max-quantity={1}
-                  data-item-description={fossil.description}
-                  data-item-image={getStrapiMedia(
-                    fossil.image.formats.thumbnail.url
-                  )}
-                  data-item-name={fossil.title}
-                >
-                  Add to cart
-                </button>
-              )
-            ) : (
-              <div className="mr-10 mb-1 text-center" v-else>
-                <div
-                  className="flex items-center bg-stone-800 p-2 leading-none text-stone-100 lg:inline-flex lg:rounded-full"
-                  role="alert"
-                >
-                  <span className="mr-3 flex rounded-full bg-stone-500 px-2 py-1 text-xs font-bold uppercase">
-                    Coming soon...
-                  </span>
-                  <span className="mr-2 flex-auto text-left font-semibold">
-                    This article is not available yet.
-                  </span>
-                </div>
-              </div>
-            ))}
+          {fossil.origin && (
+            <div className="mt-1">
+              <label className="italic">Origin</label>
+              <div>{fossil.origin}</div>
+            </div>
+          )}
+          {fossil.dimensions && (
+            <div className="mt-1">
+              <label className="italic">Dimensions</label>
+              <div>{fossil.dimensions}</div>
+            </div>
+          )}
+          {fossil.quality?.state && (
+            <div className="mt-1">
+              <label className="italic">Quality</label>
+              <div>{fossil.quality.state}</div>
+            </div>
+          )}
+          <div className="mt-1">{fossil.description}</div>
         </div>
       </div>
       <div className="col-span-2 m-auto h-full w-full pt-2 pb-2">
