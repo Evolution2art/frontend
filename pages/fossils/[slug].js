@@ -44,7 +44,11 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
                 : ""}
             </div>
           )}
-          {fossil.promotion && <div className="mt-1">{fossil.promotion}</div>}
+          {fossil.promotion ? (
+            <div className="mt-1">{fossil.promotion}</div>
+          ) : (
+            ""
+          )}
           {!fossil.sold && fossil.status === "published" ? (
             fossil.priceOnRequest ? (
               <a
@@ -72,35 +76,45 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
               </button>
             )
           ) : null}
-          {fossil.species && (
+          {fossil.species ? (
             <div className="mt-1">
               <label className="italic">Species</label>
               <div>{fossil.species}</div>
             </div>
+          ) : (
+            ""
           )}
-          {fossil.age && (
+          {fossil.age ? (
             <div className="mt-1">
               <label className="italic">Age</label>
               <div>{fossil.age}</div>
             </div>
+          ) : (
+            ""
           )}
-          {fossil.origin && (
+          {fossil.origin ? (
             <div className="mt-1">
               <label className="italic">Origin</label>
               <div>{fossil.origin}</div>
             </div>
+          ) : (
+            ""
           )}
-          {fossil.dimensions && (
+          {fossil.dimensions ? (
             <div className="mt-1">
               <label className="italic">Dimensions</label>
               <div>{fossil.dimensions}</div>
             </div>
+          ) : (
+            ""
           )}
-          {fossil.quality?.state && (
+          {fossil.quality?.state ? (
             <div className="mt-1">
               <label className="italic">Quality</label>
               <div>{fossil.quality.state}</div>
             </div>
+          ) : (
+            ""
           )}
           <div className="mt-1">{fossil.description}</div>
         </div>
