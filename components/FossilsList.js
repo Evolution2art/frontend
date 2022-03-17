@@ -17,15 +17,19 @@ const FossilsList = ({ fossils }) => {
                       objectFit="cover"
                       objectPosition="center"
                     />
-                    {_fossil.sold && (
+                    {_fossil.sold ? (
                       <div className="ribbon h-5 w-24 bg-gray-500 text-sm">
                         sold
                       </div>
+                    ) : (
+                      ""
                     )}
-                    {_fossil.new && new Date(_fossil.new) > new Date() && (
+                    {_fossil.new && new Date(_fossil.new) > new Date() ? (
                       <div className="ribbon h-5 w-24 bg-red-500 text-sm">
                         new
                       </div>
+                    ) : (
+                      ""
                     )}
                   </div>
                 </div>
@@ -35,10 +39,12 @@ const FossilsList = ({ fossils }) => {
                       <h4 className="fossil-title truncate py-3 pl-4 text-base font-semibold">
                         {_fossil.title}
                       </h4>
-                      {_fossil.price && !_fossil.priceOnRequest && (
+                      {_fossil.price && !_fossil.priceOnRequest ? (
                         <div className="fossil-price py-3 pr-4">
-                          {_fossil.price + " €"}
+                          {_fossil?.price ? _fossil.price + " €" : ""}
                         </div>
+                      ) : (
+                        ""
                       )}
                     </div>
                     <div className="fossil-description p-4 text-sm">
