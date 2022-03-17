@@ -37,7 +37,11 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
             <div className="fossil-price sold">SOLD</div>
           ) : (
             <div className="fossil-price">
-              {fossil.priceOnRequest ? "Price on Request" : fossil.price + " €"}
+              {fossil.priceOnRequest
+                ? "Price on Request"
+                : fossil?.price
+                ? fossil.price + " €"
+                : ""}
             </div>
           )}
           {fossil.promotion && <div className="mt-1">{fossil.promotion}</div>}
