@@ -11,7 +11,7 @@ const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
   // const [showCategories, setShowCategories] = useState(!fossils?.length)
 
   return (
-    <div className="mx-auto w-full max-w-screen-md">
+    <div className="mx-auto w-full max-w-screen-lg">
       <CategoryButtons
         categories={categories}
         path={router.asPath}
