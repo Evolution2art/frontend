@@ -5,12 +5,12 @@ import Navbar from "./Navbar"
 const Layout = ({ children, theme }) => {
   const router = useRouter()
   return (
-    <div className={`justify-center ${theme}`}>
-      <div className="flex flex-col items-center text-stone-800 dark:text-stone-200">
+    <div className={`${theme}`}>
+      <div className="flex min-h-full flex-col items-center text-stone-800 dark:text-stone-200">
         <Navbar
           theme={theme}
           path={router.asPath}
-          className="mx-auto w-full max-w-screen-md"
+          className="mx-auto w-full max-w-screen-lg"
         />
         {children}
         <Footer />

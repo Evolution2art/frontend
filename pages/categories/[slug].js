@@ -11,7 +11,7 @@ const CategoryPage = ({ category, categories, theme }) => {
   }
 
   return (
-    <div className="mx-auto w-full max-w-screen-md">
+    <div className="mx-auto w-full max-w-screen-lg">
       <Head>
         <title>{category.title || category.name}</title>
       </Head>

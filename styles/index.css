@@ -20,26 +20,34 @@ body.dark {
   z-index: -1;
 }
 
-.frame {
+main {
+  min-height: 100%;
+}
+
+.frame,
+.toggle-theme,
+.navbar {
   background-color: var(--bg-light-opaque);
 }
 
-body.dark .frame {
+body.dark .frame,
+body.dark .toggle-theme,
+body.dark .navbar {
   background-color: var(--bg-dark-opaque);
 }
-nav.top > a {
+nav.top a {
 }
 
-nav.top > a {
+nav.top a {
   padding: 0.2rem 1rem;
   line-height: 1;
 }
 
-nav.top > a:hover {
+nav.top a:hover {
   border-bottom-width: 1px;
 }
 
-nav.top > a {
+nav.top a {
   text-transform: uppercase;
 }
 

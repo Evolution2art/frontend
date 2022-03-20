@@ -44,18 +44,18 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
           />
         </div>
       )}
-      <Link href="/">
-        <a className="w-1/3 pb-8 text-center">
-          <NextImage
-            src={`/${logo}.png`}
-            alt="home"
-            className="logo mx-auto"
-            height={148}
-            width={148}
-          />
-        </a>
-      </Link>
-      <div className="frame mx-auto min-h-screen w-full max-w-screen-md">
+      <div className="frame mx-auto min-h-screen w-full max-w-screen-lg">
+        <Link href="/">
+          <a className="mx-auto block w-1/3 pb-8 text-center">
+            <NextImage
+              src={`/${logo}.png`}
+              alt="home"
+              className="logo"
+              height={148}
+              width={148}
+            />
+          </a>
+        </Link>
         <main className="content">
           <CMSContent
             title={intro.title}

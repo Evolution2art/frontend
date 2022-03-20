@@ -19,7 +19,7 @@ const Slideshow = ({ items }) => {
           )
         })}
       </div>
-      <nav className="fixed flex w-full max-w-screen-md justify-center gap-4">
+      <nav className="fixed flex w-full max-w-screen-lg justify-center gap-4">
         {items.map((item, idx) => {
           const classNames = "slide-nav" + (idx === current ? " active" : "")
           return (

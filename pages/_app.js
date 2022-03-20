@@ -45,7 +45,7 @@ const MyApp = ({ Component, pageProps }) => {
         />
       </Head>
       <div
-        className={`toggle-theme pt-1 ${theme} mx-auto w-full max-w-screen-md`}
+        className={`toggle-theme pt-1 ${theme} mx-auto w-full max-w-screen-lg`}
       >
         <MdDarkMode
           size="1.5em"

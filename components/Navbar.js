@@ -8,7 +8,7 @@ import Cart from "./Svg/Cart"
 const Navbar = ({ theme, path, className }) => {
   // const totalRef = useRef()
   const classNames =
-    "relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
+    "navbar relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
     (className ? ` ${className}` : "")
   const [total, setTotal] = useState(0)
   // const [isOpen, setIsOpen] = useState(true)
@@ -24,7 +24,7 @@ const Navbar = ({ theme, path, className }) => {
 
   return (
     <div className={classNames}>
-      <div className="absolute right-0 pr-6">
+      <div className="absolute right-0 z-10 mr-6">
         <button
           className={
             (total === 0 ? "w-5" : "w-auto") +
@@ -46,28 +46,32 @@ const Navbar = ({ theme, path, className }) => {
           </span>
         </button>
       </div>
-      <nav className="top flex w-full justify-between whitespace-nowrap pt-8 pb-4 text-sm">
+      <nav className="top flex w-full flex-wrap justify-between pt-8 pb-4 text-sm">
         {/* <a className="menu h-6 w-6" onClick={toggleMenu}>
           <Hamburger toggled={isOpen} size={20} />
         </a> */}
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/fossils">
-          <a>Collection</a>
-        </Link>
-        <Link href="/#about">
-          <a>Our Story</a>
-        </Link>
-        <Link href="/history">
-          <a>Our Work</a>
-        </Link>
-        <Link href="/history#press">
-          <a>Press</a>
-        </Link>
-        <Link href="/#contact">
-          <a>Contact</a>
-        </Link>
+        <div className="whitespace-nowrap">
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+          <Link href="/fossils">
+            <a>Collection</a>
+          </Link>
+          <Link href="/#about">
+            <a>Our Story</a>
+          </Link>
+        </div>
+        <div className="whitespace-nowrap">
+          <Link href="/history">
+            <a>Our Work</a>
+          </Link>
+          <Link href="/history#press">
+            <a>Press</a>
+          </Link>
+          <Link href="/#contact">
+            <a>Contact</a>
+          </Link>
+        </div>
       </nav>
     </div>
   )

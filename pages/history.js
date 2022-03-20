@@ -11,7 +11,7 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
     return null
   }
   return (
-    <div className="mx-auto w-full max-w-screen-md">
+    <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent title={history.title} text={history.description} />
       <Slideshow items={achievements} />
       {achievements.length < 1 && <em>Add some achievements in the backend</em>}
