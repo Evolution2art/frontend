@@ -24,7 +24,9 @@ const FossilsList = ({ fossils }) => {
                     ) : (
                       ""
                     )}
-                    {_fossil.new && new Date(_fossil.new) > new Date() ? (
+                    {_fossil.new &&
+                    !_fossil.sold &&
+                    new Date(_fossil.new) > new Date() ? (
                       <div className="ribbon h-5 w-24 bg-red-500 text-sm">
                         new
                       </div>

@@ -7,6 +7,10 @@ body {
   --bg-light-opaque: rgb(245 245 244 / 0.9);
   --bg-dark: rgb(28 25 23);
   --bg-dark-opaque: rgb(28 25 23 / 0.9);
+  --text-light: rgb(229 231 235);
+  --text-dark: rgb(68 64 60);
+  --soft-light: #d6d3d1;
+  --soft-dark: #44403c;
   background-color: var(--bg-light);
 }
 body.dark {
@@ -24,29 +28,33 @@ main {
   min-height: 100%;
 }
 
-.frame,
-.toggle-theme,
-.navbar {
+.frame {
   background-color: var(--bg-light-opaque);
 }
 
-body.dark .frame,
-body.dark .toggle-theme,
-body.dark .navbar {
+body.dark .frame {
   background-color: var(--bg-dark-opaque);
-}
-nav.top a {
 }
 
 nav.top a {
   padding: 0.2rem 1rem;
-  line-height: 1;
+  margin: 0.1rem 0;
+  line-height: 1.5;
+  display: inline-block;
+  border-bottom-width: 1px;
+  border-bottom-color: var(--bg-light);
 }
 
 nav.top a:hover {
-  border-bottom-width: 1px;
+  border-bottom-color: var(--soft-light);
 }
 
+body.dark nav.top a {
+  border-bottom-color: var(--bg-dark);
+}
+body.dark nav.top a:hover {
+  border-bottom-color: var(--soft-dark);
+}
 nav.top a {
   text-transform: uppercase;
 }
@@ -104,10 +112,11 @@ body.dark .selected .nav-item {
 }
 
 .fill-screen-v {
-  min-height: calc(100vh - 20rem);
+  min-height: calc(100vh - 31rem);
 }
 .nav-item:hover,
-.nav-item.current {
+.nav-item.current,
+body.dark .nav-item.current {
   opacity: 1;
 }
 
@@ -201,4 +210,21 @@ body.dark .selected .nav-item {
 .toggle-theme.dark:hover > button > div {
   border-bottom-left-radius: 100%;
   border-top-right-radius: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1s;
 }

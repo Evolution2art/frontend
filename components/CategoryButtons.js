@@ -27,7 +27,7 @@ const CategoryButtons = ({
   const hidden = "" //!category.slug ? "block " : "hidden "
   return (
     <nav
-      className={`container flex flex-wrap justify-center gap-4 ${classNames}`}
+      className={`flex flex-wrap justify-center gap-4 ${classNames}`}
       id="collection"
     >
       {categories.map((_category) => {

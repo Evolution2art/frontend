@@ -1,19 +1,21 @@
 import { useRouter } from "next/router"
+import { useLayoutEffect, useState } from "react"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 
 const Layout = ({ children, theme }) => {
   const router = useRouter()
+
   return (
     <div className={`mb-16 ${theme}`}>
       <div className="flex min-h-full flex-col items-center text-stone-800 dark:text-stone-200">
         <Navbar
           theme={theme}
           path={router.asPath}
-          className="mx-auto w-full max-w-screen-lg"
+          className={`mx-auto w-full max-w-screen-lg`}
         />
         {children}
-        <Footer />
+        <Footer className={``} />
       </div>
       <div
         hidden

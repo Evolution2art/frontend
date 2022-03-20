@@ -2,8 +2,6 @@ import { useRouter } from "next/router"
 import CategoryButtons from "../../components/CategoryButtons"
 import FossilsList from "../../components/FossilsList"
 import { getNewFossils, getCMSContent, getCategories } from "../../utils/api"
-import { MdOutlineArrowBack, MdClose } from "react-icons/md"
-import { useState } from "react"
 
 const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
   const router = useRouter()
@@ -28,20 +26,6 @@ const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
               New Acquisitions
             </h2>
           )}
-          {/* <h2 className="p-4 pb-0 text-xl text-stone-600 dark:text-stone-400">
-            {showCategories ? (
-              <MdClose
-                className="mx-4 inline"
-                onClick={() => setShowCategories(false)}
-              />
-            ) : (
-              <MdOutlineArrowBack
-                className="mx-4 inline"
-                onClick={() => setShowCategories(true)}
-              />
-            )}
-            New acquisitions
-          </h2> */}
           <FossilsList fossils={fossils} email={email} />
         </div>
       ) : (

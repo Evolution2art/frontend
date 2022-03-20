@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import App from "next/app"
 import Head from "next/head"
 import { MdDarkMode } from "react-icons/md"
@@ -69,7 +69,10 @@ MyApp.getInitialProps = async (ctx) => {
   // Fetch global site settings from Strapi
   const categories = await getCategories()
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { categories, path: ctx.pathname } }
+  return {
+    ...appProps,
+    pageProps: { categories, path: ctx.pathname },
+  }
 }
 
 export default MyApp

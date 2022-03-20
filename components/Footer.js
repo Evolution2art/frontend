@@ -1,8 +1,11 @@
 import { FaGithub, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
-const Footer = () => {
+const Footer = ({ className }) => {
+  const classNames =
+    "fixed bottom-0 left-0 w-full bg-stone-100 px-4 dark:bg-stone-900" +
+    (className ? ` ${className}` : "")
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-stone-100">
+    <div className={classNames}>
       <div className="mx-auto my-6 flex w-full max-w-screen-lg justify-between">
         <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
           Evolution2Art &copy; 2022

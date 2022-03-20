@@ -46,7 +46,7 @@ const Navbar = ({ theme, path, className }) => {
           </span>
         </button>
       </div>
-      <nav className="top flex w-full flex-wrap justify-between pt-8 pb-4 text-sm">
+      <nav className="top flex w-full flex-wrap justify-between pt-4 pb-4 text-sm">
         {/* <a className="menu h-6 w-6" onClick={toggleMenu}>
           <Hamburger toggled={isOpen} size={20} />
         </a> */}
