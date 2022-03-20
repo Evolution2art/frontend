@@ -86,7 +86,7 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
                 href={`mailto:${email}`}
                 target="_blank"
                 rel="noreferrer"
-                className={buttonClassNames}
+                className={`block ${buttonClassNames}`}
               >
                 Contact us for a quote
               </a>
