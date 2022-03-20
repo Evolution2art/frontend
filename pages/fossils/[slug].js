@@ -20,7 +20,7 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
     "frame w-full p-4 pt-6 text-stone-600 dark:text-stone-400 md:w-1/2 lg:w-1/3" +
     (hideContent ? " hidden" : "")
   const buttonClassNames =
-    "m-2 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
+    "my-6 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
     "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
 
   return (
