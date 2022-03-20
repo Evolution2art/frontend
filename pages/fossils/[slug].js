@@ -24,7 +24,7 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
     "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
 
   return (
-    <main className="mx-auto mb-20 w-full">
+    <main className="mx-auto w-full">
       <Head>
         <title>{fossil.title}</title>
       </Head>

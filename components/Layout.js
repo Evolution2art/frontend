@@ -5,7 +5,7 @@ import Navbar from "./Navbar"
 const Layout = ({ children, theme }) => {
   const router = useRouter()
   return (
-    <div className={`${theme}`}>
+    <div className={`mb-16 ${theme}`}>
       <div className="flex min-h-full flex-col items-center text-stone-800 dark:text-stone-200">
         <Navbar
           theme={theme}
