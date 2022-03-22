@@ -12,7 +12,7 @@ const Layout = ({ children, theme }) => {
         <Navbar
           theme={theme}
           path={router.asPath}
-          className={`mx-auto w-full max-w-screen-lg`}
+          className={`mx-auto w-full max-w-screen-xl`}
         />
         {children}
         <Footer className={``} />

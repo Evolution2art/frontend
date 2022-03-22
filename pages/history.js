@@ -10,10 +10,27 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
   if (!history) {
     return null
   }
+
+  const renderAchievements = (item, idx, current) => {
+    const classNames = "slide" + (idx === current ? " active" : "")
+    return (
+      <Achievement
+        key={`achievement_${idx}`}
+        achievement={item}
+        className={classNames}
+      />
+    )
+  }
+
   return (
-    <div className="mx-auto w-full max-w-screen-lg">
+    <div className="mx-auto w-full max-w-screen-md">
       <CMSContent title={history.title} text={history.description} />
-      <Slideshow items={achievements} />
+      <Slideshow
+        items={achievements}
+        render={renderAchievements}
+        className="w-full"
+        navClassName="fixed flex w-full max-w-screen-md"
+      />
       {achievements.length < 1 && <em>Add some achievements in the backend</em>}
       {/* <CMSContent title={press.title} text={press.description} id="press" />
       {medias.map((media, idx) => (

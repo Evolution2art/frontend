@@ -32,9 +32,9 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
 
   const [scroll, setScroll] = useState(false)
   const onScroll = () => {
-    if (scroll && window.scrollY == 0) {
-      setScroll(false)
-    }
+    // if (scroll && window.scrollY == 0) {
+    //   setScroll(false)
+    // }
     if (window.scrollY > 0) {
       setScroll(true)
     }
@@ -61,7 +61,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
         </div>
       )}
       <Link href="/">
-        <a className="mx-auto block w-1/3 pb-8 text-center">
+        <a className="frame block w-full max-w-screen-md py-8 text-center">
           <NextImage
             src={`/${logo}.png`}
             alt="home"
@@ -72,7 +72,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
         </a>
       </Link>
       <div
-        className={`frame mx-auto min-h-screen w-full max-w-screen-lg ${
+        className={`frame mx-auto min-h-screen w-full max-w-screen-md ${
           scroll ? "fadeIn" : "opacity-0"
         }`}
       >
@@ -101,7 +101,17 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
             theme={theme}
             className="mt-16 mb-10"
           />
-          <CMSContent title={about.title} text={about.text} id="about" />
+          <div className="flex max-w-screen-md">
+            <div className="w-1/3 pt-24">
+              <NextImage media={about.gallery[0]} />
+            </div>
+            <CMSContent
+              title={about.title}
+              text={about.text}
+              id="about"
+              className="w-2/3"
+            />
+          </div>
           <nav className="mb-12 flex items-center justify-center">
             <Link href="/history">
               <a className={classNames}>Learn more about our work</a>

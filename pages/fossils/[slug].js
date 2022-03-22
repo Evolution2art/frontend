@@ -2,6 +2,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 
 import NextImage from "../../components/Image"
+import Slideshow from "../../components/Slideshow"
 import Link from "next/link"
 import { getFossils, getFossil } from "../../utils/api"
 import { getStrapiMedia } from "../../utils/medias"
@@ -13,56 +14,75 @@ const FossilPage = ({ fossil, email = "info@evolution2art.com" }) => {
   if (router.isFallback) {
     return <div>Loading fossil...</div>
   }
+  const orientation =
+    fossil.image.height > fossil.image.width ? "portrait" : "landscape"
   const hrefBack =
     (fossil.category?.slug && "/categories/" + fossil.category.slug) || "/"
   const [hideContent, setHideContent] = useState(false)
   const classNames =
-    "frame w-full p-4 pt-6 text-stone-600 dark:text-stone-400 md:w-1/2 lg:w-1/3" +
+    "frame w-full p-4 pt-6 text-stone-600 dark:text-stone-400 md:w-1/2 " +
+    (orientation === "portrait" ? "lg:w-1/3" : "lg:w-1/2") +
     (hideContent ? " hidden" : "")
   const buttonClassNames =
     "my-6 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
     "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
+
+  const renderImages = (item, idx, current) => {
+    const classNames = "slide w-full" + (idx === current ? " active" : "")
+    return (
+      <div key={`fossil_image_${idx}`} className={classNames}>
+        <NextImage media={item} />
+      </div>
+    )
+  }
 
   return (
     <main className="mx-auto w-full">
       <Head>
         <title>{fossil.title}</title>
       </Head>
-      <article className="mx-auto flex w-full max-w-screen-lg flex-col justify-start">
-        <div className="z-10 -mt-8 ml-3 flex w-full justify-between md:w-1/2 lg:w-1/3">
-          <Link href={hrefBack}>
-            <a>
-              <MdOutlineArrowBack className="h-6 w-6" />
-              {/* <h4 className="mt-1 text-lg font-semibold text-stone-700 dark:text-stone-300">
+      <div className="absolute z-10 -mt-8 ml-3 flex w-full justify-between md:w-1/2 lg:w-1/3">
+        <Link href={hrefBack}>
+          <a>
+            <MdOutlineArrowBack className="h-6 w-6" />
+            {/* <h4 className="mt-1 text-lg font-semibold text-stone-700 dark:text-stone-300">
                 {fossil.category?.name || ""}
               </h4> */}
-            </a>
-          </Link>
-          <a
-            onClick={() => setHideContent(false)}
-            className={hideContent ? "" : " hidden"}
-          >
-            <MdExpandMore className="mr-7 h-6 w-6" />
           </a>
-        </div>
-        <div className="absolute left-0 -z-10 min-w-full pb-16">
-          <NextImage
+        </Link>
+        {/* <a
+          onClick={() => setHideContent(false)}
+          className={hideContent ? "" : " hidden"}
+        >
+          <MdExpandMore className="mr-7 h-6 w-6" />
+        </a> */}
+      </div>
+      <article className="mx-auto flex w-full max-w-screen-lg justify-start">
+        <div className={orientation === "landscape" ? "w-2/3" : "w-1/2"}>
+          {/* <div className="absolute top-24 left-0 -z-10 w-full"> */}
+          <Slideshow
+            items={[fossil.image, ...fossil.gallery]}
+            render={renderImages}
+            className="pb-24  "
+            navClassName="w-1/2"
+          />
+          {/* <NextImage
             media={fossil.image}
             // width={fossil.image.formats.large.width}
             // width={fossil.image.formats.large.height}
             // layout="fill"
             // objectFit="cover"
             // objectPosition="center"
-          />
+          /> */}
         </div>
         <section className={classNames}>
           <div className="flex justify-between">
             <h4 className="mt-1 text-lg font-semibold text-stone-700 dark:text-stone-300">
               {fossil.title}
             </h4>
-            <a onClick={() => setHideContent(true)}>
+            {/* <a onClick={() => setHideContent(true)}>
               <MdClose className="h-6 w-6" />
-            </a>
+            </a> */}
           </div>
           {fossil.sold ? (
             <div className="fossil-price sold">SOLD</div>
