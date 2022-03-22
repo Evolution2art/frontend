@@ -8,13 +8,13 @@ const Achievement = ({
   theme = "light",
 }) => {
   const classNames =
-    "flex " +
+    "relative flex " +
     (odd ? "justify-start" : "justify-end") +
     (className ? ` ${className}` : "")
   return (
     <article className={classNames}>
-      {odd && achievement.gallery?.length > 0 ? (
-        <div className="h-1/2 w-1/2 pt-2 pb-2">
+      {achievement.gallery?.length > 0 ? (
+        <div className="absolute -z-10 w-full max-w-screen-lg pt-2 pb-2">
           <NextImage
             media={achievement.gallery[0]}
             width={achievement.gallery[0].width}
@@ -24,7 +24,10 @@ const Achievement = ({
       <CMSContent
         title={achievement?.title}
         text={achievement?.description}
-        className={"w-1/2" + (!odd ? " text-right" : "")}
+        className={
+          "frame fadeIn prose-stone w-1/4 dark:prose-invert" +
+          (!odd ? " text-right" : "")
+        }
       />
     </article>
   )

@@ -18,18 +18,19 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
         key={`achievement_${idx}`}
         achievement={item}
         className={classNames}
+        odd={false}
       />
     )
   }
 
   return (
-    <div className="mx-auto w-full max-w-screen-md">
+    <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent title={history.title} text={history.description} />
       <Slideshow
         items={achievements}
         render={renderAchievements}
         className="w-full"
-        navClassName="fixed flex w-full max-w-screen-md"
+        navClassName="fixed flex w-full max-w-screen-lg"
       />
       {achievements.length < 1 && <em>Add some achievements in the backend</em>}
       {/* <CMSContent title={press.title} text={press.description} id="press" />

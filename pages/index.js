@@ -61,7 +61,11 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
         </div>
       )}
       <Link href="/">
-        <a className="frame block w-full max-w-screen-md py-8 text-center">
+        <a
+          className={`frame block w-full max-w-screen-md py-8 text-center${
+            scroll ? " fadeBgIn" : ""
+          }`}
+        >
           <NextImage
             src={`/${logo}.png`}
             alt="home"
@@ -109,7 +113,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
               title={about.title}
               text={about.text}
               id="about"
-              className="w-2/3"
+              className="prose-stone w-2/3 dark:prose-invert"
             />
           </div>
           <nav className="mb-12 flex items-center justify-center">
