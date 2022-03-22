@@ -24,6 +24,10 @@ body.dark {
   z-index: -1;
 }
 
+section.contact {
+  min-height: calc(100vh - 5rem);
+}
+
 main {
   min-height: 100%;
 }
