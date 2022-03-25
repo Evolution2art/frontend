@@ -46,14 +46,18 @@ const CategoryButtons = ({
                 "nav-item mx-4 py-2 text-center font-semibold text-stone-800 dark:text-stone-200"
               }
             >
-              {_category.icon?.url && (
-                <div className={`relative ${sizes}`}>
-                  <NextImage
-                    src={`/${_category.slug}-${theme}.png`}
-                    layout="fill"
-                  />
-                </div>
-              )}
+              {theme === "light"
+                ? _category.icon?.url && (
+                    <div className={`relative ${sizes}`}>
+                      <NextImage media={_category.icon} layout="fill" />
+                    </div>
+                  )
+                : _category.iconDark?.url && (
+                    <div className={`relative ${sizes}`}>
+                      <NextImage media={_category.iconDark} layout="fill" />
+                    </div>
+                  )}
+
               <h5 className="mx-auto pt-2 text-sm leading-4 tracking-tight">
                 {_category.name}
               </h5>

@@ -11,14 +11,14 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
     return null
   }
 
-  const renderAchievements = (item, idx, current) => {
+  function renderAchievements(item, idx, current) {
     const classNames = "slide" + (idx === current ? " active" : "")
     return (
       <Achievement
         key={`achievement_${idx}`}
         achievement={item}
         className={classNames}
-        odd={false}
+        odd={true}
       />
     )
   }

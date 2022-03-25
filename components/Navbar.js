@@ -1,22 +1,23 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { Twirl as Hamburger } from "hamburger-react"
 import { MdClose, MdMenu } from "react-icons/md"
 import NextImage from "./Image"
-import Cart from "./Svg/Cart"
+import Cart from "./Cart"
+import { useCartContext } from "../context/cart"
 
 const Navbar = ({ theme, path, className }) => {
   // const totalRef = useRef()
   const classNames =
     "navbar relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
     (className ? ` ${className}` : "")
-  const [total, setTotal] = useState(0)
   // const [isOpen, setIsOpen] = useState(true)
-  useEffect(() => {
-    if (window.Snipcart) {
-      setTotal(Snipcart.store.getState().cart.total)
-    }
-  }, [path])
+  // useEffect(() => {
+  //   if (window.Snipcart) {
+  //     setTotal(Snipcart.store.getState().cart.total)
+  //   }
+  // }, [path])
+
+  const { cart, addToCart, removeFromCart } = useCartContext()
 
   // const toggleMenu = () => setIsOpen(!isOpen)
   // const hideMenu = () => setIsOpen(false)
@@ -24,32 +25,10 @@ const Navbar = ({ theme, path, className }) => {
 
   return (
     <div className={classNames}>
-      <div className="absolute right-0 z-10 mr-6">
-        <button
-          className={
-            (total === 0 ? "w-5" : "w-auto") +
-            " snipcart-checkout snipcart-summary relative float-right flex overflow-hidden pr-4"
-          }
-        >
-          <div>
-            <Cart
-              theme={theme}
-              className="snipcart-cart-header__icon snipcart__icon text-stone-700 dark:text-stone-300"
-            />
-            <strong className="sr-only">Cart</strong>
-          </div>
-          <span className="snipcart-total-price ml-1 text-sm font-semibold text-stone-700 dark:text-stone-300">
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(total)}
-          </span>
-        </button>
+      <div className="absolute right-0 z-10 mr-10">
+        <Cart theme={theme} />
       </div>
       <nav className="top flex w-full flex-wrap justify-between pt-4 pb-4 text-sm">
-        {/* <a className="menu h-6 w-6" onClick={toggleMenu}>
-          <Hamburger toggled={isOpen} size={20} />
-        </a> */}
         <div className="whitespace-nowrap">
           <Link href="/">
             <a>Home</a>

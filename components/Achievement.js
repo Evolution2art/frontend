@@ -25,8 +25,9 @@ const Achievement = ({
         title={achievement?.title}
         text={achievement?.description}
         className={
-          "frame fadeIn prose-stone w-1/4 dark:prose-invert" +
-          (!odd ? " text-right" : "")
+          "fadeIn prose-stone mt-8 w-1/4" +
+          (!odd ? " text-right" : "") +
+          (achievement?.isDark ? " prose-invert" : " prose")
         }
       />
     </article>

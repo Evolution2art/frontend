@@ -4,7 +4,9 @@ import Head from "next/head"
 import { MdDarkMode } from "react-icons/md"
 import Layout from "../components/Layout"
 import { getCategories } from "../utils/api"
+import DarkModeToggle from "../components/Svg/DarkModeToggle"
 import "../styles/index.css"
+import { CartContextProvider } from "../context/cart"
 
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("light")
@@ -14,6 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
     localStorage.setItem("theme", _theme)
     if (window && _theme === "dark") {
       document.querySelector("body").classList.add("dark")
+      document.querySelector("body").classList.add("overflow-x-hidden")
     }
   }, [])
 
@@ -31,31 +34,32 @@ const MyApp = ({ Component, pageProps }) => {
   }
 
   return (
-    <Layout categories={pageProps.categories} theme={theme}>
-      <Head>
-        <link rel="preconnect" href="https://app.snipcart.com" />
-        <link rel="preconnect" href="https://cdn.snipcart.com" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.css"
-        />
-        <script
-          async
-          src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
-        />
-      </Head>
-      <div
-        className={`toggle-theme pt-1 ${theme} mx-auto w-full max-w-screen-xl`}
-      >
-        <MdDarkMode
-          size="1.5em"
-          onClick={toggleTheme}
-          title="Toggle dark mode"
-          className="float-right inline-block cursor-pointer text-stone-700 dark:text-stone-300"
-        />
-      </div>
-      <Component {...pageProps} theme={theme} />
-    </Layout>
+    <CartContextProvider>
+      <Layout categories={pageProps.categories} theme={theme}>
+        <Head>
+          <link rel="preconnect" href="https://app.snipcart.com" />
+          <link rel="preconnect" href="https://cdn.snipcart.com" />
+          <link
+            rel="stylesheet"
+            href="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.css"
+          />
+          <script
+            async
+            src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
+          />
+        </Head>
+        <div className={`toggle-theme ${theme} mx-auto w-full max-w-screen-xl`}>
+          <a
+            onClick={toggleTheme}
+            className="float-right mr-2 inline-block"
+            title="Toggle dark mode"
+          >
+            <DarkModeToggle />
+          </a>
+        </div>
+        <Component {...pageProps} theme={theme} />
+      </Layout>
+    </CartContextProvider>
   )
 }
 

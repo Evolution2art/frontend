@@ -26,9 +26,9 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
   //   const _date = (_fossil.new && new Date(_fossil.new)) || new Date()
   //   return _date > now
   // })
-  const classNames =
-    "m-2 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
-    "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
+  const buttonClassNames = "px-4 py-2"
+  // "m-2 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
+  // "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
 
   const [scroll, setScroll] = useState(false)
   const onScroll = () => {
@@ -118,10 +118,10 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
           </div>
           <nav className="mb-12 flex items-center justify-center">
             <Link href="/history">
-              <a className={classNames}>Learn more about our work</a>
+              <a className={buttonClassNames}>Learn more about our work</a>
             </Link>
             <Link href="/history#press">
-              <a className={classNames}>See what others have to say</a>
+              <a className={buttonClassNames}>See what others have to say</a>
             </Link>
           </nav>
         </main>

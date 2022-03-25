@@ -41,7 +41,9 @@ const FossilsList = ({ fossils }) => {
                       <h4 className="fossil-title truncate py-3 pl-4 text-base font-semibold">
                         {_fossil.title}
                       </h4>
-                      {_fossil.price && !_fossil.priceOnRequest ? (
+                      {_fossil.price &&
+                      !_fossil.priceOnRequest &&
+                      !_fossil.sold ? (
                         <div className="fossil-price py-3 pr-4">
                           {_fossil?.price ? _fossil.price + " €" : ""}
                         </div>
@@ -49,9 +51,10 @@ const FossilsList = ({ fossils }) => {
                         ""
                       )}
                     </div>
-                    <div className="fossil-description p-4 text-sm">
+                    <div className="fossil-description clip-lines p-4 text-sm line-clamp-3">
                       {_fossil.description}
                     </div>
+                    <span className="h-2 w-full"> </span>
                   </div>
                 </div>
               </a>
