@@ -154,7 +154,7 @@ const Cart = ({
               </select>
             </div>
           </div>
-          <ul className="mx-auto mb-0 flex max-w-screen-md flex-col gap-4">
+          <ul className="mx-auto mb-0 flex w-full max-w-screen-md flex-col gap-4">
             {cart.items.map((_item, _idx) => {
               const price = numberFormat.format(
                 convertCurrency(_item.price, currency)
