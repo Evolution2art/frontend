@@ -60,7 +60,7 @@ export function CartContextProvider({ children }) {
     if (to === "EUR") {
       return value
     }
-    return Math.ceil((value * cart.exchange.rates[to]) / 5) * 5
+    return Math.ceil((value * cart.exchange?.rates[to]) / 5) * 5
   }
 
   const convertToUSD = (value) => convertCurrency(value, "USD")
