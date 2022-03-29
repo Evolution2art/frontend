@@ -227,7 +227,7 @@ const Cart = ({
                     {numberFormat.format(totalShipping)}
                   </p>
                 </>
-              ) : country.length < 1 ? (
+              ) : country?.length < 1 ? (
                 <p className="italic">
                   Shipping fees will be calculated upon selecting a delivery
                   location
