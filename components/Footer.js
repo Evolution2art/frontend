@@ -2,7 +2,7 @@ import { FaGithub, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const Footer = ({ className }) => {
   const classNames =
-    "fixed bottom-0 left-0 w-full bg-stone-100 px-4 dark:bg-stone-900" +
+    "fixed z-10 bottom-0 left-0 w-full bg-stone-100 px-4 dark:bg-stone-900" +
     (className ? ` ${className}` : "")
   return (
     <div className={classNames}>
