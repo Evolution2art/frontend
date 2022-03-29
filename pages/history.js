@@ -12,7 +12,8 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
   }
 
   function renderAchievements(item, idx, current) {
-    const classNames = "slide" + (idx === current ? " active" : "")
+    const classNames =
+      "slide w-full absolute" + (idx === current ? " active" : "")
     return (
       <Achievement
         key={`achievement_${idx}`}
@@ -23,14 +24,22 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
     )
   }
 
+  const filler = achievements.reduce((largest, cur) => {
+    return cur.gallery?.[0].height / cur.gallery?.[0].width >
+      (largest?.height || 0) / (largest?.width || 1)
+      ? cur.gallery[0]
+      : largest
+  }, null)
+
   return (
     <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent title={history.title} text={history.description} />
       <Slideshow
         items={achievements}
-        render={renderAchievements}
+        renderer={renderAchievements}
         className="w-full"
         navClassName="fixed flex w-full max-w-screen-lg"
+        filler={filler}
       />
       {achievements.length < 1 && <em>Add some achievements in the backend</em>}
       {/* <CMSContent title={press.title} text={press.description} id="press" />

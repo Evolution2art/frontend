@@ -1,22 +1,27 @@
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import App from "next/app"
-import Head from "next/head"
-import { MdDarkMode } from "react-icons/md"
 import Layout from "../components/Layout"
-import { getCategories } from "../utils/api"
-import DarkModeToggle from "../components/Svg/DarkModeToggle"
+import { getCategories, getCountries, getRates } from "../utils/api"
 import "../styles/index.css"
 import { CartContextProvider } from "../context/cart"
 
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("light")
+  const [locale, setLocale] = useState("nl-BE")
   useEffect(() => {
     const _theme = localStorage.getItem("theme") || "light"
     setTheme(_theme)
     localStorage.setItem("theme", _theme)
-    if (window && _theme === "dark") {
-      document.querySelector("body").classList.add("dark")
-      document.querySelector("body").classList.add("overflow-x-hidden")
+    if (window) {
+      if (_theme === "dark") {
+        document.querySelector("body").classList.add("dark")
+        document.querySelector("body").classList.add("overflow-x-hidden")
+      }
+      setLocale(
+        Array.isArray(window.navigator.languages)
+          ? window.navigator.languages[0]
+          : window.navigator.language
+      )
     }
   }, [])
 
@@ -35,29 +40,15 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <CartContextProvider>
-      <Layout categories={pageProps.categories} theme={theme}>
-        <Head>
-          <link rel="preconnect" href="https://app.snipcart.com" />
-          <link rel="preconnect" href="https://cdn.snipcart.com" />
-          <link
-            rel="stylesheet"
-            href="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.css"
-          />
-          <script
-            async
-            src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js"
-          />
-        </Head>
-        <div className={`toggle-theme ${theme} mx-auto w-full max-w-screen-xl`}>
-          <a
-            onClick={toggleTheme}
-            className="float-right mr-2 inline-block"
-            title="Toggle dark mode"
-          >
-            <DarkModeToggle />
-          </a>
-        </div>
-        <Component {...pageProps} theme={theme} />
+      <Layout
+        categories={pageProps.categories}
+        countries={pageProps.countries}
+        rates={pageProps.rates}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        locale={locale}
+      >
+        <Component {...pageProps} theme={theme} locale={locale} />
       </Layout>
     </CartContextProvider>
   )
@@ -72,10 +63,12 @@ MyApp.getInitialProps = async (ctx) => {
   const appProps = await App.getInitialProps(ctx)
   // Fetch global site settings from Strapi
   const categories = await getCategories()
+  const countries = await getCountries()
+  const rates = await getRates()
   // Pass the data to our page via props
   return {
     ...appProps,
-    pageProps: { categories, path: ctx.pathname },
+    pageProps: { categories, countries, rates, path: ctx.pathname },
   }
 }
 

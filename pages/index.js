@@ -10,12 +10,13 @@ import {
   // getFossils,
   getCMSContent,
   getCategories,
+  getCountries,
   getHistory,
   getPress,
 } from "../utils/api"
 import { useLayoutEffect, useState } from "react"
 
-const HomePage = ({ categories, intro, about, contact, theme }) => {
+const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
   const router = useRouter()
   const logo = theme === "dark" ? "logo-white" : "logo-dark"
   const background =
@@ -133,6 +134,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
 
 export async function getStaticProps() {
   const categories = await getCategories()
+  const countries = await getCountries()
   // const fossils = await getFossils()
   // const history = await getHistory()
   // const press = await getPress()
@@ -142,7 +144,7 @@ export async function getStaticProps() {
     "contact",
   ])
   return {
-    props: { categories, intro, about, contact },
+    props: { categories, countries, intro, about, contact },
     revalidate: 300,
   }
 }

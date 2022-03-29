@@ -12,6 +12,24 @@ export async function fetchAPI(path) {
   return data
 }
 
+export async function getCountries() {
+  const countries = await fetchAPI("/countries?_sort=name")
+  return countries
+}
+
+export async function getRates() {
+  const rates = await fetchAPI("/rates")
+  const destinations = await fetchAPI("/destinations")
+  return rates.map((rate) => {
+    return {
+      ...rate,
+      countries: destinations
+        .find((_dest) => rate.destination.id === _dest.id)
+        ?.countries.map((country) => country.country),
+    }
+  })
+}
+
 export async function getCategories() {
   const categories = await fetchAPI("/categories")
   return categories
@@ -64,7 +82,6 @@ export async function getCMSContent(types) {
   }
   const content = []
   for (let i = 0; i < types.length; i++) {
-    // console.log("fetching type", types[i])
     const cms = await fetchAPI(`/${types[i]}`)
 
     // return plain object if single type
@@ -74,6 +91,5 @@ export async function getCMSContent(types) {
 
     content.push(cms)
   }
-  // console.log("content for types", types, content)
   return content
 }

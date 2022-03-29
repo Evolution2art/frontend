@@ -6,7 +6,6 @@ const DarkModeToggle = (props) => (
     width={32}
     height={32}
     xmlns="http://www.w3.org/2000/svg"
-    // fill={props?.theme === "dark" ? "var(--text-light)" : "var(--text-dark)"}
     {...props}
   >
     <g className="star">
@@ -19,13 +18,7 @@ const DarkModeToggle = (props) => (
         transform="rotate(45)"
       />
     </g>
-    <circle
-      className="bg"
-      // fill={props?.theme === "dark" ? "var(--text-dark)" : "var(--text-light)"}
-      cx="32"
-      cy="32"
-      r="12"
-    />
+    <circle className="bg" cx="32" cy="32" r="12" />
     <circle className="moon" cx="32" cy="32" r="9" />
   </svg>
 )

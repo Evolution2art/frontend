@@ -34,7 +34,9 @@ const CategoryButtons = ({
         const isCurrent = category?.slug === _category.slug
         const twSize = isCurrent ? curSize : size
         const current = isCurrent ? "current " : ""
-        const hasNew = _category.fossils.filter((_fossil) => _fossil.new).length
+        const hasNew = _category?.fossils?.filter(
+          (_fossil) => _fossil.new
+        ).length
         const sizes = `${
           (!isCurrent && "") || ""
         }${hidden}mx-auto h-${twSize} w-${twSize}`

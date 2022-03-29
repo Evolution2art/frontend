@@ -3,7 +3,7 @@ import NextImage from "./Image"
 
 const Contact = ({ cms, id = "contact", className }) => {
   const handleSubmit = (e) => {
-    console.log("handleSubmit event", e)
+    // console.log("handleSubmit event", e)
   }
   const background = cms?.background?.[0]
   const classNames =

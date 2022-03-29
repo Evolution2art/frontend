@@ -1,9 +1,7 @@
 import { useState } from "react"
-import PropTypes from "prop-types"
+import NextImage from "./Image"
 
-import Achievement from "./Achievement"
-
-const Slideshow = ({ items, render, navClassName, className }) => {
+const Slideshow = ({ items, renderer, navClassName, className, filler }) => {
   const [current, setCurrent] = useState(0)
 
   const next = () => {
@@ -20,20 +18,19 @@ const Slideshow = ({ items, render, navClassName, className }) => {
 
   return (
     <div className={classNames}>
-      <div className="slides relative w-full">
-        {items.map((item, idx) => render(item, idx, current))}
-      </div>
       {items.length > 1 && (
         <div className="nav-wrapper">
-          <nav className="prev-next absolute top-0 flex h-full w-full justify-between">
+          <nav
+            className={`prev-next absolute z-10 flex h-full w-full justify-between ${navClassNames}`}
+          >
             <a className="nav-previous h-full" onClick={previous}>
-              <span class="arrow arrow-left"></span>
+              <span className="arrow arrow-left"></span>
             </a>
             <a className="nav-next h-full" onClick={next}>
-              <span class="arrow arrow-right"></span>
+              <span className="arrow arrow-right"></span>
             </a>
           </nav>
-          <nav className={`dots ${navClassNames}`}>
+          <nav className={`dots z-10 ${navClassNames}`}>
             {items.map((item, idx) => {
               const classNames =
                 "slide-nav" + (idx === current ? " active" : "")
@@ -48,12 +45,16 @@ const Slideshow = ({ items, render, navClassName, className }) => {
           </nav>
         </div>
       )}
+      <div className="slides relative w-full">
+        {items.map((item, idx) => renderer(item, idx, current))}
+        {filler ? (
+          <div className="invisible relative -z-10">
+            <NextImage media={filler} />
+          </div>
+        ) : null}
+      </div>
     </div>
   )
-}
-
-Slideshow.propTypes = {
-  render: { type: PropTypes.func, required: true },
 }
 
 export default Slideshow

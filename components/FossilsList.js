@@ -1,7 +1,14 @@
 import NextImage from "./Image"
 import Link from "next/link"
+import { useCartContext } from "../context/cart"
 
-const FossilsList = ({ fossils }) => {
+const FossilsList = ({ locale, theme, fossils }) => {
+  const { cart, convertCurrency } = useCartContext()
+  const numberFormat = Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: cart.currency,
+    minimumFractionDigits: 0,
+  })
   return (
     <div className="mx-4 flex flex-wrap justify-center">
       {fossils?.map((_fossil) => (
@@ -45,7 +52,11 @@ const FossilsList = ({ fossils }) => {
                       !_fossil.priceOnRequest &&
                       !_fossil.sold ? (
                         <div className="fossil-price py-3 pr-4">
-                          {_fossil?.price ? _fossil.price + " €" : ""}
+                          {_fossil?.price
+                            ? numberFormat.format(
+                                convertCurrency(_fossil.price, cart.currency)
+                              )
+                            : ""}
                         </div>
                       ) : (
                         ""

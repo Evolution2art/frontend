@@ -249,7 +249,6 @@ body.dark .nav-item.current {
   transform: rotateZ(45deg) translate(0.5rem, -0.5rem);
 }
 .toggle-theme {
-  position: absolute;
   pointer-events: none;
 }
 
@@ -283,7 +282,7 @@ body.dark .toggle-theme svg .moon {
   transform: translateX(-6px);
 }
 body.dark .toggle-theme svg .star {
-  transform: rotateZ(180deg);
+  transform: rotateZ(90deg);
 }
 
 .toggle-theme > button,

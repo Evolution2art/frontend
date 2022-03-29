@@ -1,34 +1,44 @@
 import Link from "next/link"
-import { useEffect, useState } from "react"
-import { MdClose, MdMenu } from "react-icons/md"
-import NextImage from "./Image"
 import Cart from "./Cart"
 import { useCartContext } from "../context/cart"
+import DarkModeToggle from "./Svg/DarkModeToggle"
 
-const Navbar = ({ theme, path, className }) => {
-  // const totalRef = useRef()
+const Navbar = ({
+  theme,
+  toggleTheme,
+  locale,
+  path,
+  countries,
+  rates,
+  className,
+}) => {
   const classNames =
     "navbar relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
     (className ? ` ${className}` : "")
-  // const [isOpen, setIsOpen] = useState(true)
-  // useEffect(() => {
-  //   if (window.Snipcart) {
-  //     setTotal(Snipcart.store.getState().cart.total)
-  //   }
-  // }, [path])
 
-  const { cart, addToCart, removeFromCart } = useCartContext()
-
-  // const toggleMenu = () => setIsOpen(!isOpen)
-  // const hideMenu = () => setIsOpen(false)
-  // const showMenu = () => setIsOpen(true)
+  const { cart } = useCartContext()
 
   return (
     <div className={classNames}>
-      <div className="absolute right-0 z-10 mr-10">
-        <Cart theme={theme} />
+      <div className="absolute right-0 mr-3 flex">
+        <Cart
+          cart={cart}
+          theme={theme}
+          countries={countries}
+          locale={locale}
+          shippingRates={rates}
+        />
+        <div className={`toggle-theme ${theme} mx-auto w-full max-w-screen-xl`}>
+          <a
+            onClick={toggleTheme}
+            className="inline-block h-6 w-6"
+            title="Toggle dark mode"
+          >
+            <DarkModeToggle className="h-6 w-6" />
+          </a>
+        </div>
       </div>
-      <nav className="top flex w-full flex-wrap justify-between pt-4 pb-4 text-sm">
+      <nav className="top flex w-full flex-wrap justify-between pt-5 pb-4 text-sm">
         <div className="whitespace-nowrap">
           <Link href="/">
             <a>Home</a>
