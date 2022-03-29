@@ -161,7 +161,7 @@ const FossilPage = ({
               </a>
             ) : inCart(fossil) ? (
               <button className={`${buttonClassNames} opacity-50`}>
-                Already in cart{" "}
+                Added to cart{" "}
                 <a
                   title="Remove from cart"
                   onClick={() => removeFromCart(fossil)}
