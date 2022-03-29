@@ -25,7 +25,7 @@ export async function getRates() {
       ...rate,
       countries: destinations
         .find((_dest) => rate.destination.id === _dest.id)
-        ?.countries.map((country) => country.country),
+        ?.countries.map((_country) => _country.country),
     }
   })
 }

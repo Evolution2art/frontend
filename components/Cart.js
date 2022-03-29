@@ -142,12 +142,12 @@ const Cart = ({
                 onChange={handleCountry}
               >
                 <option value="">Please select</option>
-                {countries.map((country) => (
+                {countries.map((_country) => (
                   <option
-                    key={`country_${country.country}`}
-                    value={country.country}
+                    key={`country_${_country.country}`}
+                    value={_country.country}
                   >
-                    &nbsp; {country.name}
+                    &nbsp; {_country.name}
                   </option>
                 ))}
                 <option value="_">Other</option>
