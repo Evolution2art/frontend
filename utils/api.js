@@ -4,6 +4,12 @@ export function getStrapiURL(path) {
   }${path}`
 }
 
+export function getFossilUrl(slug) {
+  return `${
+    process.env.NEXT_PUBLIC_URL || "http://localhost:3000"
+  }/fossils/${slug}`
+}
+
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path) {
   const requestUrl = getStrapiURL(path)
@@ -30,14 +36,38 @@ export async function getRates() {
   })
 }
 
+export async function getMails(fossil) {
+  function fill(text) {
+    if (typeof text !== "string") {
+      return text
+    }
+    return text?.replace(/{\w+\.(\w+)}/g, (_, val) => fossil[val])
+  }
+  const mails = await fetchAPI("/mail-templates")
+  // replace placeholders with fossil values
+  if (fossil) {
+    let result = {}
+    for (const i in mails) {
+      if (typeof mails[i] === "object") {
+        result[i] = {}
+        for (const j in mails[i]) {
+          result[i][j] = fill(mails[i][j])
+        }
+      }
+    }
+    return result
+  }
+  return mails
+}
+
 export async function getCategories() {
   const categories = await fetchAPI("/categories")
   return categories
 }
 
 export async function getCategory(slug) {
-  const categories = await fetchAPI(`/categories?slug=${slug}`)
-  return categories?.[0]
+  const category = await fetchAPI(`/categories/${slug}`)
+  return category
 }
 
 export async function getFossils() {
@@ -46,8 +76,8 @@ export async function getFossils() {
 }
 
 export async function getFossil(slug) {
-  const fossils = await fetchAPI(`/fossils?slug=${slug}`)
-  return fossils?.[0]
+  const fossil = await fetchAPI(`/fossils/${slug}`)
+  return { ...fossil, url: getFossilUrl(slug) }
 }
 
 export async function getAchievements() {

@@ -1,10 +1,15 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
-
 import NextImage from "../../components/Image"
 import Slideshow from "../../components/Slideshow"
 import Link from "next/link"
-import { getFossils, getFossil, getRates, getCountries } from "../../utils/api"
+import {
+  getFossils,
+  getFossil,
+  getRates,
+  getCountries,
+  getMails,
+} from "../../utils/api"
 import { MdClose, MdOutlineArrowBack } from "react-icons/md"
 import { useEffect, useState } from "react"
 import { useCartContext } from "../../context/cart"
@@ -12,7 +17,7 @@ import { useCartContext } from "../../context/cart"
 const FossilPage = ({
   fossil,
   shippingRates,
-  countries,
+  mails,
   email = "info@evolution2art.com",
   locale,
   theme,
@@ -32,13 +37,9 @@ const FossilPage = ({
   } = useCartContext()
   const orientation =
     fossil.image.height > fossil.image.width ? "portrait" : "landscape"
-  const hrefBack =
-    (fossil.category?.slug && "/categories/" + fossil.category.slug) || "/"
-  const [hideContent, setHideContent] = useState(false)
   const classNames =
     "frame w-full p-4 pt-0 text-stone-600 dark:text-stone-400 " +
-    (orientation === "portrait" ? "md:w-1/2" : "md:w-1/3") +
-    (hideContent ? " hidden" : "")
+    (orientation === "portrait" ? "md:w-1/2" : "md:w-1/3")
   const buttonClassNames =
     "m-6 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
     "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
@@ -67,12 +68,12 @@ const FossilPage = ({
     !fossil.sold &&
     fossil.package?.id &&
     fossil.status === "published"
-  const shipping =
-    (rate && numberFormat.format(convertCurrency(rate, cart.currency))) || null
   const salesPrice =
     (fossil.price &&
       numberFormat.format(convertCurrency(fossil.price, cart.currency))) ||
     null
+
+  const { quote, shipping } = mails
 
   function renderImages(item, idx, current) {
     const classNames =
@@ -89,10 +90,11 @@ const FossilPage = ({
       <Head>
         <title>{fossil.title}</title>
       </Head>
-      <div className="relative -top-8 ml-3 flex w-full justify-between md:w-1/3">
-        <Link href={hrefBack}>
-          <a>
-            <MdOutlineArrowBack className="h-6 w-6" />
+      <div className="relative -top-4 mx-auto flex w-full max-w-screen-lg justify-between">
+        <Link href={`/categories/${encodeURIComponent(fossil.category.slug)}`}>
+          <a className="italic">
+            <MdOutlineArrowBack className="mr-2 inline h-6 w-6" />
+            {fossil.category.name}
           </a>
         </Link>
       </div>
@@ -128,7 +130,7 @@ const FossilPage = ({
                 : fossil?.price
                 ? salesPrice
                 : ""}
-              <div className="fossil-shipping italic">
+              {/* <div className="fossil-shipping italic">
                 {!rate ? "" : `${shipping} shipping`}
                 {cart.country &&
                   rate &&
@@ -136,7 +138,7 @@ const FossilPage = ({
                     countries.find(
                       (_country) => _country.country === cart.country
                     )?.name}
-              </div>
+              </div> */}
             </div>
           )}
           {fossil.promotion ? (
@@ -152,7 +154,9 @@ const FossilPage = ({
             !fossil.package ||
             (!isSellable && cart.country) ? (
               <a
-                href={`mailto:${email}`}
+                href={`mailto:${email}?subject=${encodeURIComponent(
+                  quote.subject
+                )}&body=${encodeURIComponent(quote.body)}`}
                 target="_blank"
                 rel="noreferrer"
                 className={`inline-block ${buttonClassNames}`}
@@ -178,6 +182,10 @@ const FossilPage = ({
               </button>
             )
           ) : null}
+          <div className="my-2">
+            <label className="font-bold italic">Description</label>
+            <div>{fossil.description}</div>
+          </div>
           {fossil.species ? (
             <div className="my-2">
               <label className="font-bold italic">Species</label>
@@ -218,10 +226,6 @@ const FossilPage = ({
           ) : (
             ""
           )}
-          <div className="my-2">
-            <label className="font-bold italic">Description</label>
-            <div>{fossil.description}</div>
-          </div>
         </section>
       </article>
     </main>
@@ -233,8 +237,8 @@ export default FossilPage
 export async function getStaticProps({ params }) {
   const fossil = await getFossil(params.slug)
   const shippingRates = await getRates()
-  const countries = await getCountries()
-  return { props: { fossil, shippingRates, countries }, revalidate: 300 }
+  const mails = await getMails(fossil)
+  return { props: { fossil, shippingRates, mails }, revalidate: 300 }
 }
 
 export async function getStaticPaths() {

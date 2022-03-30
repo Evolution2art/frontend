@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import App from "next/app"
 import Layout from "../components/Layout"
-import { getCategories, getCountries, getRates } from "../utils/api"
+import { getCategories, getCountries, getRates, getMails } from "../utils/api"
 import "../styles/index.css"
 import { CartContextProvider } from "../context/cart"
 
@@ -44,6 +44,7 @@ const MyApp = ({ Component, pageProps }) => {
         categories={pageProps.categories}
         countries={pageProps.countries}
         rates={pageProps.rates}
+        mails={pageProps.mails}
         theme={theme}
         toggleTheme={toggleTheme}
         locale={locale}
@@ -65,10 +66,11 @@ MyApp.getInitialProps = async (ctx) => {
   const categories = await getCategories()
   const countries = await getCountries()
   const rates = await getRates()
+  const mails = await getMails()
   // Pass the data to our page via props
   return {
     ...appProps,
-    pageProps: { categories, countries, rates, path: ctx.pathname },
+    pageProps: { categories, countries, rates, mails, path: ctx.pathname },
   }
 }
 

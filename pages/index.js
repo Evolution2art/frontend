@@ -107,7 +107,19 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
             className="mt-16 mb-10"
           />
           <div className="flex max-w-screen-md">
-            <div className="w-1/3 pt-24">
+            <CMSContent
+              title={about.title}
+              text={about.text}
+              id="about"
+              className="prose-stone w-full text-justify dark:prose-invert"
+              titleClassName="mt-0"
+              image={
+                <div className="float-left mr-4 mb-1 w-1/2 md:w-1/3">
+                  <NextImage media={about.gallery[0]} />
+                </div>
+              }
+            />
+            {/* <div className="w-1/3 pt-24">
               <NextImage media={about.gallery[0]} />
             </div>
             <CMSContent
@@ -115,7 +127,7 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
               text={about.text}
               id="about"
               className="prose-stone w-2/3 dark:prose-invert"
-            />
+            /> */}
           </div>
           <nav className="mb-12 flex items-center justify-center">
             <Link href="/history">
