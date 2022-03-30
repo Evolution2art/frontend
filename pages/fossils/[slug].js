@@ -91,7 +91,7 @@ const FossilPage = ({
         <title>{fossil.title}</title>
       </Head>
       <div className="relative -top-4 mx-auto flex w-full max-w-screen-lg justify-between">
-        <Link href={`/categories/${encodeURIComponent(fossil.category.slug)}`}>
+        <Link href={`/categories/${encodeURIComponent(fossil.category?.slug)}`}>
           <a className="italic">
             <MdOutlineArrowBack className="mr-2 inline h-6 w-6" />
             {fossil.category.name}
