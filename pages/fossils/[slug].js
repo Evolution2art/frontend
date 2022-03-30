@@ -94,7 +94,7 @@ const FossilPage = ({
         <Link href={`/categories/${encodeURIComponent(fossil.category?.slug)}`}>
           <a className="italic">
             <MdOutlineArrowBack className="mr-2 inline h-6 w-6" />
-            {fossil.category.name}
+            {fossil.category?.name || "Collection"}
           </a>
         </Link>
       </div>
