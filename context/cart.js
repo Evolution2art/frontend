@@ -16,6 +16,8 @@ export function CartContextProvider({ children }) {
 
   useEffect(() => {
     const curCart = retrieveCart()
+    // force update rates
+    curCart.exchange = rates
     if (typeof curCart?.total === "number") {
       setCart(curCart)
     } else {
@@ -60,7 +62,7 @@ export function CartContextProvider({ children }) {
     if (to === "EUR") {
       return value
     }
-    return Math.ceil((value * cart.exchange?.rates[to]) / 5) * 5
+    return Math.ceil(value / (cart.exchange?.rates.EUR || 0.8398) / 5) * 5
   }
 
   const convertToUSD = (value) => convertCurrency(value, "USD")

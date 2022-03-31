@@ -7,7 +7,7 @@ const CMSContent = ({
   text,
   id,
   className = "prose-stone dark:prose-invert",
-  titleClassName = "",
+  titleClassName = "text-2xl",
   image,
 }) => {
   const classNames = `prose ${className}`
@@ -15,9 +15,7 @@ const CMSContent = ({
     <article id={id} className={`max-w-none p-8 ${classNames}`}>
       {image}
       {title && (
-        <h2 className={`text-2xl font-light italic ${titleClassName}`}>
-          {title}
-        </h2>
+        <h2 className={`font-light italic ${titleClassName}`}>{title}</h2>
       )}
       {text && (
         <ReactMarkdown transformImageUri={getStrapiURL}>{text}</ReactMarkdown>

@@ -27,7 +27,7 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
   //   const _date = (_fossil.new && new Date(_fossil.new)) || new Date()
   //   return _date > now
   // })
-  const buttonClassNames = "px-4 py-2"
+  const buttonClassNames = "uppercase px-4 py-2"
   // "m-2 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
   // "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
 
@@ -106,20 +106,21 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
             theme={theme}
             className="mt-16 mb-10"
           />
-          <div className="flex max-w-screen-md">
-            <CMSContent
-              title={about.title}
-              text={about.text}
-              id="about"
-              className="prose-stone w-full text-justify dark:prose-invert"
-              titleClassName="mt-0"
-              image={
-                <div className="float-left mr-4 mb-1 w-1/2 md:w-1/3">
-                  <NextImage media={about.gallery[0]} />
-                </div>
-              }
-            />
-            {/* <div className="w-1/3 pt-24">
+          <div className="min-h-screen max-w-screen-md">
+            <div className="flex pt-16">
+              <CMSContent
+                title={about.title}
+                text={about.text}
+                id="about"
+                className="prose-stone w-full text-justify dark:prose-invert"
+                titleClassName="mt-0"
+                image={
+                  <div className="float-left mr-4 mb-1 w-1/2 md:w-1/3">
+                    <NextImage media={about.gallery[0]} />
+                  </div>
+                }
+              />
+              {/* <div className="w-1/3 pt-24">
               <NextImage media={about.gallery[0]} />
             </div>
             <CMSContent
@@ -128,15 +129,16 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
               id="about"
               className="prose-stone w-2/3 dark:prose-invert"
             /> */}
+            </div>
+            <nav className="text mb-12 flex items-center justify-center">
+              <Link href="/history">
+                <a className={buttonClassNames}>Learn more about our work</a>
+              </Link>
+              <Link href="/history#press">
+                <a className={buttonClassNames}>See what others have to say</a>
+              </Link>
+            </nav>
           </div>
-          <nav className="mb-12 flex items-center justify-center">
-            <Link href="/history">
-              <a className={buttonClassNames}>Learn more about our work</a>
-            </Link>
-            <Link href="/history#press">
-              <a className={buttonClassNames}>See what others have to say</a>
-            </Link>
-          </nav>
         </main>
       </div>
       <Contact cms={contact} />

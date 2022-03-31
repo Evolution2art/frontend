@@ -38,7 +38,7 @@ const Navbar = ({
           </a>
         </div>
       </div>
-      <nav className="top flex w-full flex-wrap justify-between pt-5 pb-4 text-sm">
+      <nav className="top text flex w-full flex-wrap justify-between pt-5 pb-4 text-sm">
         <div className="whitespace-nowrap">
           <Link href="/">
             <a>Home</a>

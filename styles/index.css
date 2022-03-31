@@ -68,27 +68,30 @@ a {
   cursor: pointer;
 }
 
+nav.text a {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--text-light);
+  line-height: 1.5;
+  display: inline-block;
+  text-transform: uppercase;
+  margin: 0 1rem;
+}
+
 nav.top a {
   padding: 0.2rem 1rem;
   margin: 0.1rem 0;
-  line-height: 1.5;
-  display: inline-block;
-  border-bottom-width: 1px;
   border-bottom-color: transparent;
 }
 
-nav.top a:hover {
+nav.text a:hover {
   border-bottom-color: var(--text-dark);
 }
 
-body.dark nav.top a {
+body.dark nav.text a {
   border-bottom-color: transparent;
 }
-body.dark nav.top a:hover {
+body.dark nav.text a:hover {
   border-bottom-color: var(--text-light);
-}
-nav.top a {
-  text-transform: uppercase;
 }
 
 /* nav > a.menu {
