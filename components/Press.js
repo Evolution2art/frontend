@@ -1,18 +1,14 @@
 import NextImage from "./Image"
 import CMSContent from "./CMSContent"
+import { getStrapiURL } from "../utils/api"
 
 const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
   const classNames =
-    "flex " +
+    "flex flex-col " +
     (odd ? "justify-start" : "justify-end") +
     (className ? ` ${className}` : "")
   return (
     <article className={classNames}>
-      {media.media?.length > 0 ? (
-        <div className="absolute -z-10 w-full max-w-screen-lg pt-2 pb-2">
-          <NextImage media={media.media[0]} width={media.media[0].width} />
-        </div>
-      ) : null}
       <CMSContent
         title={media?.title}
         text={media?.description}
@@ -22,6 +18,23 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
           (media?.isDark ? " prose-invert" : " prose")
         }
       />
+      {media.media?.length > 0 ? (
+        <div className="w-full max-w-screen-lg pt-2 pb-2">
+          {media.media[0].mime?.indexOf("image") >= 0 ? (
+            <NextImage media={media.media[0]} width={media.media[0].width} />
+          ) : null}
+          {media.media[0].mime === "application/pdf" ? (
+            <embed
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              type="application/pdf"
+              src={getStrapiURL(media.media[0].url)}
+            />
+          ) : null}
+        </div>
+      ) : null}
     </article>
   )
 }

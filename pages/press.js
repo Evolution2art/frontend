@@ -38,12 +38,6 @@ const PressPage = ({ medias, press }) => {
         navClassName="fixed flex w-full max-w-screen-lg"
         filler={filler}
       />
-      {medias.length < 1 && <em>Add some medias in the backend</em>}
-      {/* <CMSContent title={press.title} text={press.description} id="press" />
-      {medias.map((media, idx) => (
-        <Media key={`media_${idx}`} media={media} odd={idx % 2} />
-      ))}
-      {medias.length < 1 && <em>Add some media items in the backend</em>} */}
     </div>
   )
 }
