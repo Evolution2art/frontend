@@ -23,10 +23,10 @@ const Slideshow = ({ items, renderer, navClassName, className, filler }) => {
           <nav
             className={`prev-next absolute z-10 flex h-full w-full justify-between ${navClassNames}`}
           >
-            <a className="nav-previous h-full" onClick={previous}>
+            <a className="nav-previous h-full pr-8 pl-4" onClick={previous}>
               <span className="arrow arrow-left"></span>
             </a>
-            <a className="nav-next h-full" onClick={next}>
+            <a className="nav-next h-full pr-4 pl-8" onClick={next}>
               <span className="arrow arrow-right"></span>
             </a>
           </nav>

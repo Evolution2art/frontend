@@ -134,7 +134,7 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
               <Link href="/history">
                 <a className={buttonClassNames}>Learn more about our work</a>
               </Link>
-              <Link href="/history#press">
+              <Link href="/press">
                 <a className={buttonClassNames}>See what others have to say</a>
               </Link>
             </nav>

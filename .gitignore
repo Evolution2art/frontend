@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# exchange rates
+public/rates.json

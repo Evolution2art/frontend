@@ -1,19 +1,16 @@
 import Achievement from "../components/Achievement"
 import CMSContent from "../components/CMSContent"
 import Slideshow from "../components/Slideshow"
-import Media from "../components/Media"
-import { getCMSContent, getAchievements, getMedia } from "../utils/api"
+import { getCMSContent, getAchievements } from "../utils/api"
 
-const HistoryPage = ({ achievements, medias, history, press }) => {
-  // console.log("cms", cms)
-  // const history = cms[0]
+const HistoryPage = ({ achievements, history }) => {
   if (!history) {
     return null
   }
 
   function renderAchievements(item, idx, current) {
     const classNames =
-      "slide w-full absolute" + (idx === current ? " active" : "")
+      "slide w-full max-h-screen absolute" + (idx === current ? " active" : "")
     return (
       <Achievement
         key={`achievement_${idx}`}
@@ -38,7 +35,7 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
         items={achievements}
         renderer={renderAchievements}
         className="w-full"
-        navClassName="fixed flex w-full max-w-screen-lg"
+        navClassName="fixed flex w-full max-w-screen-lg max-h-screen"
         filler={filler}
       />
       {achievements.length < 1 && <em>Add some achievements in the backend</em>}
@@ -52,11 +49,10 @@ const HistoryPage = ({ achievements, medias, history, press }) => {
 }
 
 export async function getStaticProps() {
-  const [history, press] = await getCMSContent(["history", "press"])
+  const history = await getCMSContent("history")
   const achievements = await getAchievements()
-  const medias = await getMedia()
   return {
-    props: { history, press, medias, achievements, medias },
+    props: { history, achievements },
     revalidate: 300,
   }
 }

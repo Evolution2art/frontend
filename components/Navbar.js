@@ -54,7 +54,7 @@ const Navbar = ({
           <Link href="/history">
             <a>Our Work</a>
           </Link>
-          <Link href="/history#press">
+          <Link href="/press">
             <a>Press</a>
           </Link>
           <Link href="/#contact">
