@@ -3,7 +3,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      "object-src 'self'; script-src 'self'; font-src 'self' fonts.google.com; frame-ancestors 'self' *.evolution2art.com; require-trusted-types-for 'script';",
+      "object-src 'self' *.evolution2art.com; script-src 'self' *.evolution2art.com; font-src 'self' fonts.google.com; frame-ancestors 'self' *.evolution2art.com;",
   },
 ]
 
