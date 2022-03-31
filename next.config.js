@@ -1,15 +1,9 @@
 // next.config.js
-const securityPolicy = `
-default-src 'self';
-script-src 'self';
-font-src 'self' fonts.google.com;
-frame-ancestors 'self' *.evolution2art.com;
-`
-
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
-    value: securityPolicy.replace(/\s{2,}/g, " ").trim(),
+    value:
+      "object-src 'self'; script-src 'self'; font-src 'self' fonts.google.com; frame-ancestors 'self' *.evolution2art.com; require-trusted-types-for 'script';",
   },
 ]
 
