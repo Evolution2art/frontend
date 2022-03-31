@@ -1,40 +1,41 @@
+import Link from "next/link"
 import NextImage from "./Image"
 import CMSContent from "./CMSContent"
-import { getStrapiURL } from "../utils/api"
+import parseUrl from "parse-url"
 
 const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
   const classNames =
-    "flex flex-col " +
+    "flex flex-col md:flex-row " +
     (odd ? "justify-start" : "justify-end") +
     (className ? ` ${className}` : "")
+  const link = media.link ? parseUrl(media.link, true) : {}
   return (
     <article className={classNames}>
-      <CMSContent
-        title={media?.title}
-        text={media?.description}
-        className={
-          "fadeIn prose-stone mt-8 w-1/4" +
-          (!odd ? " text-right" : "") +
-          (media?.isDark ? " prose-invert" : " prose")
-        }
-      />
       {media.media?.length > 0 ? (
-        <div className="w-full max-w-screen-lg pt-2 pb-2">
+        <div className="w-full max-w-screen-lg pt-2 pb-2 md:w-1/2">
           {media.media[0].mime?.indexOf("image") >= 0 ? (
             <NextImage media={media.media[0]} width={media.media[0].width} />
           ) : null}
-          {media.media[0].mime === "application/pdf" ? (
-            <embed
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-              type="application/pdf"
-              src={getStrapiURL(media.media[0].url)}
-            />
-          ) : null}
         </div>
       ) : null}
+      <div className="w-full md:mt-0 md:w-1/2">
+        <CMSContent
+          title={media?.title}
+          text={media?.description}
+          className={
+            "fadeIn prose-stone" +
+            (!odd ? " text-right" : "") +
+            (media?.isDark ? " prose-invert" : " prose")
+          }
+        />
+        {link?.href ? (
+          <Link href={link.href} prefetch={false}>
+            <a className="p-8" rel="noreferrer" target="_blank">
+              {link.href}
+            </a>
+          </Link>
+        ) : null}
+      </div>
     </article>
   )
 }

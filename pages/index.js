@@ -41,10 +41,12 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
     }
   }
 
-  useLayoutEffect(() => {
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  if (typeof window !== "undefined") {
+    useLayoutEffect(() => {
+      window.addEventListener("scroll", onScroll)
+      return () => window.removeEventListener("scroll", onScroll)
+    }, [])
+  }
 
   return (
     <>
