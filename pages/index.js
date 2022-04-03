@@ -5,18 +5,12 @@ import CategoryButtons from "../components/CategoryButtons"
 import Contact from "../components/Contact"
 import NextImage from "../components/Image"
 import CMSContent from "../components/CMSContent"
-// import FossilsList from "../components/FossilsList"
-import {
-  // getFossils,
-  getCMSContent,
-  getCategories,
-  getCountries,
-} from "../utils/api"
+import logo from "../public/Evolution2Art-logo.svg"
+import { getCMSContent, getCategories, getCountries } from "../utils/api"
 import { useEffect, useState } from "react"
 
 const HomePage = ({ categories, intro, about, contact, theme }) => {
   const router = useRouter()
-  const logo = theme === "dark" ? "logo-white" : "logo-dark"
   const background =
     theme === "dark" ? intro.backgroundDark[0] : intro.background[0]
   const buttonClassNames = "uppercase px-4 py-2"
@@ -47,11 +41,11 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
           }`}
         >
           <NextImage
-            src={`/${logo}.png`}
+            src={logo}
             alt="home"
-            className="logo"
-            height={148}
-            width={148}
+            className="logo drop-shadow"
+            height={220}
+            width={200}
           />
         </a>
       </Link>

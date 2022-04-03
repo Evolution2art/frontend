@@ -109,7 +109,12 @@ body.dark nav.text a:hover {
 body.dark .selected .nav-item {
   opacity: 0.5;
 }
-
+.drop-shadow {
+  filter: drop-shadow(0px 0px 2px var(--bg-dark-opaque));
+}
+.dark .drop-shadow {
+  filter: drop-shadow(0px 0px 2px var(--bg-light-opaque));
+}
 .slideshow {
 }
 .slideshow .slides {
@@ -231,7 +236,7 @@ body.dark .slideshow nav .dots .nav-dot:hover span {
 }
 
 .fill-screen-v {
-  min-height: calc(100vh - 33rem);
+  min-height: calc(100vh - 38rem);
 }
 .nav-item:hover,
 .nav-item.current,
