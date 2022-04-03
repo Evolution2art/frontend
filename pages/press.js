@@ -9,8 +9,7 @@ const PressPage = ({ medias, press }) => {
   }
 
   function renderPress(item, idx, current) {
-    const classNames =
-      "slide w-full absolute" + (idx === current ? " active" : "")
+    const classNames = "slide" + (idx === current ? " active" : "")
     return (
       <Press
         key={`media_${idx}`}
@@ -22,22 +21,23 @@ const PressPage = ({ medias, press }) => {
   }
 
   const filler = medias.reduce((largest, cur) => {
-    return cur.gallery?.[0].height / cur.gallery?.[0].width >
-      (largest?.height || 0) / (largest?.width || 1)
-      ? cur.gallery[0]
+    return cur.media?.[0].height / cur.media?.[0].width >
+      (largest?.media?.[0].height || 0) / (largest?.media?.[0].width || 1)
+      ? cur
       : largest
   }, null)
 
   return (
     <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent title={press.title} text={press.description} />
-      <Slideshow
-        items={medias}
-        renderer={renderPress}
-        className="w-full"
-        navClassName="fixed flex w-full max-w-screen-lg"
-        filler={filler}
-      />
+      <div className="relative">
+        <Slideshow
+          items={medias}
+          renderer={renderPress}
+          navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
+          filler={filler}
+        />
+      </div>
     </div>
   )
 }

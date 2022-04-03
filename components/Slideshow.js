@@ -1,8 +1,24 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import {
+  MdFullscreen,
+  MdFullscreenExit,
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+} from "react-icons/md"
 import NextImage from "./Image"
 
-const Slideshow = ({ items, renderer, navClassName, className, filler }) => {
+const Slideshow = ({
+  items,
+  renderer,
+  navClassName,
+  className,
+  filler,
+  theme,
+  fullscreen = false,
+}) => {
   const [current, setCurrent] = useState(0)
+  const [isFullscreen, setIsFullscreen] = useState(fullscreen)
+  const [isDark, setIsDark] = useState(theme === "dark")
 
   const next = () => {
     setCurrent(current === items.length - 1 ? 0 : current + 1)
@@ -11,48 +27,71 @@ const Slideshow = ({ items, renderer, navClassName, className, filler }) => {
     setCurrent(current === 0 ? items.length - 1 : current - 1)
   }
 
-  const classNames = "slideshow" + (className ? ` ${className}` : "")
+  const toggleFullscreen = () => setIsFullscreen(!isFullscreen)
+
+  const classNames =
+    "slideshow" +
+    (className ? ` ${className}` : "") +
+    (isFullscreen ? " fullscreen" : "")
   const navClassNames =
-    "slideshow-nav mx-auto flex justify-center gap-4" +
-    (navClassName ? ` ${navClassName}` : "")
+    "slideshow-nav " + (navClassName ? ` ${navClassName}` : "")
+
+  useEffect(
+    () => setIsDark(items[current]?.isDark || theme !== "light"),
+    [current]
+  )
+  // const isDark = items[current]?.isDark || theme !== "light"
+  // const iconColor = isDark ? "text-stone-200" : "text-stone-800"
 
   return (
     <div className={classNames}>
-      {items.length > 1 && (
-        <div className="nav-wrapper">
-          <nav
-            className={`prev-next absolute z-10 flex h-full w-full justify-between ${navClassNames}`}
-          >
-            <a className="nav-previous h-full pr-8 pl-4" onClick={previous}>
-              <span className="arrow arrow-left"></span>
-            </a>
-            <a className="nav-next h-full pr-4 pl-8" onClick={next}>
-              <span className="arrow arrow-right"></span>
-            </a>
-          </nav>
-          <nav className={`dots z-10 ${navClassNames}`}>
-            {items.map((item, idx) => {
-              const classNames =
-                "slide-nav" + (idx === current ? " active" : "")
-              return (
-                <a
-                  className={classNames}
-                  key={`slide-nav-${idx}`}
-                  onClick={() => setCurrent(idx)}
-                ></a>
-              )
-            })}
-          </nav>
-        </div>
-      )}
-      <div className="slides relative w-full">
-        {items.map((item, idx) => renderer(item, idx, current))}
+      <div className="slides">
+        {items.map((item, idx) => renderer(item, idx, current, isFullscreen))}
         {filler ? (
-          <div className="invisible relative -z-10">
-            <NextImage media={filler} />
-          </div>
+          <div className="invisible relative -z-10">{renderer(filler)}</div>
         ) : null}
       </div>
+      {items.length > 1 && (
+        <nav className={`nav-wrapper ${navClassNames}`}>
+          <a className="nav-previous" onClick={previous}>
+            <MdKeyboardArrowLeft className="h-8 w-8 text-stone-800 drop-shadow-md dark:text-stone-200" />
+          </a>
+          <div className="dots">
+            {items.map((item, idx) => {
+              const dotClassNames =
+                "nav-dot drop-shadow-md text-stone-800 dark:text-stone-200" +
+                (idx === current ? " active" : "")
+              return (
+                <a
+                  className={dotClassNames}
+                  key={`nav-dot-${idx}`}
+                  onClick={() => setCurrent(idx)}
+                >
+                  <span />
+                </a>
+              )
+            })}
+          </div>
+          <a className="nav-next" onClick={next}>
+            <MdKeyboardArrowRight className="h-8 w-8 text-stone-800 drop-shadow-md dark:text-stone-200" />
+          </a>
+        </nav>
+      )}
+      <a className="toggle-fullscreen" onClick={toggleFullscreen}>
+        {isFullscreen ? (
+          <MdFullscreenExit
+            className={`h-6 w-6 text-stone-${
+              isDark ? "200" : "800"
+            } drop-shadow-md`}
+          />
+        ) : (
+          <MdFullscreen
+            className={`h-6 w-6 text-stone-${
+              isDark ? "200" : "800"
+            } drop-shadow-md`}
+          />
+        )}
+      </a>
     </div>
   )
 }

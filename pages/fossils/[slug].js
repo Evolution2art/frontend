@@ -3,13 +3,7 @@ import { useRouter } from "next/router"
 import NextImage from "../../components/Image"
 import Slideshow from "../../components/Slideshow"
 import Link from "next/link"
-import {
-  getFossils,
-  getFossil,
-  getRates,
-  getCountries,
-  getMails,
-} from "../../utils/api"
+import { getFossils, getFossil, getRates, getMails } from "../../utils/api"
 import { MdClose, MdOutlineArrowBack } from "react-icons/md"
 import { useEffect, useState } from "react"
 import { useCartContext } from "../../context/cart"
@@ -75,12 +69,19 @@ const FossilPage = ({
 
   const { quote, shipping } = mails
 
-  function renderImages(item, idx, current) {
-    const classNames =
-      "slide w-full absolute" + (idx === current ? " active" : "")
+  function renderImages(item, idx, current, fullscreen) {
+    const classNames = "slide absolute" + (idx === current ? " active" : "")
+    const mediaProps = fullscreen
+      ? {
+          layout: "fill",
+          objectFit: "cover",
+          objectPosition: "center",
+        }
+      : {}
+
     return (
       <div key={`fossil_image_${idx}`} className={classNames}>
-        <NextImage media={item} />
+        <NextImage media={item} {...mediaProps} />
       </div>
     )
   }
@@ -94,7 +95,7 @@ const FossilPage = ({
         <Link href={`/categories/${encodeURIComponent(fossil.category?.slug)}`}>
           <a className="italic">
             <MdOutlineArrowBack className="mr-2 inline h-6 w-6" />
-            {fossil.category?.name || "Collection"}
+            {fossil.category?.title || fossil.category?.name || "Collection"}
           </a>
         </Link>
       </div>
@@ -107,7 +108,7 @@ const FossilPage = ({
           <Slideshow
             items={[fossil.image, ...fossil.gallery]}
             renderer={renderImages}
-            className="md:pb-24"
+            // className="md:pb-24"
             navClassName="w-full"
             filler={filler}
           />

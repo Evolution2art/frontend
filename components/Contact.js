@@ -7,7 +7,7 @@ const Contact = ({ cms, id = "contact", className }) => {
   }
   const background = cms?.background?.[0]
   const classNames =
-    "contact prose prose-invert text-white p-8 mx-auto max-w-screen-md w-full flex flex-col justify-center" +
+    "contact min-h-screen prose prose-invert text-white p-8 mx-auto max-w-screen-md w-full flex flex-col justify-center" +
     (className ? ` ${className}` : "")
   return (
     <div className="relative w-full">

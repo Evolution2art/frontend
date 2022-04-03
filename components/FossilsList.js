@@ -1,6 +1,7 @@
 import NextImage from "./Image"
 import Link from "next/link"
 import { useCartContext } from "../context/cart"
+import { MdVisibility } from "react-icons/md"
 
 const FossilsList = ({ locale, theme, fossils }) => {
   const { cart, convertCurrency } = useCartContext()
@@ -13,9 +14,13 @@ const FossilsList = ({ locale, theme, fossils }) => {
     <div className="mx-4 flex flex-wrap justify-center">
       {fossils?.map((_fossil) => (
         <div key={_fossil.id} className="w-full p-2 sm:w-1/2">
-          <div className="fossil-card shadow-md hover-hover:shadow-lg">
+          <div className="fossil-card relative shadow-md hover-hover:shadow-lg">
             <Link href={`/fossils/${_fossil.slug}`}>
               <a className="h-full" title={_fossil.title}>
+                {_fossil.gallery?.length > 1 ? (
+                  <MdVisibility className="absolute top-2 left-2 z-10 h-6 w-6 opacity-10" />
+                ) : null}
+
                 <div className="fossil-image relative z-0 h-full w-full">
                   <div className="mx-auto h-full">
                     <NextImage

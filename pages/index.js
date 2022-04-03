@@ -11,42 +11,19 @@ import {
   getCMSContent,
   getCategories,
   getCountries,
-  getHistory,
-  getPress,
 } from "../utils/api"
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
-const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
+const HomePage = ({ categories, intro, about, contact, theme }) => {
   const router = useRouter()
   const logo = theme === "dark" ? "logo-white" : "logo-dark"
   const background =
     theme === "dark" ? intro.backgroundDark[0] : intro.background[0]
-  // const { email } = contact
-  // const now = new Date()
-  // const _fossils = fossils.filter((_fossil) => {
-  //   const _date = (_fossil.new && new Date(_fossil.new)) || new Date()
-  //   return _date > now
-  // })
   const buttonClassNames = "uppercase px-4 py-2"
-  // "m-2 rounded border px-4 py-2 font-semibold shadow hover:shadow-lg whitespace-no-wrap " +
-  // "border-stone-800 text-stone-800 dark:text-stone-200 dark:border-stone-200"
 
   const [scroll, setScroll] = useState(false)
-  const onScroll = () => {
-    // if (scroll && window.scrollY == 0) {
-    //   setScroll(false)
-    // }
-    if (window.scrollY > 0) {
-      setScroll(true)
-    }
-  }
 
-  if (typeof window !== "undefined") {
-    useLayoutEffect(() => {
-      window.addEventListener("scroll", onScroll)
-      return () => window.removeEventListener("scroll", onScroll)
-    }, [])
-  }
+  useEffect(() => setTimeout(() => setScroll(true), 1000), [])
 
   return (
     <>
@@ -89,17 +66,6 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
             text={intro.text}
             className="fill-screen-v dark:prose-invert"
           />
-          {/* <nav className="m-10 mt-36 mb-12 flex items-center justify-center">
-        <Link href="/#about">
-          <a className={classNames}>Our Story</a>
-        </Link>
-        <Link href="/history">
-          <a className={classNames}>Our Work</a>
-        </Link>
-        <Link href="/fossils">
-          <a className={classNames}>New Acquisitions</a>
-        </Link>
-      </nav> */}
           <CategoryButtons
             categories={categories}
             path={router.asPath}
@@ -114,7 +80,7 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
                 title={about.title}
                 text={about.text}
                 id="about"
-                className="prose-stone w-full text-justify dark:prose-invert"
+                className="prose-stone w-full px-0 text-justify dark:prose-invert"
                 titleClassName="mt-0"
                 image={
                   <div className="float-left mr-4 mb-1 w-1/2 md:w-1/3">
@@ -122,15 +88,6 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
                   </div>
                 }
               />
-              {/* <div className="w-1/3 pt-24">
-              <NextImage media={about.gallery[0]} />
-            </div>
-            <CMSContent
-              title={about.title}
-              text={about.text}
-              id="about"
-              className="prose-stone w-2/3 dark:prose-invert"
-            /> */}
             </div>
             <nav className="text mb-12 flex items-center justify-center">
               <Link href="/history">
@@ -151,9 +108,6 @@ const HomePage = ({ categories, countries, intro, about, contact, theme }) => {
 export async function getStaticProps() {
   const categories = await getCategories()
   const countries = await getCountries()
-  // const fossils = await getFossils()
-  // const history = await getHistory()
-  // const press = await getPress()
   const [intro, about, contact] = await getCMSContent([
     "introduction",
     "about",

@@ -2,6 +2,7 @@ import Link from "next/link"
 import NextImage from "./Image"
 import CMSContent from "./CMSContent"
 import parseUrl from "parse-url"
+import { MdLink } from "react-icons/md"
 
 const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
   const classNames =
@@ -30,8 +31,13 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
         />
         {link?.href ? (
           <Link href={link.href} prefetch={false}>
-            <a className="p-8" rel="noreferrer" target="_blank">
-              {link.href}
+            <a
+              className="inline-block w-full p-8"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <MdLink className="inline h-6 w-6" />
+              {link.resource ? ` - ${link.resource}` : null}
             </a>
           </Link>
         ) : null}

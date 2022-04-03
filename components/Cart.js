@@ -8,9 +8,10 @@ import {
   MdLocationOn,
   MdShoppingBasket,
 } from "react-icons/md"
+import { usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { useCartContext } from "../context/cart"
 import NextImage from "./Image"
-import CartIcon from "./Svg/Cart"
+import PayPalCheckoutButton from "./PayPalCheckoutButton"
 
 const Cart = ({
   cart,
@@ -33,6 +34,8 @@ const Cart = ({
   const toggleCart = () => setVisible(!visible)
   const [currency, setCurrency] = useState(cart.currency || "EUR")
   const [country, setCountry] = useState(cart.country)
+  const [checkout, setCheckout] = useState(false)
+  const [{ options }, dispatch] = usePayPalScriptReducer()
 
   const currencySymbol = {
     EUR: "€",
@@ -54,6 +57,13 @@ const Cart = ({
     const iso = event.target.value
     setCartCurrency(iso)
     setCurrency(iso)
+    dispatch({
+      type: "resetOptions",
+      value: {
+        ...options,
+        currency: iso,
+      },
+    })
   }
 
   useEffect(() => {
@@ -76,7 +86,6 @@ const Cart = ({
 
   const total = calculateTotal("sub", currency, country)
   const totalShipping = calculateTotal("shipping", currency, country)
-
   const grandTotal = calculateTotal("grand", currency, country)
 
   return (
@@ -250,20 +259,20 @@ const Cart = ({
             <a onClick={toggleCart} className="mt-8 flex">
               <MdOutlineArrowBack className="h-6 w-6" /> Back to Collection
             </a>
-            {cart.items.length > 0 && (
-              <button
-                disabled={
-                  !cart.total || country?.length < 2 ? "disabled" : false
-                }
-                className={`whitespace-no-wrap my-6 rounded border border-stone-800 px-4 py-2 font-semibold text-stone-800 shadow hover:shadow-lg dark:border-stone-200 dark:text-stone-200${
-                  !cart.total || country?.length < 2
-                    ? " cursor-not-allowed opacity-50"
-                    : ""
-                }`}
-              >
+            {/* {!total || !totalShipping ? (
+              <span className="whitespace-no-wrap my-6 px-4 py-2 font-semibold text-stone-800 opacity-50 dark:text-stone-200">
                 Proceed to Checkout
-              </button>
-            )}
+              </span>
+            ) : null} */}
+            <div
+              className={`${total * totalShipping > 0 ? "block" : "hidden"}`}
+            >
+              <PayPalCheckoutButton
+                amount={grandTotal}
+                cart={cart}
+                currency={currency}
+              />
+            </div>
           </div>
           <div className="m-auto mt-0 w-full max-w-screen-md text-right">
             {country === "_" && (

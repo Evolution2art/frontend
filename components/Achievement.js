@@ -4,20 +4,34 @@ import CMSContent from "./CMSContent"
 const Achievement = ({
   achievement = {},
   odd = true,
+  mediaProps = {},
   className = "",
-  theme = "light",
+  fullscreen = false,
 }) => {
+  // const { isDark } = achievement
   const classNames =
-    "flex " +
-    (odd ? "justify-start" : "justify-end") +
-    (className ? ` ${className}` : "")
+    // "flex " +
+    // (odd ? "justify-start" : "justify-end") +
+    className ? ` ${className}` : ""
+
+  // handle theme switch
+  // useEffect(() => {
+  //   if (
+  //     typeof toggleTheme === "function" &&
+  //     ((theme === "light" && achievement.isDark) ||
+  //       (theme === "dark" && !achievement.isDark))
+  //   ) {
+  //     toggleTheme()
+  //   }
+  // }, [active])
   return (
-    <article className={classNames}>
+    <section className={classNames}>
       {achievement.gallery?.length > 0 ? (
-        <div className="absolute -z-10 w-full max-w-screen-lg pt-2 pb-2">
+        <div>
           <NextImage
             media={achievement.gallery[0]}
-            width={achievement.gallery[0].width}
+            {...mediaProps}
+            // width={achievement.gallery[0].width}
           />
         </div>
       ) : null}
@@ -25,12 +39,13 @@ const Achievement = ({
         title={achievement?.title}
         text={achievement?.description}
         className={
-          "fadeIn prose-stone mt-8 w-1/4" +
-          (!odd ? " text-right" : "") +
-          (achievement?.isDark ? " prose-invert" : " prose")
+          (achievement?.isDark ? "prose-invert" : "prose") +
+          " absolute " +
+          (fullscreen ? "bottom-4 right-4" : "bottom-0 right-0") +
+          (!odd ? " text-right" : "")
         }
       />
-    </article>
+    </section>
   )
 }
 

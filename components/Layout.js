@@ -42,7 +42,7 @@ const Layout = ({ children, countries, rates, theme, toggleTheme, locale }) => {
           path={router.asPath}
           className={`mx-auto w-full max-w-screen-xl`}
         />
-        {React.cloneElement(children, { theme, locale })}
+        {React.cloneElement(children, { theme, toggleTheme, locale })}
         <Footer />
       </div>
     </div>

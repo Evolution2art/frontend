@@ -2,7 +2,7 @@ import { FaGithub, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
 const Footer = ({ className }) => {
   const classNames =
-    "fixed z-10 bottom-0 left-0 w-full bg-stone-100 px-4 dark:bg-stone-900" +
+    "fixed z-10 bottom-0 left-0 w-full px-4 bg-stone-100 dark:bg-stone-900" +
     (className ? ` ${className}` : "")
   return (
     <div className={classNames}>
@@ -35,14 +35,14 @@ const Footer = ({ className }) => {
           >
             <FaInstagram width={20} height={20} />
           </a>
-          <a
+          {/* <a
             href="https://github.com/Evolution2art/"
             target="_blank"
             rel="noreferrer"
             className="ml-3"
           >
             <FaGithub width={20} height={20} />
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

@@ -28,8 +28,8 @@ const MyApp = ({ Component, pageProps }) => {
   const toggleTheme = () => {
     const _theme = theme === "dark" ? "light" : "dark"
     setTheme(_theme)
-    localStorage.setItem("theme", _theme)
-    if (window) {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", _theme)
       if (_theme === "light") {
         document.querySelector("body").classList.remove("dark")
       } else {

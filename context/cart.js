@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 import rates from "../public/rates.json"
 
 const CartContext = createContext()
@@ -123,6 +124,13 @@ export function CartContextProvider({ children }) {
   const inCart = (item) =>
     cart?.items.filter((_item) => _item.id === item.id).length > 0
 
+  const initialPayPalOptions = {
+    "client-id": process.env.PAYPAL_CLIENT_ID || "test",
+    currency: "EUR",
+    intent: "capture",
+    // "data-client-token": process.env.PAYPAL_CLIENT_TOKEN || "MTIzNDU2Nzg=",
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -138,7 +146,9 @@ export function CartContextProvider({ children }) {
         setShippingRates,
       }}
     >
-      {children}
+      <PayPalScriptProvider deferLoading={true} options={initialPayPalOptions}>
+        {children}
+      </PayPalScriptProvider>
     </CartContext.Provider>
   )
 }
