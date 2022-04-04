@@ -83,7 +83,7 @@ const Contact = ({ cms, id = "contact", className }) => {
           </p>
           <p>
             By Phone: <br />
-            <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>{phone}</a>
+            <a href={`tel:${phone?.replace(/[^\d+]/g, "")}`}>{phone}</a>
           </p>
         </div>
         <div className="ml-8 mt-24">
