@@ -9,12 +9,12 @@ const PressPage = ({ medias, press }) => {
   }
 
   function renderPress(item, idx, current) {
-    const classNames = "slide" + (idx === current ? " active" : "")
+    // const classNames = "slide" + (idx === current ? " active" : "")
     return (
       <Press
         key={`media_${idx}`}
         media={item}
-        className={classNames}
+        // className={classNames}
         odd={true}
       />
     )

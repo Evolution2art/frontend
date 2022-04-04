@@ -70,7 +70,7 @@ const FossilPage = ({
   const { quote, shipping } = mails
 
   function renderImages(item, idx, current, fullscreen) {
-    const classNames = "slide absolute" + (idx === current ? " active" : "")
+    // const classNames = idx === current ? " active" : ""
     const mediaProps = fullscreen
       ? {
           layout: "fill",
@@ -80,7 +80,7 @@ const FossilPage = ({
       : {}
 
     return (
-      <div key={`fossil_image_${idx}`} className={classNames}>
+      <div key={`fossil_image_${idx}`}>
         <NextImage media={item} {...mediaProps} />
       </div>
     )
@@ -111,6 +111,7 @@ const FossilPage = ({
             // className="md:pb-24"
             navClassName="w-full"
             filler={filler}
+            fullscreen={true}
           />
           {fossil.sold ? (
             <div className="ribbon h-5 w-24 bg-gray-500 text-sm">sold</div>

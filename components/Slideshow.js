@@ -17,7 +17,7 @@ const Slideshow = ({
   fullscreen = false,
 }) => {
   const [current, setCurrent] = useState(0)
-  const [isFullscreen, setIsFullscreen] = useState(fullscreen)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const [isDark, setIsDark] = useState(theme === "dark")
 
   const next = () => {
@@ -46,9 +46,15 @@ const Slideshow = ({
   return (
     <div className={classNames}>
       <div className="slides">
-        {items.map((item, idx) => renderer(item, idx, current, isFullscreen))}
+        {items.map((item, idx) => (
+          <div className={`slide absolute${idx === current ? " active" : ""}`}>
+            {renderer(item, idx, current, isFullscreen)}
+          </div>
+        ))}
         {filler ? (
-          <div className="invisible relative -z-10">{renderer(filler)}</div>
+          <div className="filler invisible relative -z-10">
+            {renderer(filler)}
+          </div>
         ) : null}
       </div>
       {items.length > 1 && (
@@ -77,21 +83,23 @@ const Slideshow = ({
           </a>
         </nav>
       )}
-      <a className="toggle-fullscreen" onClick={toggleFullscreen}>
-        {isFullscreen ? (
-          <MdFullscreenExit
-            className={`h-6 w-6 text-stone-${
-              isDark ? "200" : "800"
-            } drop-shadow-md`}
-          />
-        ) : (
-          <MdFullscreen
-            className={`h-6 w-6 text-stone-${
-              isDark ? "200" : "800"
-            } drop-shadow-md`}
-          />
-        )}
-      </a>
+      {fullscreen ? (
+        <a className="toggle-fullscreen" onClick={toggleFullscreen}>
+          {isFullscreen ? (
+            <MdFullscreenExit
+              className={`h-6 w-6 text-stone-${
+                isDark ? "200" : "800"
+              } drop-shadow-md`}
+            />
+          ) : (
+            <MdFullscreen
+              className={`h-6 w-6 text-stone-${
+                isDark ? "200" : "800"
+              } drop-shadow-md`}
+            />
+          )}
+        </a>
+      ) : null}
     </div>
   )
 }

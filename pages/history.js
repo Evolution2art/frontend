@@ -9,7 +9,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
   }
 
   function renderAchievements(item, idx, current, fullscreen) {
-    const classNames = "slide" + (idx === current ? " active" : "")
+    // const classNames = "slide" + (idx === current ? " active" : "")
     const mediaProps = fullscreen
       ? {
           layout: "fill",
@@ -22,7 +22,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
         key={`achievement_${idx}`}
         achievement={item}
         mediaProps={mediaProps}
-        className={classNames}
+        // className={classNames}
         odd={true}
         fullscreen={fullscreen}
       />
@@ -46,6 +46,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
           navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
           filler={filler}
           theme={theme}
+          fullscreen={true}
         />
       </div>
     </div>
