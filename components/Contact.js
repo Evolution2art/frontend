@@ -83,10 +83,12 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
             By Email: <br />
             <a href={`mailto:${email}`}>{email}</a>
           </p>
-          <p>
-            By Phone: <br />
-            <a href={`tel:${phone?.replace(/[^\d+]/g, "")}`}>{phone}</a>
-          </p>
+          {phone ? (
+            <p>
+              By Phone: <br />
+              <a href={`tel:${phone?.replace(/[^\d+]/g, "")}`}>{phone}</a>
+            </p>
+          ) : null}
         </div>
         <div className="ml-8 mt-24 w-1/2">
           <CMSContent
