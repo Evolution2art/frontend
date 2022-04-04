@@ -271,6 +271,32 @@ const Cart = ({
                 amount={grandTotal}
                 cart={cart}
                 currency={currency}
+                createOrder={(data, actions) => {
+                  return actions.order.create({
+                    purchase_units: [
+                      {
+                        amount: {
+                          value: grandTotal,
+                        },
+                      },
+                    ],
+                  })
+                }}
+                onApprove={(data, actions) => {
+                  return actions.order.capture().then(function (orderData) {
+                    // Successful capture! For dev/demo purposes:
+                    console.log(
+                      "Capture result",
+                      orderData,
+                      JSON.stringify(orderData, null, 2)
+                    )
+                    const transaction =
+                      orderData.purchase_units[0].payments.captures[0]
+                    console.log(
+                      `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
+                    )
+                  })
+                }}
               />
             </div>
           </div>
