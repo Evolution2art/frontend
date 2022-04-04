@@ -88,7 +88,7 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
             <a href={`tel:${phone?.replace(/[^\d+]/g, "")}`}>{phone}</a>
           </p>
         </div>
-        <div className="ml-8 mt-24">
+        <div className="ml-8 mt-24 w-1/2">
           <CMSContent
             text={cms.text}
             className="prose-invert mt-5 text-white"
