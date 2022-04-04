@@ -43,6 +43,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
         <Slideshow
           items={achievements}
           renderer={renderAchievements}
+          keyName="history"
           navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
           filler={filler}
           theme={theme}

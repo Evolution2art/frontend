@@ -5,7 +5,6 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md"
-import NextImage from "./Image"
 
 const Slideshow = ({
   items,
@@ -14,6 +13,7 @@ const Slideshow = ({
   className,
   filler,
   theme,
+  keyName = "slide",
   fullscreen = false,
 }) => {
   const [current, setCurrent] = useState(0)
@@ -47,7 +47,10 @@ const Slideshow = ({
     <div className={classNames}>
       <div className="slides">
         {items.map((item, idx) => (
-          <div className={`slide absolute${idx === current ? " active" : ""}`}>
+          <div
+            key={`${keyName}-${idx}`}
+            className={`slide absolute${idx === current ? " active" : ""}`}
+          >
             {renderer(item, idx, current, isFullscreen)}
           </div>
         ))}
@@ -60,13 +63,21 @@ const Slideshow = ({
       {items.length > 1 && (
         <nav className={`nav-wrapper ${navClassNames}`}>
           <a className="nav-previous" onClick={previous}>
-            <MdKeyboardArrowLeft className="h-8 w-8 text-stone-800 drop-shadow-md dark:text-stone-200" />
+            <MdKeyboardArrowLeft
+              className={`h-8 w-8 text-stone-${
+                isFullscreen
+                  ? isDark
+                    ? "200"
+                    : "800"
+                  : "text-stone-800 dark:text-stone-200"
+              } drop-shadow-md`}
+            />
           </a>
           <div className="dots">
             {items.map((item, idx) => {
-              const dotClassNames =
-                "nav-dot drop-shadow-md text-stone-800 dark:text-stone-200" +
-                (idx === current ? " active" : "")
+              const dotClassNames = `nav-dot drop-shadow-md ${
+                idx === current ? " active" : ""
+              }`
               return (
                 <a
                   className={dotClassNames}
@@ -79,7 +90,15 @@ const Slideshow = ({
             })}
           </div>
           <a className="nav-next" onClick={next}>
-            <MdKeyboardArrowRight className="h-8 w-8 text-stone-800 drop-shadow-md dark:text-stone-200" />
+            <MdKeyboardArrowRight
+              className={`h-8 w-8 text-stone-${
+                isFullscreen
+                  ? isDark
+                    ? "200"
+                    : "800"
+                  : "text-stone-800 dark:text-stone-200"
+              } drop-shadow-md`}
+            />
           </a>
         </nav>
       )}

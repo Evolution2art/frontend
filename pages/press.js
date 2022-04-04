@@ -33,6 +33,7 @@ const PressPage = ({ medias, press }) => {
       <div className="relative">
         <Slideshow
           items={medias}
+          keyName="press"
           renderer={renderPress}
           navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
           filler={filler}

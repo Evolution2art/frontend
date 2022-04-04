@@ -70,7 +70,6 @@ const FossilPage = ({
   const { quote, shipping } = mails
 
   function renderImages(item, idx, current, fullscreen) {
-    // const classNames = idx === current ? " active" : ""
     const mediaProps = fullscreen
       ? {
           layout: "fill",
@@ -80,7 +79,7 @@ const FossilPage = ({
       : {}
 
     return (
-      <div key={`fossil_image_${idx}`}>
+      <div>
         <NextImage media={item} {...mediaProps} />
       </div>
     )
@@ -108,6 +107,7 @@ const FossilPage = ({
           <Slideshow
             items={[fossil.image, ...fossil.gallery]}
             renderer={renderImages}
+            keyName="fossil-image"
             // className="md:pb-24"
             navClassName="w-full"
             filler={filler}
