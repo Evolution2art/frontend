@@ -8,7 +8,7 @@ const Layout = ({ children, countries, rates, theme, toggleTheme, locale }) => {
   const router = useRouter()
 
   return (
-    <div className={`mb-20 ${theme}`}>
+    <div className={`mb-16 ${theme}`}>
       <Head>
         <link
           rel="apple-touch-icon"
