@@ -109,14 +109,14 @@ body.dark nav.text a:hover {
 body.dark .selected .nav-item {
   opacity: 0.5;
 }
-.drop-shadow {
+/* .drop-shadow {
   filter: drop-shadow(0px 0px 2px var(--bg-dark-opaque));
 }
 .dark .drop-shadow {
   filter: drop-shadow(0px 0px 2px var(--bg-light-opaque));
 }
 .slideshow {
-}
+} */
 .slideshow .slides {
   /* min-height: calc(100vh - 8rem); */
   width: 100%;

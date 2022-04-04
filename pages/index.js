@@ -5,16 +5,18 @@ import CategoryButtons from "../components/CategoryButtons"
 import Contact from "../components/Contact"
 import NextImage from "../components/Image"
 import CMSContent from "../components/CMSContent"
-import logo from "../public/Evolution2Art-logo.svg"
+import logoLight from "../public/Evolution2Art-logo-light.svg"
+import logoDark from "../public/Evolution2Art-logo-dark.svg"
 import { getCMSContent, getCategories, getCountries } from "../utils/api"
 import { useEffect, useState } from "react"
 
-const HomePage = ({ categories, intro, about, contact, theme }) => {
+const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
   const router = useRouter()
   const background =
     theme === "dark" ? intro.backgroundDark[0] : intro.background[0]
   const buttonClassNames = "uppercase px-4 py-2"
 
+  const logo = theme !== "light" ? logoDark : logoLight
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => setTimeout(() => setScroll(true), 1000), [])
@@ -43,7 +45,7 @@ const HomePage = ({ categories, intro, about, contact, theme }) => {
           <NextImage
             src={logo}
             alt="home"
-            className="logo drop-shadow"
+            className="logo opacity-70 drop-shadow"
             height={220}
             width={200}
           />

@@ -1,14 +1,16 @@
 import CMSContent from "./CMSContent"
 import NextImage from "./Image"
-import logo from "../public/Evolution2Art-logo.svg"
+// import logoLight from "../public/Evolution2Art-logo-light.svg"
+import logoDark from "../public/Evolution2Art-logo-dark.svg"
 
-const Contact = ({ cms, id = "contact", className }) => {
+const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
   const background = cms?.background?.[0]
   const {
     title = "Contact",
     email = "info@evolution2art.com",
     phone = "+32 4xx xxx xxx",
   } = cms
+  const logo = logoDark
   const classNames =
     "contact min-h-screen prose prose-invert text-white p-8 mx-auto max-w-screen-md w-full " +
     "flex flex-row justify-between items-start" +
@@ -95,7 +97,7 @@ const Contact = ({ cms, id = "contact", className }) => {
             <NextImage
               src={logo}
               className="drop-shadow"
-              width="300"
+              width="200"
               height="330"
             />
           </div>
