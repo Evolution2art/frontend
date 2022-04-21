@@ -23,7 +23,10 @@ const FossilPage = ({
   countries,
   theme,
 }) => {
-  console.log("ShippingRates", shippingRates)
+  // return early if fossil is undefined or has no image
+  if (!fossil?.image) return null
+
+  // console.log("ShippingRates", shippingRates)
   const router = useRouter()
   // if (router.isFallback) {
   //   return <div>Loading fossil...</div>
@@ -38,7 +41,7 @@ const FossilPage = ({
     convertCurrency,
   } = useCartContext()
   const orientation =
-    fossil.image.height > fossil.image.width ? "portrait" : "landscape"
+    fossil.image.height >= fossil.image.width ? "portrait" : "landscape"
   const classNames =
     "frame w-full p-4 pt-0 text-stone-600 dark:text-stone-400 " +
     (orientation === "portrait" ? "md:w-1/2" : "md:w-1/3")
