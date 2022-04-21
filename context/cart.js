@@ -3,15 +3,16 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 import rates from "../public/rates.json"
 
 const CartContext = createContext()
+const defaultCart = {
+  total: 0,
+  items: [],
+  currency: "EUR",
+  country: null,
+  exchange: rates,
+}
 
 export function CartContextProvider({ children }) {
-  const [cart, setCart] = useState({
-    total: 0,
-    items: [],
-    currency: "EUR",
-    country: null,
-    exchange: rates,
-  })
+  const [cart, setCart] = useState(defaultCart)
 
   const [shippingRates, setShippingRates] = useState([])
 
@@ -66,9 +67,17 @@ export function CartContextProvider({ children }) {
     return Math.ceil(value / (cart.exchange?.rates.EUR || 0.8398) / 5) * 5
   }
 
-  const convertToUSD = (value) => convertCurrency(value, "USD")
+  // const convertToUSD = (value) => convertCurrency(value, "USD")
 
   const calculateShipping = (item, country) => {
+    if (!shippingRates.length) {
+      return console.log("ShippingRates not loaded!")
+    }
+    // console.log(
+    //   `calculate shipping to ${country} for item`,
+    //   item,
+    //   shippingRates
+    // )
     return convertCurrency(
       shippingRates.find(
         (_rate) =>
@@ -84,7 +93,7 @@ export function CartContextProvider({ children }) {
   }
 
   const retrieveCart = () => {
-    return JSON.parse(localStorage.getItem("cart"))
+    return JSON.parse(localStorage.getItem("cart")) || defaultCart
   }
 
   const addToCart = (item) => {
@@ -125,11 +134,13 @@ export function CartContextProvider({ children }) {
     cart?.items.filter((_item) => _item.id === item.id).length > 0
 
   const initialPayPalOptions = {
-    "client-id": process.env.PAYPAL_CLIENT_ID || "test",
+    "client-id": `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID_TEST || "test"}`,
     currency: "EUR",
     intent: "capture",
     // "data-client-token": process.env.PAYPAL_CLIENT_TOKEN || "MTIzNDU2Nzg=",
   }
+
+  // console.log(initialPayPalOptions)
 
   return (
     <CartContext.Provider

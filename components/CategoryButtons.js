@@ -30,7 +30,7 @@ const CategoryButtons = ({
       className={`flex flex-wrap justify-center gap-4 ${classNames}`}
       id="collection"
     >
-      {categories.map((_category) => {
+      {categories?.map((_category) => {
         const isCurrent = category?.slug === _category.slug
         const twSize = isCurrent ? curSize : size
         const current = isCurrent ? "current " : ""

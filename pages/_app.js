@@ -65,7 +65,7 @@ MyApp.getInitialProps = async (ctx) => {
   // Fetch global site settings from Strapi
   const categories = await getCategories()
   const countries = await getCountries()
-  const rates = await getRates()
+  const rates = await getRates(countries)
   const mails = await getMails()
   // Pass the data to our page via props
   return {

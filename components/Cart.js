@@ -8,20 +8,15 @@ import {
   MdLocationOn,
   MdShoppingBasket,
 } from "react-icons/md"
+import { fetchAPI } from "../utils/api"
 import { usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { useCartContext } from "../context/cart"
 import NextImage from "./Image"
 import PayPalCheckoutButton from "./PayPalCheckoutButton"
 
-const Cart = ({
-  cart,
-  theme,
-  locale = "nl-BE",
-  countries,
-  shippingRates,
-  open,
-}) => {
+const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
   const {
+    cart,
     removeFromCart,
     setCartCurrency,
     setCartCountry,
@@ -82,11 +77,32 @@ const Cart = ({
 
   useEffect(() => {
     setShippingRates(shippingRates)
-  }, [shippingRates])
+  }, [shippingRates, setShippingRates])
 
   const total = calculateTotal("sub", currency, country)
   const totalShipping = calculateTotal("shipping", currency, country)
   const grandTotal = calculateTotal("grand", currency, country)
+
+  const handlePaymentSuccess = async (result) => {
+    console.log(
+      "Cart handlePaymentSuccess called, mark items as solved",
+      result
+    )
+    await cart.items.map(async (_item) => {
+      await fetchAPI(
+        `/sell/`,
+        {
+          method: "PUT",
+          body: { item: _item, pp: JSON.stringify(result) },
+        },
+        true
+      )
+    })
+  }
+
+  const handlePaymentFail = (data) => {
+    console.log("Cart handlePaymentFail called", data)
+  }
 
   return (
     <div>
@@ -152,10 +168,7 @@ const Cart = ({
               >
                 <option value="">Please select</option>
                 {countries.map((_country) => (
-                  <option
-                    key={`country_${_country.country}`}
-                    value={_country.country}
-                  >
+                  <option key={`country_${_country.iso}`} value={_country.iso}>
                     &nbsp; {_country.name}
                   </option>
                 ))}
@@ -227,7 +240,7 @@ const Cart = ({
                     <span className="font-bold">
                       {
                         countries.find(
-                          (_country) => _country.country === cart.country
+                          (_country) => _country.iso === cart.country
                         )?.name
                       }
                     </span>
@@ -269,43 +282,22 @@ const Cart = ({
             >
               <PayPalCheckoutButton
                 amount={grandTotal}
+                total={total}
+                shipping={totalShipping}
                 cart={cart}
+                country={country}
                 currency={currency}
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        amount: {
-                          value: grandTotal,
-                        },
-                      },
-                    ],
-                  })
-                }}
-                onApprove={(data, actions) => {
-                  return actions.order.capture().then(function (orderData) {
-                    // Successful capture! For dev/demo purposes:
-                    console.log(
-                      "Capture result",
-                      orderData,
-                      JSON.stringify(orderData, null, 2)
-                    )
-                    const transaction =
-                      orderData.purchase_units[0].payments.captures[0]
-                    console.log(
-                      `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
-                    )
-                  })
-                }}
+                handleOK={handlePaymentSuccess}
+                handleNO={handlePaymentFail}
               />
             </div>
           </div>
           <div className="m-auto mt-0 w-full max-w-screen-md text-right">
             {country === "_" && (
               <span className="cart-unshippable italic">
-                If your destination is not listed above, or the item you're
+                If your destination is not listed above, or the item you&quot;re
                 interested in has specialized shipping needs, please get in
-                touch with us via email
+                touch with us via email.
               </span>
             )}
           </div>

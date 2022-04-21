@@ -17,6 +17,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
           objectPosition: "center",
         }
       : {}
+    // console.log("RenderAchievement", item)
     return (
       <Achievement
         key={`achievement_${idx}`}
@@ -38,6 +39,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
 
   return (
     <div className="mx-auto w-full max-w-screen-lg">
+      {/* {JSON.stringify(achievements)} */}
       <CMSContent title={history.title} text={history.description} />
       <div className="relative">
         <Slideshow

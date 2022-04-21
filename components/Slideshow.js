@@ -38,7 +38,7 @@ const Slideshow = ({
 
   useEffect(
     () => setIsDark(items[current]?.isDark || theme !== "light"),
-    [current]
+    [current, items, theme]
   )
   // const isDark = items[current]?.isDark || theme !== "light"
   // const iconColor = isDark ? "text-stone-200" : "text-stone-800"

@@ -3,7 +3,13 @@ import { useRouter } from "next/router"
 import NextImage from "../../components/Image"
 import Slideshow from "../../components/Slideshow"
 import Link from "next/link"
-import { getFossils, getFossil, getRates, getMails } from "../../utils/api"
+import {
+  getFossils,
+  getFossil,
+  getRates,
+  getMails,
+  getCountries,
+} from "../../utils/api"
 import { MdClose, MdOutlineArrowBack } from "react-icons/md"
 import { useEffect, useState } from "react"
 import { useCartContext } from "../../context/cart"
@@ -14,12 +20,14 @@ const FossilPage = ({
   mails,
   email = "info@evolution2art.com",
   locale,
+  countries,
   theme,
 }) => {
+  console.log("ShippingRates", shippingRates)
   const router = useRouter()
-  if (router.isFallback) {
-    return <div>Loading fossil...</div>
-  }
+  // if (router.isFallback) {
+  //   return <div>Loading fossil...</div>
+  // }
   const {
     cart,
     addToCart,
@@ -43,8 +51,9 @@ const FossilPage = ({
     minimumFractionDigits: 0,
   })
 
+  const images = [fossil.image || [], ...(fossil.gallery || [])]
   // get largest image to use as filler for the Slideshow component
-  const filler = [fossil.image, ...fossil.gallery].reduce((largest, _image) => {
+  const filler = images.reduce((largest, _image) => {
     return _image.height / _image.width >
       (largest?.height || 0) / (largest?.width || 1)
       ? _image
@@ -53,9 +62,10 @@ const FossilPage = ({
 
   useEffect(() => {
     setShippingRates(shippingRates)
-  }, [shippingRates])
+  }, [shippingRates, setShippingRates])
 
   const rate = calculateShipping(fossil, cart.country)
+  const shippingTotal = numberFormat.format(rate)
   const isSellable =
     rate &&
     !fossil.priceOnRequest &&
@@ -105,13 +115,14 @@ const FossilPage = ({
           }`}
         >
           <Slideshow
-            items={[fossil.image, ...fossil.gallery]}
+            items={images}
             renderer={renderImages}
             keyName="fossil-image"
             // className="md:pb-24"
-            navClassName="w-full"
+            // navClassName="w-full"
+            navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
             filler={filler}
-            fullscreen={true}
+            fullscreen={false}
           />
           {fossil.sold ? (
             <div className="ribbon h-5 w-24 bg-gray-500 text-sm">sold</div>
@@ -132,15 +143,14 @@ const FossilPage = ({
                 : fossil?.price
                 ? salesPrice
                 : ""}
-              {/* <div className="fossil-shipping italic">
-                {!rate ? "" : `${shipping} shipping`}
+              <div className="fossil-shipping italic">
+                {!rate ? "" : `${shippingTotal} shipping`}
                 {cart.country &&
                   rate &&
                   " to " +
-                    countries.find(
-                      (_country) => _country.country === cart.country
-                    )?.name}
-              </div> */}
+                    countries.find((_country) => _country.iso === cart.country)
+                      ?.name}
+              </div>
             </div>
           )}
           {fossil.promotion ? (
@@ -239,6 +249,7 @@ export default FossilPage
 export async function getStaticProps({ params }) {
   const fossil = await getFossil(params.slug)
   const shippingRates = await getRates()
+  const countries = await getCountries()
   const mails = await getMails(fossil)
   return { props: { fossil, shippingRates, mails }, revalidate: 300 }
 }
@@ -246,7 +257,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   const fossils = await getFossils()
   return {
-    paths: fossils.map((_fossil) => {
+    paths: fossils?.map((_fossil) => {
       return {
         params: { slug: _fossil.slug },
       }

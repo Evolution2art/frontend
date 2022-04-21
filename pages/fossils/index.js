@@ -26,7 +26,7 @@ const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
               New Acquisitions
             </h2>
           )}
-          <FossilsList fossils={fossils} email={email} />
+          {<FossilsList fossils={fossils} email={email} />}
         </div>
       ) : (
         <div>
@@ -41,8 +41,11 @@ const FossilsPage = ({ categories, fossils, contact, theme, selected }) => {
 
 export async function getStaticProps() {
   const categories = await getCategories()
+  // console.log("categories", categories)
   const fossils = await getNewFossils()
-  const [intro, about, contact] = await getCMSContent()
+  // console.log("fossils", fossils)
+  const contact = await getCMSContent("contact")
+  // console.log("contact", contact)
   return {
     props: { categories, fossils, contact },
     revalidate: 300,

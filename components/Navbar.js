@@ -16,13 +16,12 @@ const Navbar = ({
     "navbar relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
     (className ? ` ${className}` : "")
 
-  const { cart } = useCartContext()
+  // const { cart } = useCartContext()
 
   return (
     <div className={classNames}>
       <div className="absolute right-0 mr-3 flex">
         <Cart
-          cart={cart}
           theme={theme}
           countries={countries}
           locale={locale}
