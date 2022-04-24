@@ -92,7 +92,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
       await fetchAPI(
         `/sell/`,
         {
-          method: "PUT",
+          method: "POST",
           body: { item: _item, pp: JSON.stringify(result) },
         },
         true
