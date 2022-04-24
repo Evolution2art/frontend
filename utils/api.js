@@ -6,7 +6,7 @@ export function getStrapiURL(path) {
 
 export function getSecureURL(path) {
   return `${
-    process.env.NEXT_PUBLIC_SECURE_URL || "http://localhost:1339"
+    process.env.NEXT_PUBLIC_SECURE_URL || "http://localhost:1338"
   }${path}`
 }
 
