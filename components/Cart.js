@@ -93,7 +93,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
         `/sell/`,
         {
           method: "POST",
-          body: { item: _item, pp: JSON.stringify(result) },
+          body: JSON.stringify({ item: _item, pp: result }),
         },
         true
       )
