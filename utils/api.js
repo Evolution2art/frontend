@@ -74,9 +74,7 @@ export async function fetchAPI(path, options = {}, secure = false) {
   //     ...options.headers,
   //   },
   // })
-  const requestUrl = secure
-    ? getSecureURL(`/${path}`)
-    : getStrapiURL(`/${path}`)
+  const requestUrl = secure ? getSecureURL(`${path}`) : getStrapiURL(`${path}`)
   const response = await fetch(requestUrl, options)
   const data = await response.json()
   // console.log(
