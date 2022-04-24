@@ -85,15 +85,15 @@ export async function fetchAPI(path, options = {}, secure = false) {
 }
 
 export async function getCountries() {
-  const countries = await fetchAPI("countries?_sort=name")
+  const countries = await fetchAPI("/countries?_sort=name")
   // console.log(`Called fetchAPI for "countries" with data`, countries)
   return countries
 }
 
 export async function getRates() {
-  const rates = await fetchAPI("rates?populate=destination,package")
+  const rates = await fetchAPI("/rates?populate=destination,package")
   // console.log(`Called fetchAPI for "rates" with data`, rates)
-  const destinations = await fetchAPI("destinations?populate=countries")
+  const destinations = await fetchAPI("/destinations?populate=countries")
   // console.log(`Called fetchAPI for "destinations" with data`, destinations)
 
   return rates.map((rate) => {
@@ -113,7 +113,7 @@ export async function getMails(fossil) {
     }
     return text?.replace(/{\w+\.(\w+)}/g, (_, val) => fossil[val])
   }
-  const mails = await fetchAPI("mail-template?populate=*")
+  const mails = await fetchAPI("/mail-template?populate=*")
   // replace placeholders with fossil values
   if (fossil) {
     let result = {}
@@ -131,13 +131,13 @@ export async function getMails(fossil) {
 }
 
 export async function getCategories() {
-  const categories = await fetchAPI("categories?populate=*")
+  const categories = await fetchAPI("/categories?populate=*")
   return categories
 }
 
 export async function getCategory(slug) {
   const categories = await fetchAPI(
-    `categories?populate=icon,iconDark&filters[slug]=${slug}`
+    `/categories?populate=icon,iconDark&filters[slug]=${slug}`
   )
   if (!Array.isArray(categories) || !categories.length) {
     return null
@@ -148,19 +148,19 @@ export async function getCategory(slug) {
 }
 
 export async function getFossils() {
-  const fossils = await fetchAPI("fossils?populate=gallery,image")
+  const fossils = await fetchAPI("/fossils?populate=gallery,image")
   return fossils
 }
 
 export async function getFossilsByCategory(id) {
   const fossils = await fetchAPI(
-    `fossils?populate=gallery,image&filters[category]=${id}`
+    `/fossils?populate=gallery,image&filters[category]=${id}`
   )
   return fossils
 }
 
 export async function getFossil(slug) {
-  const fossil = await fetchAPI(`fossils?populate=*&filters[slug]=${slug}`)
+  const fossil = await fetchAPI(`/fossils?populate=*&filters[slug]=${slug}`)
   if (!Array.isArray(fossil) || !fossil.length) {
     return null
   }
@@ -168,25 +168,25 @@ export async function getFossil(slug) {
 }
 
 export async function getAchievements() {
-  const achievements = await fetchAPI("achievements?populate=*")
+  const achievements = await fetchAPI("/achievements?populate=*")
   // console.log("Got achievements", achievements)
   return achievements
 }
 
 export async function getMedia() {
-  const medias = await fetchAPI("medias?populate=*")
+  const medias = await fetchAPI("/medias?populate=*")
   return medias
 }
 
 export async function getPress() {
-  const press = await fetchAPI("press?populate=*")
+  const press = await fetchAPI("/press?populate=*")
   return press
 }
 
 export async function getNewFossils() {
   const now = new Date()
   const fossils = await fetchAPI(
-    "fossils?populate=*&filters[new][$gte]=" +
+    "/fossils?populate=*&filters[new][$gte]=" +
       now.toISOString().substring(0, 10)
   )
   return fossils
@@ -201,7 +201,7 @@ export async function getCMSContent(types) {
   }
   const content = []
   for (let i = 0; i < types.length; i++) {
-    const cms = await fetchAPI(`${types[i]}?populate=*`)
+    const cms = await fetchAPI(`/${types[i]}?populate=*`)
 
     // return plain object if single type
     if (types.length === 1) {
