@@ -137,7 +137,6 @@ export function CartContextProvider({ children }) {
     "client-id": `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID_TEST || "test"}`,
     currency: "EUR",
     intent: "capture",
-    // "data-client-token": process.env.PAYPAL_CLIENT_TOKEN || "MTIzNDU2Nzg=",
   }
 
   // console.log(initialPayPalOptions)

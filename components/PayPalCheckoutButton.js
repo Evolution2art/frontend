@@ -43,7 +43,9 @@ const PayPalCheckoutButton = (props) => {
           .create({
             purchase_units: [
               {
-                reference_id: `e2a-sale-${amount}-${now.toISOString()}`,
+                reference_id: `e2a-${amount}|${cart.items
+                  .map((_item) => _item.id)
+                  .join(":")}-${now.toISOString()}`,
                 description: `${cart.items
                   .map((_item) => _item.title)
                   .join(" ")}`.substring(0, 127),
