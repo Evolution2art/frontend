@@ -93,7 +93,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ result }),
+        body: JSON.stringify(result),
       },
       true
     )
