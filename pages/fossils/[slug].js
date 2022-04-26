@@ -74,7 +74,7 @@ const FossilPage = ({
     !fossil.priceOnRequest &&
     !fossil.sold &&
     fossil.package?.id &&
-    fossil.status === "published"
+    !!fossil.publishedAt
   const salesPrice =
     (fossil.price &&
       numberFormat.format(convertCurrency(fossil.price, cart.currency))) ||
