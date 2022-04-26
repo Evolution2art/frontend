@@ -164,7 +164,7 @@ const FossilPage = ({
           {/* {fossil.package ? (
             <div className="italic">Shipping: {fossil.package.name}</div>
           ) : null} */}
-          {!fossil.sold && fossil.status === "published" ? (
+          {!fossil.sold && !!fossil.publishedAt ? (
             fossil.priceOnRequest ||
             !fossil.package ||
             (!isSellable && cart.country) ? (
