@@ -68,12 +68,6 @@ export async function loginAPI() {
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path, options = {}, secure = false) {
-  // Object.assign(options, {
-  //   headers: {
-  //     Authorization: `Bearer ${process.env.NEXT_PUBLIC_JWT_PUBLIC_TOKEN}`,
-  //     ...options.headers,
-  //   },
-  // })
   const requestUrl = secure ? getSecureURL(`${path}`) : getStrapiURL(`${path}`)
   const response = await fetch(requestUrl, options)
   const data = await response.json()
