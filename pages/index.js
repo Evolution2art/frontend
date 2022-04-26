@@ -19,7 +19,9 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
   const logo = theme !== "light" ? logoDark : logoLight
   const [scroll, setScroll] = useState(false)
 
-  useEffect(() => setTimeout(() => setScroll(true), 1000), [])
+  useEffect(() => {
+    setTimeout(() => setScroll(true), 1000)
+  }, [])
 
   return (
     <>

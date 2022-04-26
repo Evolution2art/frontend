@@ -36,10 +36,9 @@ const Slideshow = ({
   const navClassNames =
     "slideshow-nav " + (navClassName ? ` ${navClassName}` : "")
 
-  useEffect(
-    () => setIsDark(items[current]?.isDark || theme !== "light"),
-    [current, items, theme]
-  )
+  useEffect(() => {
+    setIsDark(items[current]?.isDark || theme !== "light")
+  }, [current, items, theme])
   // const isDark = items[current]?.isDark || theme !== "light"
   // const iconColor = isDark ? "text-stone-200" : "text-stone-800"
 
