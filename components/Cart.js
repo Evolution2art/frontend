@@ -84,23 +84,20 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
   const grandTotal = calculateTotal("grand", currency, country)
 
   const handlePaymentSuccess = async (result) => {
-    console.log(
-      "Cart handlePaymentSuccess called, mark items as solved",
-      result
-    )
-    await cart.items.map(async (_item) => {
-      await fetchAPI(
-        `/sell/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ item: _item, pp: result }),
+    console.log("Cart handlePaymentSuccess called, mark items as sold", result)
+    // await cart.items.map(async (_item) => {
+    await fetchAPI(
+      `/sell/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        true
-      )
-    })
+        body: JSON.stringify({ result }),
+      },
+      true
+    )
+    // })
   }
 
   const handlePaymentFail = (data) => {
