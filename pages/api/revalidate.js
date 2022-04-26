@@ -6,6 +6,7 @@ export default async function handler(req, res) {
 
   const path = req.qeury.path
   try {
+    console.log("Calling unstable revalidate for path", path)
     await res.unstable_revalidate(`/${path}`)
     return res.json({ revalidated: true })
   } catch (err) {
