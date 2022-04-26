@@ -130,8 +130,9 @@ export function CartContextProvider({ children }) {
     persistCart({ ...cart, country: iso })
   }
 
-  const inCart = (item) =>
+  const inCart = (item) => {
     cart?.items.filter((_item) => _item.id === item.id).length > 0
+  }
 
   const clearCart = () => {
     persistCart({
