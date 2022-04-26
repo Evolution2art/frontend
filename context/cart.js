@@ -133,6 +133,14 @@ export function CartContextProvider({ children }) {
   const inCart = (item) =>
     cart?.items.filter((_item) => _item.id === item.id).length > 0
 
+  const clearCart = () => {
+    persistCart({
+      ...defaultCart,
+      currency: cart.currency,
+      country: cart.country,
+    })
+  }
+
   const initialPayPalOptions = {
     "client-id": `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID_TEST || "test"}`,
     currency: "EUR",
@@ -148,6 +156,7 @@ export function CartContextProvider({ children }) {
         addToCart,
         removeFromCart,
         inCart,
+        clearCart,
         calculateShipping,
         calculateTotal,
         convertCurrency,

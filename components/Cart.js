@@ -18,6 +18,7 @@ import PayPalCheckoutButton from "./PayPalCheckoutButton"
 const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
   const {
     cart,
+    clearCart,
     removeFromCart,
     setCartCurrency,
     setCartCountry,
@@ -99,6 +100,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
       },
       true
     )
+    clearCart()
     router.reload()
     // })
   }
