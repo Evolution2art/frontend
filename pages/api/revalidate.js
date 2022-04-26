@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: "Invalid token" })
   }
 
-  const path = req.qeury.path
+  const path = req.query.path
   try {
     console.log("Calling unstable revalidate for path", path)
     await res.unstable_revalidate(`/${path}`)
