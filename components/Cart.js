@@ -8,8 +8,9 @@ import {
   MdLocationOn,
   MdShoppingBasket,
 } from "react-icons/md"
-import { fetchAPI } from "../utils/api"
 import { usePayPalScriptReducer } from "@paypal/react-paypal-js"
+import { useRouter } from "next/router"
+import { fetchAPI } from "../utils/api"
 import { useCartContext } from "../context/cart"
 import NextImage from "./Image"
 import PayPalCheckoutButton from "./PayPalCheckoutButton"
@@ -31,6 +32,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
   const [country, setCountry] = useState(cart.country)
   const [checkout, setCheckout] = useState(false)
   const [{ options }, dispatch] = usePayPalScriptReducer()
+  const router = useRouter()
 
   const currencySymbol = {
     EUR: "€",
@@ -97,6 +99,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
       },
       true
     )
+    router.reload()
     // })
   }
 
