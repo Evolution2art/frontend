@@ -13,7 +13,7 @@ const defaultCart = {
 
 export function CartContextProvider({ children }) {
   const [cart, setCart] = useState(defaultCart)
-
+  const [orders, setOrders] = useState([])
   const [shippingRates, setShippingRates] = useState([])
 
   useEffect(() => {
@@ -25,6 +25,9 @@ export function CartContextProvider({ children }) {
     } else {
       localStorage.setItem("cart", JSON.stringify(cart))
     }
+    // get and set orders
+    const orders = retrieveOrders()
+    setOrders(orders)
   }, [])
 
   const calculateTotal = (kind, currency, country, items) => {
@@ -64,7 +67,7 @@ export function CartContextProvider({ children }) {
     if (to === "EUR") {
       return value
     }
-    return Math.ceil(value / (cart.exchange?.rates.EUR || 0.8398) / 5) * 5
+    return Math.ceil(value / (cart?.exchange?.rates.EUR || 0.8398) / 5) * 5
   }
 
   // const convertToUSD = (value) => convertCurrency(value, "USD")
@@ -92,8 +95,18 @@ export function CartContextProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(newCart))
   }
 
+  const persistOrder = (cart) => {
+    orders.push(cart)
+    setOrders(orders)
+    localStorage.setItem("orders", JSON.stringify(orders))
+  }
+
   const retrieveCart = () => {
     return JSON.parse(localStorage.getItem("cart")) || defaultCart
+  }
+
+  const retrieveOrders = () => {
+    return JSON.parse(localStorage.getItem("orders")) || []
   }
 
   const addToCart = (item) => {
@@ -130,8 +143,12 @@ export function CartContextProvider({ children }) {
     persistCart({ ...cart, country: iso })
   }
 
-  const inCart = (item) => {
+  const inCart = (item) =>
     cart?.items.filter((_item) => _item.id === item.id).length > 0
+
+  const storeCart = (order) => {
+    persistOrder(order)
+    clearCart()
   }
 
   const clearCart = () => {
@@ -140,6 +157,10 @@ export function CartContextProvider({ children }) {
       currency: cart.currency,
       country: cart.country,
     })
+  }
+
+  const clearOrders = () => {
+    localStorage.removeItem("orders")
   }
 
   const initialPayPalOptions = {
@@ -154,16 +175,18 @@ export function CartContextProvider({ children }) {
     <CartContext.Provider
       value={{
         cart,
+        orders,
         addToCart,
         removeFromCart,
         inCart,
-        clearCart,
+        storeCart,
         calculateShipping,
         calculateTotal,
         convertCurrency,
         setCartCurrency,
         setCartCountry,
         setShippingRates,
+        clearOrders,
       }}
     >
       <PayPalScriptProvider deferLoading={true} options={initialPayPalOptions}>

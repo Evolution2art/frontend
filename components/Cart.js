@@ -7,6 +7,7 @@ import {
   MdLocationOff,
   MdLocationOn,
   MdShoppingBasket,
+  MdOutlineArrowForward,
 } from "react-icons/md"
 import { usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { useRouter } from "next/router"
@@ -18,7 +19,8 @@ import PayPalCheckoutButton from "./PayPalCheckoutButton"
 const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
   const {
     cart,
-    clearCart,
+    storeCart,
+    orders,
     removeFromCart,
     setCartCurrency,
     setCartCountry,
@@ -100,8 +102,43 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
       },
       true
     )
-    clearCart()
-    router.reload()
+    // convert cart to order
+    // storing any calculated values
+    const { country, currency } = cart
+
+    const order = {
+      country: countries.find((_country) => _country.iso === country)?.name,
+      currency,
+      completed: new Date().toLocaleString(),
+      exchange: {
+        rates: cart.exchange.rates,
+      },
+      items: cart.items.map((_item) => {
+        const price = numberFormat.format(
+          convertCurrency(_item.price, currency)
+        )
+        const rate = calculateShipping(_item, country, shippingRates)
+        const shipping = rate
+          ? numberFormat.format(convertCurrency(rate, currency))
+          : null
+        return {
+          id: _item.id,
+          title: _item.title,
+          description: _item.description,
+          image: _item.image,
+          price,
+          shipping,
+        }
+      }),
+      total: numberFormat.format(convertCurrency(total, currency)),
+      totalShipping: numberFormat.format(
+        convertCurrency(totalShipping, currency)
+      ),
+      grandTotal: numberFormat.format(convertCurrency(grandTotal, currency)),
+    }
+    storeCart(order)
+    // eslint-disable-next-line no-floating-promises
+    await router.push("/orders")
     // })
   }
 
@@ -273,15 +310,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
               </div>
             </div>
           ) : null}
-          <div className="mx-auto flex w-full max-w-screen-md flex-row justify-between">
-            <a onClick={toggleCart} className="mt-8 flex">
-              <MdOutlineArrowBack className="h-6 w-6" /> Back to Collection
-            </a>
-            {/* {!total || !totalShipping ? (
-              <span className="whitespace-no-wrap my-6 px-4 py-2 font-semibold text-stone-800 opacity-50 dark:text-stone-200">
-                Proceed to Checkout
-              </span>
-            ) : null} */}
+          <div className="mx-auto flex w-full max-w-screen-md flex-row justify-end">
             <div
               className={`${total * totalShipping > 0 ? "block" : "hidden"}`}
             >
@@ -297,10 +326,27 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
               />
             </div>
           </div>
+          <div className="mx-auto flex w-full max-w-screen-md flex-row justify-between">
+            <a onClick={toggleCart} className="mt-8 flex">
+              <MdOutlineArrowBack className="h-6 w-6" /> Back to Collection
+            </a>
+            {orders.length > 0 && (
+              <Link href="/orders">
+                <a className="mt-8 flex" onClick={() => setVisible(false)}>
+                  Order history <MdOutlineArrowForward className="h-6 w-6" />
+                </a>
+              </Link>
+            )}
+            {/* {!total || !totalShipping ? (
+              <span className="whitespace-no-wrap my-6 px-4 py-2 font-semibold text-stone-800 opacity-50 dark:text-stone-200">
+                Proceed to Checkout
+              </span>
+            ) : null} */}
+          </div>
           <div className="m-auto mt-0 w-full max-w-screen-md text-right">
             {country === "_" && (
               <span className="cart-unshippable italic">
-                If your destination is not listed above, or the item you&quot;re
+                If your destination is not listed above, or the item you're
                 interested in has specialized shipping needs, please get in
                 touch with us via email.
               </span>

@@ -147,7 +147,7 @@ const FossilPage = ({
                 ? salesPrice
                 : ""}
               <div className="fossil-shipping italic">
-                {!rate ? "" : `${shippingTotal} shipping`}
+                {!rate ? "Specialized shipping" : `${shippingTotal} shipping`}
                 {cart.country &&
                   rate &&
                   " to " +
@@ -176,7 +176,8 @@ const FossilPage = ({
                 rel="noreferrer"
                 className={`inline-block ${buttonClassNames}`}
               >
-                Contact us for a quote
+                Contact us for a {fossil?.price && !rate ? "shipping " : ""}
+                quote
               </a>
             ) : inCart(fossil) ? (
               <button className={`${buttonClassNames} opacity-50`}>

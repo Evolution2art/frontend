@@ -106,13 +106,14 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
 export async function getStaticProps() {
   const categories = await getCategories()
   const countries = await getCountries()
-  const [intro, about, contact] = await getCMSContent([
+  const [intro, about, contact, notification] = await getCMSContent([
     "introduction",
     "about",
     "contact",
+    "notification",
   ])
   return {
-    props: { categories, countries, intro, about, contact },
+    props: { categories, countries, intro, about, contact, notification },
     revalidate: 300,
   }
 }
