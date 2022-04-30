@@ -48,6 +48,7 @@ const HistoryPage = ({ achievements, history, theme, toggleTheme }) => {
           keyName="history"
           navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
           filler={filler}
+          navStyle="numbers"
           theme={theme}
           fullscreen={true}
         />

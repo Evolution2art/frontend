@@ -8,14 +8,17 @@ const Image = (props) => {
 
   const { url, alternativeText } = props.media
 
-  const loader = ({ src }) => {
-    return getStrapiMedia(src)
+  const loader = ({ src, width }) => {
+    return `${getStrapiMedia(src)}${
+      src.indexOf("?") > 0 ? "&" : "?"
+    }width=${width}`
   }
 
   const {
     layout = "responsive",
     objectFit = "contain",
     objectPosition = "center",
+    priority = false,
   } = props
 
   // console.log("calling Image with layout, objectFit", layout, objectFit)
@@ -24,6 +27,7 @@ const Image = (props) => {
     <NextImage
       loader={loader}
       layout={layout}
+      priority={priority}
       objectFit={objectFit}
       objectPosition={objectPosition}
       width={layout !== "fill" && props.media.width}

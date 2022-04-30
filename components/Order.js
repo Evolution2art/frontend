@@ -14,7 +14,11 @@ const Order = ({
 
   if (idx !== view)
     return (
-      <div className="mb-4 flex justify-between gap-2">
+      <div
+        className={
+          "mb-4 flex justify-between gap-2" + (className ? ` ${className}` : "")
+        }
+      >
         Ordered on {order.completed}
         <a className="flex items-center gap-2" onClick={() => handleView(idx)}>
           <MdVisibility /> View order

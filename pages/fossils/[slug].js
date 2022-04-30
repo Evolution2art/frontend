@@ -91,11 +91,7 @@ const FossilPage = ({
         }
       : {}
 
-    return (
-      <div>
-        <NextImage media={item} {...mediaProps} />
-      </div>
-    )
+    return <NextImage media={item} {...mediaProps} />
   }
 
   return (
@@ -123,7 +119,7 @@ const FossilPage = ({
             keyName="fossil-image"
             // className="md:pb-24"
             // navClassName="w-full"
-            navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
+            navClassName="w-full left-0 bottom-4 z-20"
             filler={filler}
             fullscreen={false}
           />
@@ -146,14 +142,17 @@ const FossilPage = ({
                 : fossil?.price
                 ? salesPrice
                 : ""}
-              <div className="fossil-shipping italic">
-                {!rate ? "Specialized shipping" : `${shippingTotal} shipping`}
-                {cart.country &&
-                  rate &&
-                  " to " +
-                    countries.find((_country) => _country.iso === cart.country)
-                      ?.name}
-              </div>
+              {cart.country ? (
+                <div className="fossil-shipping italic">
+                  {!rate ? "Specialized shipping" : `${shippingTotal} shipping`}
+                  {cart.country &&
+                    rate &&
+                    " to " +
+                      countries.find(
+                        (_country) => _country.iso === cart.country
+                      )?.name}
+                </div>
+              ) : null}
             </div>
           )}
           {fossil.promotion ? (
@@ -176,7 +175,10 @@ const FossilPage = ({
                 rel="noreferrer"
                 className={`inline-block ${buttonClassNames}`}
               >
-                Contact us for a {fossil?.price && !rate ? "shipping " : ""}
+                Contact us for a{" "}
+                {fossil?.price && !rate && cart.country.length > 1
+                  ? "shipping "
+                  : ""}
                 quote
               </a>
             ) : inCart(fossil) ? (

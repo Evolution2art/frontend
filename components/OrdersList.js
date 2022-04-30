@@ -17,6 +17,7 @@ const OrdersList = ({ theme, orders }) => {
           idx={idx}
           view={view}
           handleView={handleView}
+          className={idx ? "border-t-2 pt-3" : ""}
         />
       ))}
     </div>

@@ -8,6 +8,7 @@ import { CartContextProvider } from "../context/cart"
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("light")
   const [locale, setLocale] = useState("nl-BE")
+
   useEffect(() => {
     const _theme = localStorage.getItem("theme") || "light"
     setTheme(_theme)

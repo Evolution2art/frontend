@@ -20,7 +20,7 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setScroll(true), 1000)
+    setTimeout(() => setScroll(true), router.asPath.startsWith("/#") ? 0 : 1000)
   }, [])
 
   return (

@@ -14,7 +14,7 @@ const FossilsList = ({ locale, theme, fossils }) => {
     <div className="mx-4 flex flex-wrap justify-center">
       {fossils
         ?.filter((_fossil) => !!_fossil.image)
-        .map((_fossil) => (
+        .map((_fossil, _idx) => (
           <div key={_fossil.id} className="w-full p-2 sm:w-1/2">
             <div className="fossil-card relative shadow-md hover-hover:shadow-lg">
               <Link href={`/fossils/${_fossil.slug}`}>
@@ -27,6 +27,7 @@ const FossilsList = ({ locale, theme, fossils }) => {
                     <div className="mx-auto h-full">
                       <NextImage
                         media={_fossil.image}
+                        priority={_idx < 4}
                         layout="fill"
                         objectFit="cover"
                         objectPosition="center"

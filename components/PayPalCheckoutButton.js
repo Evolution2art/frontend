@@ -27,6 +27,7 @@ const PayPalCheckoutButton = (props) => {
     shipping,
     currency,
     country,
+    disabled,
     handleOK,
     handleNO,
   } = props
@@ -35,7 +36,9 @@ const PayPalCheckoutButton = (props) => {
     <PayPalButtons
       style={{
         layout: "horizontal",
+        tagline: false,
       }}
+      disabled={disabled}
       forceReRender={[amount, currency, country]}
       createOrder={(data, actions) => {
         const now = new Date()

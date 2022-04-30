@@ -13,6 +13,7 @@ const Slideshow = ({
   className,
   filler,
   theme,
+  navStyle = "dots",
   keyName = "slide",
   fullscreen = false,
 }) => {
@@ -21,10 +22,10 @@ const Slideshow = ({
   const [isDark, setIsDark] = useState(theme === "dark")
 
   const next = () => {
-    setCurrent(current === items.length - 1 ? 0 : current + 1)
+    setCurrent((_current) => (_current === items.length - 1 ? 0 : _current + 1))
   }
   const previous = () => {
-    setCurrent(current === 0 ? items.length - 1 : current - 1)
+    setCurrent((_current) => (_current === 0 ? items.length - 1 : _current - 1))
   }
 
   const toggleFullscreen = () => setIsFullscreen(!isFullscreen)
@@ -34,7 +35,7 @@ const Slideshow = ({
     (className ? ` ${className}` : "") +
     (isFullscreen ? " fullscreen" : "")
   const navClassNames =
-    "slideshow-nav " + (navClassName ? ` ${navClassName}` : "")
+    "slideshow-nav" + (navClassName ? ` ${navClassName}` : "")
 
   useEffect(() => {
     setIsDark(items[current]?.isDark || theme !== "light")
@@ -44,7 +45,7 @@ const Slideshow = ({
 
   return (
     <div className={classNames}>
-      <div className="slides">
+      <div className="slides" onClick={next}>
         {items.map((item, idx) => (
           <div
             key={`${keyName}-${idx}`}
@@ -72,7 +73,7 @@ const Slideshow = ({
               } drop-shadow-md`}
             />
           </a>
-          <div className="dots">
+          <div className={navStyle}>
             {items.map((item, idx) => {
               const dotClassNames = `nav-dot drop-shadow-md ${
                 idx === current ? " active" : ""
@@ -83,7 +84,7 @@ const Slideshow = ({
                   key={`nav-dot-${idx}`}
                   onClick={() => setCurrent(idx)}
                 >
-                  <span />
+                  <span>{navStyle !== "dots" ? idx + 1 : ""}</span>
                 </a>
               )
             })}

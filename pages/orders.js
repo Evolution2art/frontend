@@ -23,7 +23,7 @@ const OrdersPage = ({ order, theme }) => {
             Click here to clear all orders from this device - this cannot be
             undone. <MdDelete />
           </a>
-          <OrdersList orders={orders} />
+          <OrdersList orders={orders.reverse()} />
         </>
       )}
     </div>

@@ -30,10 +30,11 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
     convertCurrency,
   } = useCartContext()
   const [visible, setVisible] = useState(open)
-  const toggleCart = () => setVisible(!visible)
+  const toggleCart = () => setVisible((_current) => !_current)
   const [currency, setCurrency] = useState(cart.currency || "EUR")
   const [country, setCountry] = useState(cart.country)
   const [checkout, setCheckout] = useState(false)
+  const [agreed, setAgreed] = useState(false)
   const [{ options }, dispatch] = usePayPalScriptReducer()
   const router = useRouter()
 
@@ -47,6 +48,18 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
     currency: currency,
     minimumFractionDigits: 0,
   })
+
+  const handleAgreed = () => {
+    setAgreed((_current) => !_current)
+  }
+
+  const handleClickLink = (path) => {
+    if (router.asPath === path) {
+      toggleCart()
+    } else {
+      setTimeout(() => toggleCart(), 500)
+    }
+  }
 
   const handleCountry = (event) => {
     const iso = event.target.value
@@ -238,7 +251,11 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
                   </div>
                   <div className="prose prose-sm prose-stone col-span-2 max-w-none p-2 pt-4">
                     <Link href={`/fossils/${_item.slug}`}>
-                      <a onClick={toggleCart}>
+                      <a
+                        onClick={() =>
+                          handleClickLink(`/fossils/${_item.slug}`)
+                        }
+                      >
                         <h4>{_item.title}</h4>
                       </a>
                     </Link>
@@ -310,10 +327,34 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
               </div>
             </div>
           ) : null}
-          <div className="mx-auto flex w-full max-w-screen-md flex-row justify-end">
-            <div
-              className={`${total * totalShipping > 0 ? "block" : "hidden"}`}
-            >
+          <div className="mx-auto flex w-full max-w-screen-md flex-col justify-end">
+            <div className="my-4 flex items-center justify-end gap-2">
+              <label for="agree">By checking the box I agree to the</label>
+              <Link href="/legal">
+                <a
+                  className="underline"
+                  onClick={() => handleClickLink("/legal")}
+                >
+                  Terms and Conditions
+                </a>
+              </Link>
+              <input
+                id="agree"
+                type="checkbox"
+                checked={agreed}
+                onChange={handleAgreed}
+              />
+            </div>
+            <div className="m-auto mt-0 w-full max-w-screen-md text-right">
+              {country === "_" && (
+                <span className="cart-unshippable italic">
+                  If your destination is not listed above, or the item you're
+                  interested in has specialized shipping needs, please get in
+                  touch with us via email.
+                </span>
+              )}
+            </div>
+            <div className="ml-auto w-64">
               <PayPalCheckoutButton
                 amount={grandTotal}
                 total={total}
@@ -321,6 +362,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
                 cart={cart}
                 country={country}
                 currency={currency}
+                disabled={!(total * totalShipping > 0) || !agreed}
                 handleOK={handlePaymentSuccess}
                 handleNO={handlePaymentFail}
               />
@@ -342,15 +384,6 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
                 Proceed to Checkout
               </span>
             ) : null} */}
-          </div>
-          <div className="m-auto mt-0 w-full max-w-screen-md text-right">
-            {country === "_" && (
-              <span className="cart-unshippable italic">
-                If your destination is not listed above, or the item you're
-                interested in has specialized shipping needs, please get in
-                touch with us via email.
-              </span>
-            )}
           </div>
         </div>
       )}
