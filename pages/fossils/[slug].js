@@ -120,6 +120,7 @@ const FossilPage = ({
             // className="md:pb-24"
             // navClassName="w-full"
             navClassName="w-full left-0 bottom-4 z-20"
+            navStyle="numbers"
             filler={filler}
             fullscreen={false}
           />
@@ -176,7 +177,7 @@ const FossilPage = ({
                 className={`inline-block ${buttonClassNames}`}
               >
                 Contact us for a{" "}
-                {fossil?.price && !rate && cart.country.length > 1
+                {fossil?.price && !rate && cart.country?.length > 1
                   ? "shipping "
                   : ""}
                 quote
