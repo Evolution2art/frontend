@@ -12,10 +12,13 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
   const link = media.link ? parseUrl(media.link, true) : {}
   return (
     <article className={classNames}>
-      {media.media?.length > 0 ? (
+      {media.content?.length > 0 ? (
         <div className="w-full max-w-screen-lg pt-2 pb-2 md:w-1/2">
-          {media.media[0].mime?.indexOf("image") >= 0 ? (
-            <NextImage media={media.media[0]} width={media.media[0].width} />
+          {media.content[0].mime?.indexOf("image") >= 0 ? (
+            <NextImage
+              media={media.content[0]}
+              width={media.content[0].width}
+            />
           ) : null}
         </div>
       ) : null}

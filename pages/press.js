@@ -1,6 +1,6 @@
 import Press from "../components/Press"
 import CMSContent from "../components/CMSContent"
-import Slideshow from "../components/Slideshow"
+// import Slideshow from "../components/Slideshow"
 import { getCMSContent, getMedia } from "../utils/api"
 
 const PressPage = ({ medias, press }) => {
@@ -31,13 +31,23 @@ const PressPage = ({ medias, press }) => {
     <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent title={press.title} text={press.description} />
       <div className="relative">
-        <Slideshow
+        {medias.map((_media, idx) => {
+          return (
+            <Press
+              key={`media_${idx}`}
+              media={_media}
+              // className={classNames}
+              odd={true}
+            />
+          )
+        })}
+        {/* <Slideshow
           items={medias}
           keyName="press"
           renderer={renderPress}
           navClassName="w-full left-0 fixed bottom-4 px-4 z-20"
           filler={filler}
-        />
+        /> */}
       </div>
     </div>
   )
