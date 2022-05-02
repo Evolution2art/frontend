@@ -1,6 +1,7 @@
+import Link from "next/link"
 import { FaGithub, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa"
 
-const Footer = ({ className }) => {
+const Footer = ({ className, withTerms = true }) => {
   const classNames =
     "fixed z-10 bottom-0 left-0 w-full px-4 bg-stone-100 dark:bg-stone-900" +
     (className ? ` ${className}` : "")
@@ -10,6 +11,13 @@ const Footer = ({ className }) => {
         <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
           Evolution2Art &copy; 2022
         </p>
+        {withTerms && (
+          <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
+            <Link href="/legal">
+              <a>Terms &amp; Conditions</a>
+            </Link>
+          </p>
+        )}
         <div className="ml-4 flex gap-3">
           {/* <a
           href="https://twitter.com/evolution2art"

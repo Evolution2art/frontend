@@ -12,7 +12,7 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
   const link = media.link ? parseUrl(media.link, true) : {}
   return (
     <article className={classNames}>
-      <div className="w-full max-w-screen-lg pt-2 pb-2 md:w-1/2">
+      <div className="w-full max-w-screen-lg pt-2 pb-2 md:w-1/3">
         {media.content?.length > 0 ? (
           media.content[0].mime?.indexOf("image") >= 0 ? (
             <NextImage
@@ -22,7 +22,7 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
           ) : null
         ) : null}
       </div>
-      <div className="w-full md:mt-0 md:w-1/2">
+      <div className="w-full md:mt-0 md:w-2/3">
         <CMSContent
           title={media?.title}
           text={media?.description}

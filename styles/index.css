@@ -23,6 +23,7 @@ body {
   --soft-light: #d6d3d1;
   --soft-dark: #44403c;
   background-color: var(--bg-light);
+  font-family: "Lora", sans-serif;
 }
 body.dark {
   background-color: var(--bg-dark);

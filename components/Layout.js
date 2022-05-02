@@ -6,6 +6,7 @@ import Navbar from "./Navbar"
 
 const Layout = ({ children, countries, rates, theme, toggleTheme, locale }) => {
   const router = useRouter()
+  const showTerms = !router.asPath.startsWith("/history")
 
   return (
     <div className={`mb-16 ${theme}`}>
@@ -29,6 +30,11 @@ const Layout = ({ children, countries, rates, theme, toggleTheme, locale }) => {
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1c1917" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+          rel="stylesheet"
+        ></link>
         <meta name="msapplication-TileColor" content="#f5f5f4" />
         <meta name="theme-color" content="#f5f5f4" />
       </Head>
@@ -43,7 +49,7 @@ const Layout = ({ children, countries, rates, theme, toggleTheme, locale }) => {
           className={`mx-auto w-full max-w-screen-xl`}
         />
         {React.cloneElement(children, { theme, toggleTheme, locale })}
-        <Footer />
+        <Footer withTerms={showTerms} />
       </div>
     </div>
   )
