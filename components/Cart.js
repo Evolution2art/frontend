@@ -162,7 +162,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
   return (
     <div>
       <div
-        className="flex cursor-pointer font-medium text-stone-700 dark:text-stone-300"
+        className="flex cursor-pointer text-stone-700 dark:text-stone-300"
         onClick={toggleCart}
       >
         <span className="mx-1 mt-1">

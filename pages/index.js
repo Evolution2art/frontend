@@ -70,7 +70,7 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
             size={12}
             curSize={12}
             theme={theme}
-            className="mt-16 mb-10"
+            className="mt-12 mb-10"
           />
           <div className="min-h-screen max-w-screen-md">
             <div className="flex pt-16">
