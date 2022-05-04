@@ -9,7 +9,7 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
     "flex flex-col md:flex-row " +
     (odd ? "justify-start" : "justify-end") +
     (className ? ` ${className}` : "")
-  const link = media.link ? parseUrl(media.link, true) : {}
+  const link = media.link ? parseUrl(media.link, { stripWWW: false }) : {}
   return (
     <article className={classNames}>
       <div className="w-full max-w-screen-lg pt-2 pb-2 md:w-1/3">
