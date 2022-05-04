@@ -26,11 +26,7 @@ const Press = ({ media = {}, odd = true, className = "", theme = "light" }) => {
         <CMSContent
           title={media?.title}
           text={media?.description}
-          className={
-            "fadeIn prose-stone" +
-            (!odd ? " text-right" : "") +
-            (media?.isDark ? " prose-invert" : " prose")
-          }
+          className="fadeIn prose-stone dark:prose-invert"
         />
         {link?.href ? (
           <Link href={link.href} prefetch={false}>
