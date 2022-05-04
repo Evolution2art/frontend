@@ -79,7 +79,7 @@ export async function fetchAPI(path, options = {}, secure = false) {
 }
 
 export async function getCountries() {
-  const countries = await fetchAPI("/countries?_sort=name")
+  const countries = await fetchAPI("/countries?&sort[0]=name:asc")
   // console.log(`Called fetchAPI for "countries" with data`, countries)
   return countries
 }
@@ -125,7 +125,7 @@ export async function getMails(fossil) {
 }
 
 export async function getCategories() {
-  const categories = await fetchAPI("/categories?populate=*")
+  const categories = await fetchAPI("/categories?populate=*&sort[0]=id:asc")
   return categories
 }
 
@@ -142,13 +142,15 @@ export async function getCategory(slug) {
 }
 
 export async function getFossils() {
-  const fossils = await fetchAPI("/fossils?populate=gallery,image")
+  const fossils = await fetchAPI(
+    "/fossils?populate=gallery,image&sort[0]=id:desc"
+  )
   return fossils
 }
 
 export async function getFossilsByCategory(id) {
   const fossils = await fetchAPI(
-    `/fossils?populate=gallery,image&filters[category]=${id}`
+    `/fossils?populate=gallery,image&filters[category]=${id}&sort[0]=id:desc`
   )
   return fossils
 }
@@ -162,26 +164,29 @@ export async function getFossil(slug) {
 }
 
 export async function getAchievements() {
-  const achievements = await fetchAPI("/achievements?populate=*")
+  const achievements = await fetchAPI(
+    "/achievements?populate=*&sort[0]=id:desc"
+  )
   // console.log("Got achievements", achievements)
   return achievements
 }
 
 export async function getMedia() {
-  const medias = await fetchAPI("/medias?populate=*")
+  const medias = await fetchAPI("/medias?populate=*&sort[0]=id:desc")
   return medias
 }
 
 export async function getPress() {
-  const press = await fetchAPI("/press?populate=*")
+  const press = await fetchAPI("/press?populate=*&sort[0]=id:desc")
   return press
 }
 
 export async function getNewFossils() {
   const now = new Date()
   const fossils = await fetchAPI(
-    "/fossils?populate=*&filters[new][$gte]=" +
-      now.toISOString().substring(0, 10)
+    `/fossils?populate=*&filters[new][$gte]=${now
+      .toISOString()
+      .substring(0, 10)}&sort[0]=id:desc`
   )
   return fossils
 }
