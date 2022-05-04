@@ -36,7 +36,7 @@ const PressPage = ({ medias, press }) => {
             <Press
               key={`media_${idx}`}
               media={_media}
-              // className={classNames}
+              className="p-8 pt-0"
               odd={true}
             />
           )

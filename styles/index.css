@@ -72,6 +72,7 @@ nav.text a {
   display: inline-block;
   text-transform: uppercase;
   margin: 0 1rem;
+  font-family: sans-serif;
 }
 
 nav.top a {
@@ -101,6 +102,7 @@ body.dark nav.text a:hover {
   position: relative;
   overflow: hidden;
   transition: opacity ease-out 0.2s;
+  font-family: sans-serif;
 }
 
 .selected .nav-item {

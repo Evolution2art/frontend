@@ -98,7 +98,7 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
           </div>
         </main>
       </div>
-      <Contact cms={contact} />
+      <Contact cms={contact} className="m-auto" />
     </>
   )
 }
