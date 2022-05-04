@@ -195,7 +195,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
             <div>
               Currency:{" "}
               <select
-                className="form-select"
+                className="form-select bg-stone-200 dark:bg-stone-800"
                 name="currency"
                 value={currency || "EUR"}
                 onChange={handleCurrency}
@@ -216,7 +216,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
               )}
               Shipping destination:{" "}
               <select
-                className="form-select"
+                className="form-select bg-stone-200 dark:bg-stone-800"
                 name="country"
                 value={country || ""}
                 onChange={handleCountry}
@@ -243,13 +243,13 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
 
               return (
                 <li
-                  className="relative grid grid-cols-4 gap-2 bg-stone-200"
+                  className="relative grid grid-cols-4 gap-2 bg-stone-200 dark:bg-stone-800"
                   key={`cart_item_${_idx}`}
                 >
-                  <div className="relative h-32 bg-stone-200">
+                  <div className="relative h-32 bg-stone-200 dark:bg-stone-800">
                     <NextImage media={_item.image} layout="fill" />
                   </div>
-                  <div className="prose prose-sm prose-stone col-span-2 max-w-none p-2 pt-4">
+                  <div className="prose prose-sm prose-stone col-span-2 max-w-none p-2 pt-4 dark:prose-invert">
                     <Link href={`/fossils/${_item.slug}`}>
                       <a
                         onClick={() =>
