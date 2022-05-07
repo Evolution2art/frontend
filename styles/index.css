@@ -22,11 +22,37 @@ body {
   --text-dark: rgb(68 64 60);
   --soft-light: #d6d3d1;
   --soft-dark: #44403c;
+  --color-info: #d1ecf1;
+  --color-success: #d4edda;
+  --color-warning: #fff3cd;
+  --color-danger: #f8d7da;
+  --text-color-info: #0c5460;
+  --text-color-success: #0c5460;
+  --text-color-warning: #856404;
+  --text-color-danger: #721c24;
   background-color: var(--bg-light);
   font-family: "Lora", sans-serif;
 }
 body.dark {
   background-color: var(--bg-dark);
+}
+
+.info {
+  border-radius: 1rem;
+  color: var(--text-color-info);
+  background-color: var(--color-info);
+}
+.success {
+  color: var(--text-color-success);
+  background-color: var(--color-success);
+}
+.warning {
+  color: var(--text-color-warning);
+  background-color: var(--color-warning);
+}
+.error {
+  color: var(--text-color-danger);
+  background-color: var(--color-danger);
 }
 
 .background {
@@ -293,15 +319,8 @@ body.dark .nav-item.current {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.fossil-price {
-  white-space: nowrap;
-}
-
-.fossil-description {
-  /* max-height: 6rem; */
-}
-
 .ribbon {
+  font-family: sans-serif;
   position: absolute;
   color: white;
   font-weight: bold;

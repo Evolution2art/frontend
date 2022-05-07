@@ -12,8 +12,8 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
   } = cms
   const logo = logoDark
   const classNames =
-    "contact min-h-screen prose prose-invert text-white p-8 mx-auto max-w-screen-md w-full " +
-    "flex flex-row justify-between items-start" +
+    "contact min-h-screen prose prose-invert text-white p-8 max-w-screen-md w-full " +
+    "flex flex-row flex-wrap justify-between items-center mx-auto" +
     (className ? ` ${className}` : "")
   return (
     <div className="relative w-full">
@@ -77,8 +77,8 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
           </dd>
           <button type="submit">Send</button>
         </form> */}
-        <div>
-          <h2 className={`text-4xl font-light italic`}>{title}</h2>
+        <div className="w-1/3 md:w-1/4">
+          <h2 className={`mt-0 text-4xl font-light italic`}>{title}</h2>
           <p>
             By Email: <br />
             <a href={`mailto:${email}`}>{email}</a>
@@ -90,12 +90,9 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
             </p>
           ) : null}
         </div>
-        <div className="ml-8 mt-24 w-1/2">
-          <CMSContent
-            text={cms.text}
-            className="prose-invert mt-5 text-white"
-          />
-          <div className="dark ml-8">
+        {/* <div className="dark w-1/3 md:w-1/4"></div> */}
+        <div className="relative flex w-full justify-center md:w-1/2">
+          <div className="absolute -top-full">
             <NextImage
               src={logo}
               className="drop-shadow"
@@ -103,6 +100,10 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
               height="330"
             />
           </div>
+          <CMSContent
+            text={cms.text}
+            className="prose-invert mt-16 text-white"
+          />
         </div>
       </section>
     </div>

@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react"
 import App from "next/app"
 import Layout from "../components/Layout"
-import { getCategories, getCountries, getRates, getMails } from "../utils/api"
+import {
+  getCategories,
+  getCountries,
+  getRates,
+  getMails,
+  getCMSContent,
+} from "../utils/api"
 import "../styles/index.css"
 import { CartContextProvider } from "../context/cart"
+import { ToastContainer, toast, Zoom, cssTransition } from "react-toastify"
+import CMSContent from "../components/CMSContent"
+import "react-toastify/dist/ReactToastify.css"
 
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("light")
@@ -39,9 +48,38 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }
 
+  const notify = (type, options = {}) => {
+    const content = pageProps.notifications[type]
+    if (content) {
+      const toastOptions = {
+        theme,
+        type: content?.type,
+        // icon: false,
+        position: "bottom-left",
+        autoClose: content?.type !== "warning" && content?.type !== "error",
+        closeButton: content?.type === "warning" || content?.type === "error",
+        // hideProgressBar: true,
+        // closeOnClick: true,
+        // pauseOnFocusLoss: true,
+        // draggable: true,
+        // pauseOnHover: true,
+        transition: Zoom,
+        ...options,
+      }
+      return toast(
+        <div>
+          {content?.title && <h4>{content.title}</h4>}
+          {content?.message && <p className="italic">{content.message}</p>}
+        </div>,
+        toastOptions
+      )
+    }
+  }
+
   return (
     <CartContextProvider>
       <Layout
+        notify={notify}
         categories={pageProps.categories}
         countries={pageProps.countries}
         rates={pageProps.rates}
@@ -52,6 +90,7 @@ const MyApp = ({ Component, pageProps }) => {
       >
         <Component {...pageProps} theme={theme} locale={locale} />
       </Layout>
+      <ToastContainer />
     </CartContextProvider>
   )
 }
@@ -68,10 +107,18 @@ MyApp.getInitialProps = async (ctx) => {
   const countries = await getCountries()
   const rates = await getRates(countries)
   const mails = await getMails()
+  const notifications = await getCMSContent("notification")
   // Pass the data to our page via props
   return {
     ...appProps,
-    pageProps: { categories, countries, rates, mails, path: ctx.pathname },
+    pageProps: {
+      categories,
+      countries,
+      rates,
+      mails,
+      notifications,
+      path: ctx.pathname,
+    },
   }
 }
 

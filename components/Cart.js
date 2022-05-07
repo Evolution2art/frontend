@@ -16,7 +16,14 @@ import { useCartContext } from "../context/cart"
 import NextImage from "./Image"
 import PayPalCheckoutButton from "./PayPalCheckoutButton"
 
-const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
+const Cart = ({
+  theme,
+  locale = "nl-BE",
+  countries,
+  shippingRates,
+  open,
+  notify,
+}) => {
   const {
     cart,
     storeCart,
@@ -103,6 +110,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
 
   const handlePaymentSuccess = async (result) => {
     console.log("Cart handlePaymentSuccess called, mark items as sold", result)
+    notify("purchaseCompleted", { autoClose: false })
     // await cart.items.map(async (_item) => {
     await fetchAPI(
       `/sell/`,
@@ -151,12 +159,13 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
     }
     storeCart(order)
     // eslint-disable-next-line no-floating-promises
-    await router.push("/orders")
+    await router.push("/orders?completed", null, { shallow: true })
     // })
   }
 
   const handlePaymentFail = (data) => {
-    console.log("Cart handlePaymentFail called", data)
+    notify("purchaseCancelled")
+    // console.log("Cart handlePaymentFail called", data)
   }
 
   return (
@@ -262,7 +271,7 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
                     <p className="line-clamp-3">{_item.description}</p>
                   </div>
                   <div className="flex h-full flex-col items-end justify-between p-4">
-                    <a onClick={() => removeFromCart(_item)}>
+                    <a onClick={() => removeFromCart(_item, notify)}>
                       <MdDelete className="h-6 w-6" />
                     </a>
                     <span className="cart-item-total font-bold">{price}</span>
@@ -329,8 +338,8 @@ const Cart = ({ theme, locale = "nl-BE", countries, shippingRates, open }) => {
           ) : null}
           <div className="mx-auto flex w-full max-w-screen-md flex-col justify-end">
             <div className="my-4 flex items-center justify-end gap-2">
-              <label for="agree">By checking the box I agree to the</label>
-              <Link href="/legal">
+              <label htmlFor="agree">By checking the box I agree to the</label>
+              <Link href="/legal" shallow>
                 <a
                   className="underline"
                   onClick={() => handleClickLink("/legal")}

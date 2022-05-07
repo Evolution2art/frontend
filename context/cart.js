@@ -95,8 +95,8 @@ export function CartContextProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(newCart))
   }
 
-  const persistOrder = (cart) => {
-    orders.push(cart)
+  const persistOrder = (order) => {
+    orders.push(order)
     setOrders(orders)
     localStorage.setItem("orders", JSON.stringify(orders))
   }
@@ -109,7 +109,7 @@ export function CartContextProvider({ children }) {
     return JSON.parse(localStorage.getItem("orders")) || []
   }
 
-  const addToCart = (item) => {
+  const addToCart = (item, notify) => {
     const newItems = [...cart.items, item]
     const newTotal = calculateTotal(
       "grand",
@@ -119,9 +119,12 @@ export function CartContextProvider({ children }) {
     )
     const newCart = { ...cart, total: newTotal, items: newItems }
     persistCart(newCart)
+    if (typeof notify === "function") {
+      notify("addedToCart")
+    }
   }
 
-  const removeFromCart = (item) => {
+  const removeFromCart = (item, notify) => {
     const newItems = cart.items.filter((_item) => _item.id !== item.id)
     const newTotal = calculateTotal(
       "grand",
@@ -131,6 +134,9 @@ export function CartContextProvider({ children }) {
     )
     const newCart = { ...cart, total: newTotal, items: newItems }
     persistCart(newCart)
+    if (typeof notify === "function") {
+      notify("removedFromCart")
+    }
   }
 
   const setCartCurrency = (symbol) => {
@@ -159,8 +165,11 @@ export function CartContextProvider({ children }) {
     })
   }
 
-  const clearOrders = () => {
-    localStorage.removeItem("orders")
+  const clearOrders = (notify) => {
+    // localStorage.removeItem("orders")
+    if (typeof notify === "function") {
+      notify("ordersCleared")
+    }
   }
 
   const initialPayPalOptions = {

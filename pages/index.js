@@ -10,7 +10,14 @@ import logoDark from "../public/Evolution2Art-logo-dark.svg"
 import { getCMSContent, getCategories, getCountries } from "../utils/api"
 import { useEffect, useState } from "react"
 
-const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
+const HomePage = ({
+  categories,
+  intro,
+  about,
+  contact,
+  theme = "light",
+  notifications,
+}) => {
   const router = useRouter()
   const background =
     theme === "dark" ? intro.backgroundDark[0] : intro.background[0]
@@ -62,7 +69,7 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
           <CMSContent
             title={intro.title}
             text={intro.text}
-            className="fill-screen-v dark:prose-invert"
+            className="fill-screen-v p-8 dark:prose-invert"
           />
           <CategoryButtons
             categories={categories}
@@ -78,7 +85,7 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
                 title={about.title}
                 text={about.text}
                 id="about"
-                className="prose-stone w-full px-0 text-justify dark:prose-invert"
+                className="prose-stone w-full p-8 px-0 text-justify dark:prose-invert"
                 titleClassName="mt-0"
                 image={
                   <div className="float-left mr-4 mb-1 w-1/2 md:w-1/3">
@@ -98,7 +105,7 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
           </div>
         </main>
       </div>
-      <Contact cms={contact} className="m-auto" />
+      <Contact cms={contact} className="p-8" />
     </>
   )
 }
@@ -106,14 +113,13 @@ const HomePage = ({ categories, intro, about, contact, theme = "light" }) => {
 export async function getStaticProps() {
   const categories = await getCategories()
   const countries = await getCountries()
-  const [intro, about, contact, notification] = await getCMSContent([
+  const [intro, about, contact] = await getCMSContent([
     "introduction",
     "about",
     "contact",
-    "notification",
   ])
   return {
-    props: { categories, countries, intro, about, contact, notification },
+    props: { categories, countries, intro, about, contact },
     revalidate: 300,
   }
 }

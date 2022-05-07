@@ -22,6 +22,7 @@ const FossilPage = ({
   locale,
   countries,
   theme,
+  notify,
 }) => {
   // return early if fossil is undefined or has no image
   if (!fossil?.image) return null
@@ -78,6 +79,13 @@ const FossilPage = ({
   const salesPrice =
     (fossil.price &&
       numberFormat.format(convertCurrency(fossil.price, cart.currency))) ||
+    null
+
+  const promotionPrice =
+    (fossil.promotionPrice &&
+      numberFormat.format(
+        convertCurrency(fossil.promotionPrice, cart.currency)
+      )) ||
     null
 
   const { quote, shipping } = mails
@@ -137,12 +145,27 @@ const FossilPage = ({
             </h4>
           </div>
           {fossil.sold ? null : (
-            <div className="fossil-price font-medium">
-              {fossil.priceOnRequest
-                ? "Price on Request"
-                : fossil?.price
-                ? salesPrice
-                : ""}
+            <div className="font-medium">
+              <div className="flex flex-row gap-2 ">
+                {promotionPrice ? (
+                  <del className="whitespace-nowrap">
+                    {fossil.priceOnRequest
+                      ? "Price on Request"
+                      : fossil?.price
+                      ? salesPrice
+                      : ""}
+                  </del>
+                ) : (
+                  <span className="whitespace-nowrap">
+                    {fossil.priceOnRequest
+                      ? "Price on Request"
+                      : fossil?.price
+                      ? salesPrice
+                      : ""}
+                  </span>
+                )}
+                <span className="promotionPrice">{promotionPrice}</span>
+              </div>
               {cart.country ? (
                 <div className="fossil-shipping italic">
                   {!rate ? "Specialized shipping" : `${shippingTotal} shipping`}
@@ -187,14 +210,14 @@ const FossilPage = ({
                 Added to cart{" "}
                 <a
                   title="Remove from cart"
-                  onClick={() => removeFromCart(fossil)}
+                  onClick={() => removeFromCart(fossil, notify)}
                 >
                   <MdClose className="inline h-6 w-6 p-1" />
                 </a>
               </button>
             ) : (
               <button
-                onClick={() => addToCart(fossil)}
+                onClick={() => addToCart(fossil, notify)}
                 className={`${buttonClassNames}`}
               >
                 Add to cart

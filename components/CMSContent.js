@@ -6,13 +6,13 @@ const CMSContent = ({
   title,
   text,
   id,
-  className = "prose-stone dark:prose-invert",
+  className = "prose-stone dark:prose-invert p-8",
   titleClassName = "text-2xl",
   image,
 }) => {
   const classNames = `prose ${className}`
   return (
-    <article id={id} className={`max-w-none p-8 ${classNames}`}>
+    <article id={id} className={`max-w-none ${classNames}`}>
       {image}
       {title && (
         <h2 className={`font-light italic ${titleClassName}`}>{title}</h2>

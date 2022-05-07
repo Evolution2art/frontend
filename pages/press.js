@@ -29,7 +29,11 @@ const PressPage = ({ medias, press }) => {
 
   return (
     <div className="mx-auto w-full max-w-screen-lg">
-      <CMSContent title={press.title} text={press.description} />
+      <CMSContent
+        title={press.title}
+        text={press.description}
+        className="p-8"
+      />
       <div className="relative">
         {medias.map((_media, idx) => {
           return (

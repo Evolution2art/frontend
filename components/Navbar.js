@@ -11,6 +11,7 @@ const Navbar = ({
   countries,
   rates,
   className,
+  notify,
 }) => {
   const classNames =
     "navbar relative pt-1 text-stone-700 dark:text-stone-300 h-24" +
@@ -26,6 +27,7 @@ const Navbar = ({
           countries={countries}
           locale={locale}
           shippingRates={rates}
+          notify={notify}
         />
         <div className={`toggle-theme ${theme} mx-auto w-full max-w-screen-xl`}>
           <a

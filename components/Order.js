@@ -1,6 +1,6 @@
 import Link from "next/link"
 import NextImage from "./Image"
-import { MdVisibility } from "react-icons/md"
+import { MdArrowRight, MdArrowDropDown } from "react-icons/md"
 
 const Order = ({
   order = {},
@@ -19,9 +19,12 @@ const Order = ({
           "mb-4 flex justify-between gap-2" + (className ? ` ${className}` : "")
         }
       >
-        Ordered on {order.completed}
-        <a className="flex items-center gap-2" onClick={() => handleView(idx)}>
-          <MdVisibility /> View order
+        <a
+          className="flex w-full items-center justify-between"
+          onClick={() => handleView(idx)}
+        >
+          <p>Ordered on {order.completed}</p>
+          <MdArrowRight className="h-6 w-6" />
         </a>
       </div>
     )
@@ -29,7 +32,12 @@ const Order = ({
   const { country, total, grandTotal, totalShipping } = order
   return (
     <div className={classNames}>
-      Ordered on {order.completed}
+      <div className="mb-4 flex justify-between">
+        <p>Ordered on {order.completed}</p>
+        <span>
+          <MdArrowDropDown className="h-6 w-6" />
+        </span>
+      </div>
       <ul className="mx-auto mb-0 flex w-full flex-col gap-4">
         {order?.items.map((_item, _idx) => {
           const price = _item.price
