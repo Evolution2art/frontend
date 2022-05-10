@@ -29,7 +29,7 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
           {thanks && (
             <CMSContent
               className="success m-8 mt-0 p-8"
-              title={`Thank you!`}
+              title={purchaseCompleted.title}
               text={purchaseCompleted.message}
             />
           )}

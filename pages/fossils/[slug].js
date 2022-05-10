@@ -146,7 +146,7 @@ const FossilPage = ({
           </div>
           {fossil.sold ? null : (
             <div className="font-medium">
-              <div className="flex flex-row gap-2 ">
+              <div className="flex flex-row gap-2">
                 {promotionPrice ? (
                   <del className="whitespace-nowrap">
                     {fossil.priceOnRequest
