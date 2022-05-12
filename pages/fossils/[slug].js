@@ -137,6 +137,18 @@ const FossilPage = ({
           ) : (
             ""
           )}
+          {fossil.new && !fossil.sold && new Date(fossil.new) > new Date() ? (
+            <div className="ribbon h-5 w-24 bg-red-500 text-sm">new</div>
+          ) : (
+            ""
+          )}
+          {(!fossil.new || new Date(fossil.new) < new Date()) &&
+          !fossil.sold &&
+          promotionPrice ? (
+            <div className="ribbon h-5 w-24 bg-orange-500 text-sm">sale</div>
+          ) : (
+            ""
+          )}
         </div>
         <section className={classNames}>
           <div>
