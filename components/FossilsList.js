@@ -60,7 +60,7 @@ const FossilsList = ({ locale, theme, fossils }) => {
                         {(!_fossil.new || new Date(_fossil.new) < new Date()) &&
                         !_fossil.sold &&
                         promotionPrice ? (
-                          <div className="ribbon h-5 w-24 bg-green-500 text-sm">
+                          <div className="ribbon h-5 w-24 bg-orange-500 text-sm">
                             sale
                           </div>
                         ) : (

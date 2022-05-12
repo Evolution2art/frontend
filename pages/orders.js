@@ -17,6 +17,9 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
       router.push("/orders", null, { shallow: true })
     }
   }, [])
+  const sorted = orders.sort(
+    (prev, next) => new Date(next.completed) - new Date(prev.completed)
+  )
   return (
     <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent
@@ -33,7 +36,7 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
               text={purchaseCompleted.message}
             />
           )}
-          <OrdersList orders={orders.reverse()} />
+          <OrdersList orders={sorted} />
           <a
             onClick={() => clearOrders(notify)}
             className="flex items-center justify-end gap-2 p-8 pt-16 italic"
