@@ -166,7 +166,7 @@ export function CartContextProvider({ children }) {
   }
 
   const clearOrders = (notify) => {
-    // localStorage.removeItem("orders")
+    localStorage.removeItem("orders")
     if (typeof notify === "function") {
       notify("ordersCleared")
     }

@@ -10,10 +10,15 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
   const { orders, clearOrders } = useCartContext()
   const { purchaseCompleted } = notifications
   const [thanks, setThanks] = useState(false)
+  const [cleared, setCleared] = useState(false)
   const router = useRouter()
   useEffect(() => {
     if (router.asPath.endsWith("?complete")) {
       setThanks(true)
+      router.push("/orders", null, { shallow: true })
+    }
+    if (router.asPath.endsWith("?cleared")) {
+      setCleared(true)
       router.push("/orders", null, { shallow: true })
     }
   }, [])
