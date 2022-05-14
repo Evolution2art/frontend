@@ -23,7 +23,7 @@ const Order = ({
           className="flex w-full items-center justify-between"
           onClick={() => handleView(idx)}
         >
-          <p>Ordered on {order.completed}</p>
+          <p>Ordered on {new Date(order.completed).toLocaleString()}</p>
           <MdArrowRight className="h-6 w-6" />
         </a>
       </div>
@@ -33,7 +33,7 @@ const Order = ({
   return (
     <div className={classNames}>
       <div className="mb-4 flex justify-between">
-        <p>Ordered on {order.completed}</p>
+        <p>Ordered on {new Date(order.completed).toLocaleString()}</p>
         <span>
           <MdArrowDropDown className="h-6 w-6" />
         </span>

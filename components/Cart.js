@@ -109,8 +109,8 @@ const Cart = ({
   const grandTotal = calculateTotal("grand", currency, country)
 
   const handlePaymentSuccess = async (result) => {
-    console.log("Cart handlePaymentSuccess called, mark items as sold", result)
-    notify("purchaseCompleted", { autoClose: false })
+    // console.log("Cart handlePaymentSuccess called, mark items as sold", result)
+    // notify("purchaseCompleted", { autoClose: false })
     // await cart.items.map(async (_item) => {
     await fetchAPI(
       `/sell/`,
@@ -130,7 +130,7 @@ const Cart = ({
     const order = {
       country: countries.find((_country) => _country.iso === country)?.name,
       currency,
-      completed: new Date().toLocaleString(),
+      completed: new Date().getTime(),
       exchange: {
         rates: cart.exchange.rates,
       },

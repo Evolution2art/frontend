@@ -23,9 +23,7 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
       router.push("/orders", null, { shallow: true })
     }
   }, [asPath])
-  const sorted = orders.sort(
-    (prev, next) => new Date(next.completed) - new Date(prev.completed)
-  )
+  const sorted = orders.sort((prev, next) => next.completed - prev.completed)
 
   const handleClear = async () => {
     clearOrders(notify)
