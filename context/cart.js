@@ -173,7 +173,7 @@ export function CartContextProvider({ children }) {
   }
 
   const initialPayPalOptions = {
-    "client-id": `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID_TEST || "test"}`,
+    "client-id": `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test"}`,
     currency: "EUR",
     intent: "capture",
   }

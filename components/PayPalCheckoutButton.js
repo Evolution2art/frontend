@@ -79,7 +79,7 @@ const PayPalCheckoutButton = (props) => {
           })
       }}
       onCancel={function (data) {
-        console.log("PayPal onCancel", data)
+        // console.log("PayPal onCancel", data)
         if (typeof handleNO === "function") {
           handleNO(data)
         }
@@ -89,15 +89,15 @@ const PayPalCheckoutButton = (props) => {
           .capture()
           .then(function (orderData) {
             // Successful capture! For dev/demo purposes:
-            console.log(
-              "Capture result",
-              orderData,
-              JSON.stringify(orderData, null, 2)
-            )
+            // console.log(
+            //   "Capture result",
+            //   orderData,
+            //   JSON.stringify(orderData, null, 2)
+            // )
             const transaction = orderData.purchase_units[0].payments.captures[0]
-            console.log(
-              `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
-            )
+            // console.log(
+            //   `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
+            // )
             return orderData
           })
           .then(function (result) {
