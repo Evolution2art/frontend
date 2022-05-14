@@ -8,12 +8,13 @@ import CMSContent from "../components/CMSContent"
 
 const OrdersPage = ({ order, theme, notifications, notify }) => {
   const { orders, clearOrders } = useCartContext()
-  const { purchaseCompleted } = notifications
+  const { purchaseCompleted, ordersCleared } = notifications
   const [thanks, setThanks] = useState(false)
   const [cleared, setCleared] = useState(false)
   const router = useRouter()
+  const { asPath } = router
   useEffect(() => {
-    if (router.asPath.endsWith("?complete")) {
+    if (router.asPath.endsWith("?completed")) {
       setThanks(true)
       router.push("/orders", null, { shallow: true })
     }
@@ -21,10 +22,17 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
       setCleared(true)
       router.push("/orders", null, { shallow: true })
     }
-  }, [])
+  }, [asPath])
   const sorted = orders.sort(
     (prev, next) => new Date(next.completed) - new Date(prev.completed)
   )
+
+  const handleClear = async () => {
+    clearOrders(notify)
+    // eslint-disable-next-line no-floating-promises
+    await router.push("/orders?cleared")
+  }
+
   return (
     <div className="mx-auto w-full max-w-screen-lg">
       <CMSContent
@@ -40,14 +48,24 @@ const OrdersPage = ({ order, theme, notifications, notify }) => {
               title={purchaseCompleted.title}
               text={purchaseCompleted.message}
             />
+          )}{" "}
+          {cleared ? (
+            <CMSContent
+              className="success m-8 mt-0 p-8"
+              title={ordersCleared.title}
+              text={ordersCleared.message}
+            />
+          ) : (
+            <>
+              <OrdersList orders={sorted} />
+              <a
+                onClick={handleClear}
+                className="flex items-center justify-end gap-2 p-8 pt-16 italic"
+              >
+                Click here to clear all orders from this device <MdDelete />
+              </a>
+            </>
           )}
-          <OrdersList orders={sorted} />
-          <a
-            onClick={() => clearOrders(notify)}
-            className="flex items-center justify-end gap-2 p-8 pt-16 italic"
-          >
-            Click here to clear all orders from this device <MdDelete />
-          </a>
         </>
       )}
     </div>

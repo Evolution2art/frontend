@@ -159,7 +159,7 @@ const Cart = ({
     }
     storeCart(order)
     // eslint-disable-next-line no-floating-promises
-    await router.push("/orders?completed", null, { shallow: true })
+    await router.push("/orders?completed")
     // })
   }
 
