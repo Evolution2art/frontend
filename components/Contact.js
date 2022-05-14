@@ -79,7 +79,7 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
         </form> */}
         <div className="w-1/3 md:w-1/4">
           <h2
-            className={`mt-0 mb-10 whitespace-nowrap text-4xl font-light italic`}
+            className={`mt-0 mb-12 whitespace-nowrap text-4xl font-light italic`}
           >
             {title}
           </h2>
