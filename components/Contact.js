@@ -78,7 +78,11 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
           <button type="submit">Send</button>
         </form> */}
         <div className="w-1/3 md:w-1/4">
-          <h2 className={`mt-0 text-4xl font-light italic`}>{title}</h2>
+          <h2
+            className={`mt-0 mb-10 whitespace-nowrap text-4xl font-light italic`}
+          >
+            {title}
+          </h2>
           <p>
             By Email: <br />
             <a href={`mailto:${email}`}>{email}</a>
@@ -102,7 +106,7 @@ const Contact = ({ cms, id = "contact", className, theme = "light" }) => {
           </div>
           <CMSContent
             text={cms.text}
-            className="prose-invert mt-16 text-white"
+            className="prose-invert mt-24 text-white"
           />
         </div>
       </section>

@@ -105,7 +105,7 @@ const HomePage = ({
           </div>
         </main>
       </div>
-      <Contact cms={contact} className="p-8" />
+      <Contact cms={contact} className="p-12 pt-24" />
     </>
   )
 }
