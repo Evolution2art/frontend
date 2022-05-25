@@ -48,7 +48,9 @@ export function CartContextProvider({ children }) {
       items?.reduce(
         (total, _item) =>
           (total +=
-            (kind !== "shipping" ? convertCurrency(_item.price, currency) : 0) +
+            (kind !== "shipping"
+              ? convertCurrency(_item.promotionPrice || _item.price, currency)
+              : 0) +
             (kind === "grand" || kind === "shipping"
               ? convertCurrency(calculateShipping(_item, country), currency)
               : 0)),

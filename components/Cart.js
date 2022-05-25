@@ -135,13 +135,9 @@ const Cart = ({
         rates: cart.exchange.rates,
       },
       items: cart.items.map((_item) => {
-        const price = numberFormat.format(
-          convertCurrency(_item.price, currency)
-        )
+        const price = numberFormat.format(_item.promotionPrice || _item.price)
         const rate = calculateShipping(_item, country, shippingRates)
-        const shipping = rate
-          ? numberFormat.format(convertCurrency(rate, currency))
-          : null
+        const shipping = rate ? numberFormat.format(rate, currency) : null
         return {
           id: _item.id,
           title: _item.title,
@@ -151,11 +147,9 @@ const Cart = ({
           shipping,
         }
       }),
-      total: numberFormat.format(convertCurrency(total, currency)),
-      totalShipping: numberFormat.format(
-        convertCurrency(totalShipping, currency)
-      ),
-      grandTotal: numberFormat.format(convertCurrency(grandTotal, currency)),
+      total: numberFormat.format(total, currency),
+      totalShipping: numberFormat.format(totalShipping),
+      grandTotal: numberFormat.format(grandTotal),
     }
     storeCart(order)
     // eslint-disable-next-line no-floating-promises
