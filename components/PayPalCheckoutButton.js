@@ -26,16 +26,6 @@ const PayPalCheckoutButton = (props) => {
     }
   }, [dispatch])
 
-  useEffect(() => {
-    dispatch({
-      type: "resetOptions",
-      value: {
-        ...options,
-        currency,
-      },
-    })
-  }, [currency])
-
   // return early for SSR
   if (typeof window === "undefined") {
     return null
@@ -53,41 +43,41 @@ const PayPalCheckoutButton = (props) => {
       forceReRender={[amount, currency, country]}
       createOrder={(data, actions) => {
         const now = new Date()
-        return actions.order
-          .create({
-            purchase_units: [
-              {
-                reference_id: `e2a-${amount}|${cart.items
-                  .map((_item) => _item.id)
-                  .join(":")}-${now.toISOString()}`,
-                description: `${cart.items
-                  .map((_item) => _item.title)
-                  .join(" ")}`.substring(0, 127),
-                amount: {
-                  currency_code: currency,
-                  value: amount,
-                  breakdown: {
-                    item_total: { value: total, currency_code: currency },
-                    shipping: { value: shipping, currency_code: currency },
-                  },
+        const purchaseUnits = {
+          purchase_units: [
+            {
+              reference_id: `e2a-${amount}|${cart.items
+                .map((_item) => _item.id)
+                .join(":")}-${now.toISOString()}`,
+              description: `${cart.items
+                .map((_item) => _item.title)
+                .join(" ")}`.substring(0, 127),
+              amount: {
+                currency_code: currency,
+                value: amount,
+                breakdown: {
+                  item_total: { value: total, currency_code: currency },
+                  shipping: { value: shipping, currency_code: currency },
                 },
-                items: cart.items.map((_item) => ({
-                  name: `${_item.title}`.substring(0, 127),
-                  unit_amount: {
-                    currency_code: currency,
-                    value: _item.price,
-                  },
-                  // sku: _item.id,
-                  quantity: 1,
-                  category: "PHYSICAL_GOODS",
-                })),
               },
-            ],
-          })
-          .then((orderId) => {
-            // Your code here after create the order
-            return orderId
-          })
+              items: cart.items.map((_item) => ({
+                name: `${_item.title}`.substring(0, 127),
+                unit_amount: {
+                  currency_code: currency,
+                  value: _item.price,
+                },
+                // sku: _item.id,
+                quantity: 1,
+                category: "PHYSICAL_GOODS",
+              })),
+            },
+          ],
+        }
+        console.log("Purchase units: ", purchaseUnits)
+        return actions.order.create(purchaseUnits).then((orderId) => {
+          // Your code here after create the order
+          return orderId
+        })
       }}
       onCancel={function (data) {
         // console.log("PayPal onCancel", data)
