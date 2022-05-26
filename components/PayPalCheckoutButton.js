@@ -1,25 +1,8 @@
 import { useEffect } from "react"
 import { usePayPalScriptReducer, PayPalButtons } from "@paypal/react-paypal-js"
-import { useCartContext } from "../context/cart"
+// import { useCartContext } from "../context/cart"
 
 const PayPalCheckoutButton = (props) => {
-  const [{ isResolved }, dispatch] = usePayPalScriptReducer()
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      dispatch({
-        type: "setLoadingStatus",
-        value: "pending",
-      })
-    }
-  }, [dispatch])
-  // return early for SSR
-  if (typeof window === "undefined") {
-    return null
-  }
-
-  // const { cart, calculateShipping } = useCartContext()
-
   const {
     cart,
     amount,
@@ -31,6 +14,34 @@ const PayPalCheckoutButton = (props) => {
     handleOK,
     handleNO,
   } = props
+
+  const [{ isResolved, options }, dispatch] = usePayPalScriptReducer()
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      dispatch({
+        type: "setLoadingStatus",
+        value: "pending",
+      })
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch({
+      type: "resetOptions",
+      value: {
+        ...options,
+        currency,
+      },
+    })
+  }, [currency])
+
+  // return early for SSR
+  if (typeof window === "undefined") {
+    return null
+  }
+
+  // const { cart, calculateShipping } = useCartContext()
 
   return isResolved ? (
     <PayPalButtons
@@ -85,26 +96,28 @@ const PayPalCheckoutButton = (props) => {
         }
       }}
       onApprove={function (data, actions) {
-        return actions.order
-          .capture()
-          .then(function (orderData) {
-            // Successful capture! For dev/demo purposes:
-            // console.log(
-            //   "Capture result",
-            //   orderData,
-            //   JSON.stringify(orderData, null, 2)
-            // )
-            const transaction = orderData.purchase_units[0].payments.captures[0]
-            // console.log(
-            //   `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
-            // )
-            return orderData
-          })
-          .then(function (result) {
-            if (typeof handleOK === "function") {
-              handleOK(result)
-            }
-          })
+        return (
+          actions.order
+            .capture()
+            // .then(function (orderData) {
+            //   // Successful capture! For dev/demo purposes:
+            //   // console.log(
+            //   //   "Capture result",
+            //   //   orderData,
+            //   //   JSON.stringify(orderData, null, 2)
+            //   // )
+            //   // const transaction = orderData.purchase_units[0].payments.captures[0]
+            //   // console.log(
+            //   //   `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
+            //   // )
+            //   return orderData
+            // })
+            .then(function (result) {
+              if (typeof handleOK === "function") {
+                handleOK(result)
+              }
+            })
+        )
       }}
     />
   ) : (
