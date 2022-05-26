@@ -367,6 +367,7 @@ const Cart = ({
                 disabled={!(total * totalShipping > 0) || !agreed}
                 handleOK={handlePaymentSuccess}
                 handleNO={handlePaymentFail}
+                handleConversion={convertCurrency}
               />
             </div>
           </div>

@@ -13,9 +13,12 @@ const PayPalCheckoutButton = (props) => {
     disabled,
     handleOK,
     handleNO,
+    handleConversion,
   } = props
 
   const [{ isResolved, options }, dispatch] = usePayPalScriptReducer()
+  const convertCurrency = (value, to) =>
+    typeof handleConversion === "function" ? handleConversion(value, to) : value
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -64,7 +67,10 @@ const PayPalCheckoutButton = (props) => {
                 name: `${_item.title}`.substring(0, 127),
                 unit_amount: {
                   currency_code: currency,
-                  value: _item.price,
+                  value: convertCurrency(
+                    _item.promotionPrice || _item.price,
+                    currency
+                  ),
                 },
                 // sku: _item.id,
                 quantity: 1,
