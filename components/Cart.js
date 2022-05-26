@@ -109,7 +109,7 @@ const Cart = ({
   const grandTotal = calculateTotal("grand", currency, country)
 
   const handlePaymentSuccess = async (result) => {
-    console.log("Cart handlePaymentSuccess called, mark items as sold", result)
+    // console.log("Cart handlePaymentSuccess called, mark items as sold", result)
     // notify("purchaseCompleted", { autoClose: false })
     // await cart.items.map(async (_item) => {
     const sellResult = await fetchAPI(
@@ -123,7 +123,7 @@ const Cart = ({
       },
       true
     )
-    console.log("Result of calling auth sell endpoint", sellResult)
+    // console.log("Result of calling auth sell endpoint", sellResult)
     // convert cart to order
     // storing any calculated values
     const { country, currency } = cart

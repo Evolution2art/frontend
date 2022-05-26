@@ -76,7 +76,8 @@ export function CartContextProvider({ children }) {
 
   const calculateShipping = (item, country) => {
     if (!shippingRates.length) {
-      return console.log("ShippingRates not loaded!")
+      // console.log("ShippingRates not loaded!")
+      return false
     }
     // console.log(
     //   `calculate shipping to ${country} for item`,

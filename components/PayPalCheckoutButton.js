@@ -79,7 +79,7 @@ const PayPalCheckoutButton = (props) => {
             },
           ],
         }
-        console.log("Purchase units: ", purchaseUnits)
+        // console.log("Purchase units: ", purchaseUnits)
         return actions.order.create(purchaseUnits).then((orderId) => {
           // Your code here after create the order
           return orderId
