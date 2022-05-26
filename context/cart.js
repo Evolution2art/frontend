@@ -88,7 +88,8 @@ export function CartContextProvider({ children }) {
         (_rate) =>
           _rate.package?.id === item.package?.id &&
           _rate.countries?.find((_country) => _country === country)
-      )?.price || null
+      )?.price || null,
+      cart.currency
     )
   }
 
