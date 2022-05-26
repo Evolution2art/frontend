@@ -293,7 +293,7 @@ export async function getStaticProps({ params }) {
   const shippingRates = await getRates()
   const countries = await getCountries()
   const mails = await getMails(fossil)
-  return { props: { fossil, shippingRates, mails }, revalidate: 300 }
+  return { props: { fossil, shippingRates, mails }, revalidate: 60 }
 }
 
 export async function getStaticPaths() {
