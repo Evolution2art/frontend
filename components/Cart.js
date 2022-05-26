@@ -237,12 +237,10 @@ const Cart = ({
           <ul className="mx-auto mb-0 flex w-full max-w-screen-md flex-col gap-4">
             {cart.items.map((_item, _idx) => {
               const price = numberFormat.format(
-                convertCurrency(_item.price, currency)
+                convertCurrency(_item.promotionPrice || _item.price, currency)
               )
               const rate = calculateShipping(_item, country, shippingRates)
-              const shipping = rate
-                ? numberFormat.format(convertCurrency(rate, currency))
-                : null
+              const shipping = rate ? numberFormat.format(rate) : null
 
               return (
                 <li
