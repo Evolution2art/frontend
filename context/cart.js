@@ -52,7 +52,7 @@ export function CartContextProvider({ children }) {
               ? convertCurrency(_item.promotionPrice || _item.price, currency)
               : 0) +
             (kind === "grand" || kind === "shipping"
-              ? convertCurrency(calculateShipping(_item, country), currency)
+              ? calculateShipping(_item, country)
               : 0)),
         0
       ) || null
