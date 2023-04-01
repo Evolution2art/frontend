@@ -74,24 +74,35 @@ const FossilsList = ({ locale, theme, fossils }) => {
                           <h4 className="fossil-title truncate py-3 pl-4 text-base font-semibold">
                             {_fossil.title}
                           </h4>
-                          {_fossil.price &&
-                          !_fossil.priceOnRequest &&
-                          !_fossil.sold ? (
-                            <div className="fossil-price flex flex-row gap-2 py-3 pr-4">
-                              {promotionPrice ? (
-                                <del className="whitespace-nowrap">{price}</del>
-                              ) : (
-                                <span className="whitespace-nowrap">
-                                  {price}
+                          <div className="fossil-price flex flex-row gap-2 py-3 pr-4">
+                            {_fossil.price &&
+                            !_fossil.priceOnRequest &&
+                            !_fossil.sold ? (
+                              <>
+                                {promotionPrice ? (
+                                  <del className="whitespace-nowrap">
+                                    {price}
+                                  </del>
+                                ) : (
+                                  <span className="whitespace-nowrap">
+                                    {price}
+                                  </span>
+                                )}
+                                <span className="promotionPrice">
+                                  {promotionPrice}
                                 </span>
-                              )}
-                              <span className="promotionPrice">
-                                {promotionPrice}
-                              </span>
-                            </div>
-                          ) : (
-                            ""
-                          )}
+                              </>
+                            ) : (
+                              _fossil.priceOnRequest && (
+                                <span
+                                  className="whitespace-nowrap"
+                                  title="Price on Request"
+                                >
+                                  p.o.r
+                                </span>
+                              )
+                            )}
+                          </div>
                         </div>
                         <div className="fossil-description clip-lines p-4 text-sm line-clamp-3">
                           {_fossil.description}
