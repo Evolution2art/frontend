@@ -93,7 +93,8 @@ const FossilsList = ({ locale, theme, fossils }) => {
                                 </span>
                               </>
                             ) : (
-                              _fossil.priceOnRequest && (
+                              _fossil.priceOnRequest &&
+                              !_fossil.sold && (
                                 <span
                                   className="whitespace-nowrap"
                                   title="Price on Request"
